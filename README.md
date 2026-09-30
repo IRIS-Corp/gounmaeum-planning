@@ -6,7 +6,8 @@
 
 | 폴더 | 내용 | 최신 버전 |
 |---|---|---|
-| [`iris-console/`](iris-console/) | IRIS 경조사 관리 콘솔 프로토타입 | [v0.1.0](iris-console/iris-console-v0.1.0.html) · [변경 기록](iris-console/CHANGELOG.md) |
+| [`iris-console/`](iris-console/) | IRIS 경조사 관리 콘솔 프로토타입 | [v0.2.0](iris-console/iris-console-v0.2.0.html) · [변경 기록](iris-console/CHANGELOG.md) |
+| [`iris-component-states/`](iris-component-states/) | 콘솔에서 쓰는 컴포넌트의 상태별 모양 · 토큰 시트 | [v0.1.0](iris-component-states/iris-component-states-v0.1.0.html) |
 
 ## 여는 법
 
