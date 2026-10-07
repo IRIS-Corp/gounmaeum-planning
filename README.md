@@ -6,8 +6,10 @@
 
 | 폴더 | 내용 | 최신 버전 |
 |---|---|---|
-| [`iris-console/`](iris-console/) | IRIS 경조사 관리 콘솔 프로토타입 | [v0.2.0](iris-console/iris-console-v0.2.0.html) · [변경 기록](iris-console/CHANGELOG.md) |
+| [`iris-console/`](iris-console/) | IRIS 경조사 관리 콘솔 프로토타입 | [v0.3.1](iris-console/iris-console-v0.3.1.html) · [변경 기록](iris-console/CHANGELOG.md) |
 | [`iris-component-states/`](iris-component-states/) | 콘솔에서 쓰는 컴포넌트의 상태별 모양 · 토큰 시트 | [v0.1.1](iris-component-states/iris-component-states-v0.1.1.html) · [상태값 표](iris-component-states/component-states.md) |
+| [`iris-ds/`](iris-ds/) | 콘솔이 쓰는 디자인 토큰 · 컴포넌트 · 아이콘 | [토큰](iris-ds/tokens/semantic.css) · [컴포넌트](iris-ds/iris-bundle.js) |
+| [`docs/`](docs/) | 기획 · 설계 문서 | [글자 위계](docs/type-scale.md) · [토큰 차이](docs/token-diff.md) · [로그인 정책](docs/Login-flow.md) |
 
 ## 여는 법
 
@@ -21,3 +23,4 @@ GitHub 웹에서는 HTML이 화면이 아니라 코드로 보입니다. 꼭 내�
 - 파일 이름: `{폴더명}-v{버전}.html` (예: `iris-console-v0.1.0.html`)
 - 새 버전을 올릴 때는 이전 파일을 지우지 않고 새 파일을 추가합니다.
 - 바뀐 내용은 같은 폴더의 `CHANGELOG.md`에 적습니다.
+- `iris-ds/`와 `docs/`는 버전을 붙이지 않고 같은 파일을 덮어씁니다. 어느 콘솔 버전에서 바뀐 값인지는 `iris-console/CHANGELOG.md`를 보세요.
