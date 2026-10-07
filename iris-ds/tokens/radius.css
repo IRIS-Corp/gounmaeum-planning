@@ -1,0 +1,11 @@
+:root{
+--radius-xsmall:6px;
+--radius-small:8px;
+--radius-medium:10px;
+--radius-large:12px;
+--radius-xlarge:16px;
+--radius-xxlarge:20px;
+--radius-full:9999px;
+--radius-checkbox:5px;
+--radius-skeleton-text:3px;
+}
