@@ -1,11 +1,11 @@
 # 개발자용 읽는 순서
 
-IRIS 콘솔을 처음 받는 개발자가 이 순서로 읽으면 됩니다. 기준 화면은 **[iris-console/iris-console-v0.3.1.html](../iris-console/iris-console-v0.3.1.html)** 입니다.
+IRIS 콘솔을 처음 받는 개발자가 이 순서로 읽으면 됩니다. 기준 화면은 **[iris-console/iris-console-v0.3.2.html](../iris-console/iris-console-v0.3.2.html)** 입니다.
 
 | 순서 | 문서 | 무엇 | 상태 |
 |---|---|---|---|
 | 1 | [`functional-spec.md`](functional-spec.md) | 기능 명세 — 화면 목록 · 기능 ID · 상태 전이 · 권한 · 필요 API · 미정 목록 | ⚠️ 일부 갱신 필요 (아래) |
-| 2 | [`../iris-console/iris-console-v0.3.1.html`](../iris-console/iris-console-v0.3.1.html) | 화면 시안. 내려받아서 브라우저로 여세요 | 최신 |
+| 2 | [`../iris-console/iris-console-v0.3.2.html`](../iris-console/iris-console-v0.3.2.html) | 화면 시안. 내려받아서 브라우저로 여세요 | 최신 |
 | 3 | [`login-flow.md`](login-flow.md) | 로그인 · 계정 발급 정책 | 최신 |
 | 4 | [`validation-ui.md`](validation-ui.md) | 오류 · 확인 창 · 토스트 쓰는 규칙 | 최신 |
 | 5 | [`../iris-component-states/component-states.md`](../iris-component-states/component-states.md) | 쓰는 컴포넌트와 상태값 ([그림](../iris-component-states/iris-component-states-v0.1.1.html)) | 최신 |

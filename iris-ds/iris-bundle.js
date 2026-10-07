@@ -1701,7 +1701,7 @@ function ActionArea({
     } : undefined
   }, b.label))), subs.map((b, i) => React.createElement(__ds_scope.TextButton, {
     key: 's' + i,
-    size: 'small',
+    size: 'medium',
     color: 'assistive',
     onClick: b.onClick,
     disabled: b.disabled
@@ -3340,10 +3340,10 @@ Object.assign(__ds_scope, { SectionMessage });
 // components/feedback/Modal.jsx
 try { (() => {
 const SIZE = {
-  small: [360, 12, 20, 56, '16px 16px'],
-  medium: [400, 12, 20, 64, '20px 16px'],
-  large: [480, 20, 24, 64, '20px 20px'],
-  xlarge: [560, 20, 32, 72, '24px 28px']
+  small: [420, 12, 20, 56, '16px 16px'],
+  medium: [480, 12, 20, 64, '20px 16px'],
+  large: [560, 20, 24, 64, '20px 20px'],
+  xlarge: [640, 20, 32, 72, '24px 28px']
 };
 
 /**
