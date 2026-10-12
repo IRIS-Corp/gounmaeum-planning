@@ -2,13 +2,13 @@
 
 | 항목 | 내용 |
 |---|---|
-| 기준 시안 | 이 문서를 쓴 기준은 [`v0.3.3`](../archive/iris-console-v0.3.3.html) (archive) · 최신 화면은 [`v0.3.4`](../iris-console/iris-console-v0.3.4.html) |
+| 기준 시안 | 이 문서를 쓴 기준은 [`v0.3.3`](../archive/iris-console-v0.3.3.html) (archive) · 최신 화면은 [`v0.3.5`](../iris-console/iris-console-v0.3.5.html) |
 | 대상 | 클라이언트(고객사) 콘솔 · 웹 데스크톱 (최소 1280px) |
 | 함께 볼 문서 | PRD [`prd.md`](prd.md) · 로그인 [`login-flow.md`](login-flow.md) · 오류 안내 [`validation-ui.md`](validation-ui.md) · 컴포넌트 [`component-states.md`](../iris-component-states/component-states.md) · 결정 기록 [`decisions.md`](decisions.md) |
 | 범위 표기 | **P1** 1차 출시 · **P2** 후순위 후보 (1차에서 빼도 흐름이 끊기지 않음) |
 | 상태 | 금액 · 한도 · 정책 값은 모두 **가안**입니다. 회사마다 설정으로 정합니다 (9장 미정 목록). |
 | 개정 | 2026-10-12. v0.1.0 기준으로 쓰인 뒤 v0.3.0에서 뒤집힌 결정(법인카드 한도 초과 승인 · 거래처 분류 · 수신 거부 · 부고장 서식 편집 · 권한 4단 · HR 동기화)을 반영했습니다. 버전별 변경은 [`CHANGELOG.md`](../iris-console/CHANGELOG.md). |
-| ⚠️ 갱신 필요 | **v0.3.4(2026-10-12)의 `decisions.md` D9~D24가 아직 반영되지 않았습니다.** 회사 정보 수정 요청 · 조직 순서 · 퇴사 예정 · 복지 정책 버전 · 적용일 선택 부분은 이 문서보다 [`decisions.md`](decisions.md)와 [`policy-review-1012.md`](policy-review-1012.md)가 맞습니다. 자세한 차이는 [`README.md`](README.md). |
+| ⚠️ 갱신 필요 | 4장 권한은 D22 · D25 · D26까지 반영했습니다. 그러나 **회사 정보 수정 요청 · 조직 순서 · 퇴사 예정 · 복지 정책 버전 · 적용일 선택(D9~D21 · D23 · D24)은 2장 본문에 아직 안 들어갔습니다.** 그 부분은 이 문서보다 [`decisions.md`](decisions.md)와 [`policy-review-1012.md`](policy-review-1012.md)가 맞습니다. 차이는 [`README.md`](README.md). |
 
 ---
 
@@ -223,49 +223,39 @@ ID 규칙: `S-화면` · 기능은 `F-화면-번호` · 모달은 `M-이름`.
 
 ## 4. 권한
 
-역할은 **Owner** · **관리자** · **뷰어** 셋입니다. Owner는 회사당 1명이고 계약 시 백오피스가 지정합니다. 임직원은 신청 웹만 쓰고 콘솔에 들어오지 않습니다.
+역할은 **Owner**(회사당 1명 · 계약 시 백오피스가 지정) · **관리자** · **뷰어** 3단입니다. 임직원은 신청 웹만 쓰고 콘솔에 들어오지 않습니다.
 
-Owner와 관리자는 **같은 권한**이고, 법인카드 두 가지만 Owner 전용입니다. 뷰어는 보이는 메뉴 자체가 줄어듭니다.
+Owner와 관리자는 **같은 권한**입니다(10-12 · 법인카드 등록 · 한도도 관리자 가능). 뷰어는 보기만 합니다.
 
-아래 뷰어 열은 프로토타입 v0.3.4의 사이드바 · 설정 탭 필터를 그대로 적은 것입니다.
+**메뉴**
 
 | 메뉴 | Owner | 관리자 | 뷰어 |
 |---|---|---|---|
-| 홈 | ○ | ○ | ○ (전용 화면 "홈 · 뷰어") |
-| 단건 발송 (화환 · 경조금 · 부고장) — 보기 · **실행** | ○ | ○ | ○ |
-| 경조사 등록 (사이드바 ＋ 버튼) | ○ | ○ | ○ |
-| 신청 승인 · 반려 | ○ | ○ | — |
-| 결제 실행 | ○ | ○ | — |
-| 신청 · 승인 | ○ | ○ | **메뉴 없음** |
-| 경조사 (목록 · 캘린더 · 상세) | ○ | ○ | **메뉴 없음** |
-| 리포트 · 내역 (리포트 · 결제 내역 · 활동 로그) | ○ | ○ | **메뉴 없음** |
-| 마일리지 | ○ | ○ | **메뉴 없음** |
-| 임직원 | ○ | ○ | **메뉴 없음** |
-| 거래처 | ○ | ○ | **메뉴 없음** |
+| 홈 · 경조사 · 신청 · 승인 | ○ | ○ | ○ (보기) |
+| 단건 발송 (화환 · 경조금 · 부고장) | ○ | ○ | ○ |
+| 리포트 · 결제 내역 · 활동 로그 | ○ | ○ | 메뉴 없음 |
+| 임직원 · 거래처 | ○ | ○ | ○ (보기) |
+| 설정 | ○ | ○ | ○ (보기 전용) |
 
-설정은 탭 단위로 갈립니다. 뷰어에게 보이는 3개 탭은 모두 **읽기 전용**입니다.
+**설정 탭**
 
-| 설정 탭 | Owner | 관리자 | 뷰어 |
+| 탭 | Owner | 관리자 | 뷰어 |
 |---|---|---|---|
-| 조직 · 관계 | ○ | ○ | 읽기 전용 |
-| 복지 정책 | ○ | ○ | 읽기 전용 |
-| 회사 정보 | ○ | ○ | 읽기 전용 |
-| 권한 | ○ | ○ | **탭 없음** |
-| 문자 · 안내 | ○ | ○ | **탭 없음** |
-| 법인카드 — 등록 | ○ | 신청만 | **탭 없음** |
-| 법인카드 — 한도 | ○ | — | **탭 없음** |
+| 복지 정책 (저장 시 Owner에게 알림) | ○ | ○ | 보기 |
+| 권한 · 회사 운영 · 회사 정보 | ○ | ○ | 보기 |
+| 문자 · 안내 | ○ | ○ | 보기 |
+| 법인카드 등록 · 수정 · 한도 | ○ | ○ | 보기 |
 
-뷰어의 휴대폰 번호 변경은 본인이 하지 못하고 "휴대폰 번호 변경 요청"으로 담당자(관리자 · Owner)에게 요청합니다.
+**실행 권한**
 
-**뷰어는 "보기 전용"이라는 이름과 달리 경조사 등록과 단건 발송은 실행할 수 있습니다.** 못 하는 것은 **승인 · 결제 · 설정 변경**입니다. 뷰어 홈 상단 안내가 기준입니다.
+| 동작 | Owner | 관리자 | 뷰어 |
+|---|---|---|---|
+| 단건 발송 실행 | ○ | ○ | ○ |
+| 경조사 등록 | ○ | ○ | ○ |
+| 신청 승인 · 반려 | ○ | ○ | — |
+| 결제 실행 (승인 후 이체 · 카드 결제) | ○ | ○ | — |
 
-> 보기 전용 계정입니다 — 경조사 등록과 단건 발송을 할 수 있습니다 · 승인 · 결제 · 설정 변경은 관리자가 합니다
-
-경조사는 사이드바 메뉴에 없지만 `＋ 경조사 등록` 버튼은 뷰어에게도 보입니다. 등록한 뒤 그 건을 목록에서 다시 열어볼 수는 없습니다.
-
-⚠️ `decisions.md` **D22의 "본부 담당 · 뷰어는 보기만"** 은 이 내용과 맞지 않습니다. 위 표가 맞고, D22의 그 문구는 고쳐야 합니다.
-
-v0.3.0에서 **본부 담당** 역할은 없어졌습니다. 본부 단위로 보이는 범위를 제한하지 않습니다. 다만 설정 › 법인카드의 권한 안내 모달 문구에는 아직 "본부 담당"이 남아 있습니다 — 옛 문구로 보이며 확인이 필요합니다 (9장 Q11).
+v0.3.0에서 **본부 담당** 역할은 없어졌습니다. 본부 단위로 보이는 범위를 제한하지 않습니다.
 
 권한 없는 메뉴는 **숨김**(사이드바에서 제외), 권한 없는 버튼은 **비활성 + 툴팁 "권한이 없습니다"**.
 
@@ -284,7 +274,7 @@ v0.3.0에서 **본부 담당** 역할은 없어졌습니다. 본부 단위로 �
 | Request (신청) | id · employeeId · kind · relation · amount · docs[] · status · rejectReason? · requestedAt |
 | Shipment (발송) | id · caseId? · type(flower/money/notice) · recipient · status · amount · fee · payMethodId · meta(상품·리본·배송지 / 계좌·예금주 / 수신명단·문구) · history[] |
 | Payment | id · shipmentId · amount · method(card/account) · approval(auto) · status · receiptUrl |
-| CorpCard | id · issuer · last4 · usage(main/spare) · dept · monthlyLimit · used · purpose |
+| CorpCard | id · issuer · last4 · usage(main/spare) · monthlyLimit · used · purpose |
 | Mileage | balance · ledger[{date, type(earn/use), points, shipmentId}] |
 | ActivityLog | id · at · actorId · action · targetType · targetId · summary |
 
@@ -378,6 +368,7 @@ v0.3.0에서 **본부 담당** 역할은 없어졌습니다. 본부 단위로 �
 | Q10 | 경조사 "서류 확인"을 별도 단계로 둘지 | 진행 단계 안에 둠 (4단계로 줄이면서 정산 단계가 없어짐) | 기획 |
 | Q11 | 법인카드 권한 안내 모달의 "본부 담당" | 옛 역할 이름이 문구에만 남아 있음 · 역할은 Owner · 관리자 · 뷰어 셋 | 기획 |
 | ~~Q12~~ | ~~뷰어가 단건 발송 · 경조사 등록을 실행할 수 있는지~~ | ✅ 확정: **실행 가능**. 못 하는 것은 승인 · 결제 · 설정 변경 (4장) | — |
+| Q13 | 4장 뷰어 "보기" 범위와 프로토타입이 다름 | 4장: 경조사 · 신청·승인 · 임직원 · 거래처 · 설정 전체 탭을 뷰어가 **본다**. 프로토타입 v0.3.5: `navShown = isViewer ? navDef.filter(today \| 단건 발송)` 이라 그 메뉴가 **없고**, `settingsDefs.filter(org \| policy \| company)` 라 설정은 3탭만 보인다 | 기획 |
 
 ---
 
@@ -390,7 +381,7 @@ v0.3.0에서 **본부 담당** 역할은 없어졌습니다. 본부 단위로 �
 | 기획 | [`prd.md`](prd.md) · [`decisions.md`](decisions.md) · [`design-principles.md`](design-principles.md) | 있음 |
 | 기능 명세 | `functional-spec.md` (이 문서) | 있음 |
 | 로그인 · 계정 | [`login-flow.md`](login-flow.md) | 있음 |
-| 화면 시안 | [`iris-console-v0.3.4.html`](../iris-console/iris-console-v0.3.4.html) | 있음 (빈 상태 전환 포함) |
+| 화면 시안 | [`iris-console-v0.3.5.html`](../iris-console/iris-console-v0.3.5.html) | 있음 (빈 상태 전환 포함) |
 | 컴포넌트 · 상태 | [`component-states.md`](../iris-component-states/component-states.md) · [상태 시트 v0.1.1](../iris-component-states/iris-component-states-v0.1.1.html) | 있음 |
 | 토큰 · 컴포넌트 | [`iris-ds/`](../iris-ds/README.md) · [`token-diff.md`](token-diff.md) · [`type-scale.md`](type-scale.md) | 있음 |
 | 오류 안내 | [`validation-ui.md`](validation-ui.md) | 있음 |
