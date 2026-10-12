@@ -4688,10 +4688,25 @@ function DatePicker({
   const [draft, setDraft] = React.useState(null);
   const val = value !== undefined ? value : inner;
   const ref = React.useRef(null);
+  const popRef = React.useRef(null);
+  const [pos, setPos] = React.useState(null);
+  React.useLayoutEffect(() => {
+    if (!open || !ref.current) return;
+    const place = () => {
+      const r = ref.current.getBoundingClientRect(); const H = (popRef.current && popRef.current.offsetHeight) || 380; const W = (popRef.current && popRef.current.offsetWidth) || 320;
+      const below = window.innerHeight - r.bottom - 8, above = r.top - 8;
+      const top = below >= H || below >= above ? Math.min(r.bottom + 4, window.innerHeight - H - 8) : Math.max(8, r.top - 4 - H);
+      const left = Math.max(8, Math.min(r.left, window.innerWidth - W - 8));
+      setPos({ top: Math.max(8, top), left });
+    };
+    place(); const raf = requestAnimationFrame(place);
+    window.addEventListener('resize', place); window.addEventListener('scroll', place, true);
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', place); window.removeEventListener('scroll', place, true); };
+  }, [open]);
   React.useEffect(() => {
     if (!open) return;
     const h = e => {
-      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+      if (ref.current && !ref.current.contains(e.target) && !(popRef.current && popRef.current.contains(e.target))) setOpen(false);
     };
     document.addEventListener('mousedown', h);
     return () => document.removeEventListener('mousedown', h);
@@ -4727,12 +4742,14 @@ function DatePicker({
       cursor: disabled ? 'default' : 'pointer'
     },
     ...rest
-  }), open && React.createElement('div', {
+  }), open && ReactDOM.createPortal(React.createElement('div', {
+    ref: popRef,
+    onMouseDown: e => e.stopPropagation(),
     style: {
-      position: 'absolute',
-      top: 'calc(100% + 4px)',
-      left: 0,
-      zIndex: 30,
+      position: 'fixed',
+      top: pos ? pos.top : -9999,
+      left: pos ? pos.left : -9999,
+      zIndex: 2000,
       borderRadius: 16,
       overflow: 'hidden',
       border: '1px solid var(--semantic-line-solid-neutral)',
@@ -4748,7 +4765,7 @@ function DatePicker({
     onLeading: () => setDraft(null),
     onConfirm: () => commit(draft),
     confirmDisabled: !draft
-  })));
+  })), document.body));
 }
 Object.assign(__ds_scope, { DatePicker });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "components/date/DatePicker.jsx", error: String((e && e.message) || e) }); }

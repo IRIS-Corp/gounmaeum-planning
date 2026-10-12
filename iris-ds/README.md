@@ -8,8 +8,12 @@ IRIS 콘솔이 쓰는 디자인 토큰 · 컴포넌트 · 아이콘입니다. �
 
 ```html
 <link rel="stylesheet" href="iris-ds/styles.css">
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="iris-ds/iris-bundle.js"></script>
 ```
+
+`iris-bundle.js`는 전역 `React`와 `ReactDOM`을 씁니다. 둘 다 번들보다 먼저 불러와야 합니다. `ReactDOM`은 DatePicker가 달력을 화면 위로 띄울 때(`createPortal`) 필요합니다.
 
 | # | 파일 | 내용 |
 |---|---|---|

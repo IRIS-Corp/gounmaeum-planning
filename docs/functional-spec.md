@@ -2,12 +2,13 @@
 
 | 항목 | 내용 |
 |---|---|
-| 기준 시안 | [`iris-console/iris-console-v0.3.3.html`](../iris-console/iris-console-v0.3.3.html) |
+| 기준 시안 | 이 문서를 쓴 기준은 [`v0.3.3`](../archive/iris-console-v0.3.3.html) (archive) · 최신 화면은 [`v0.3.4`](../iris-console/iris-console-v0.3.4.html) |
 | 대상 | 클라이언트(고객사) 콘솔 · 웹 데스크톱 (최소 1280px) |
 | 함께 볼 문서 | PRD [`prd.md`](prd.md) · 로그인 [`login-flow.md`](login-flow.md) · 오류 안내 [`validation-ui.md`](validation-ui.md) · 컴포넌트 [`component-states.md`](../iris-component-states/component-states.md) · 결정 기록 [`decisions.md`](decisions.md) |
 | 범위 표기 | **P1** 1차 출시 · **P2** 후순위 후보 (1차에서 빼도 흐름이 끊기지 않음) |
 | 상태 | 금액 · 한도 · 정책 값은 모두 **가안**입니다. 회사마다 설정으로 정합니다 (9장 미정 목록). |
 | 개정 | 2026-10-12. v0.1.0 기준으로 쓰인 뒤 v0.3.0에서 뒤집힌 결정(법인카드 한도 초과 승인 · 거래처 분류 · 수신 거부 · 부고장 서식 편집 · 권한 4단 · HR 동기화)을 반영했습니다. 버전별 변경은 [`CHANGELOG.md`](../iris-console/CHANGELOG.md). |
+| ⚠️ 갱신 필요 | **v0.3.4(2026-10-12)의 `decisions.md` D9~D24가 아직 반영되지 않았습니다.** 회사 정보 수정 요청 · 조직 순서 · 퇴사 예정 · 복지 정책 버전 · 적용일 선택 부분은 이 문서보다 [`decisions.md`](decisions.md)와 [`policy-review-1012.md`](policy-review-1012.md)가 맞습니다. 자세한 차이는 [`README.md`](README.md). |
 
 ---
 
@@ -358,7 +359,7 @@ v0.3.0에서 **본부 담당 · 조회** 역할은 없어졌습니다. 본부 �
 | 기획 | [`prd.md`](prd.md) · [`decisions.md`](decisions.md) · [`design-principles.md`](design-principles.md) | 있음 |
 | 기능 명세 | `functional-spec.md` (이 문서) | 있음 |
 | 로그인 · 계정 | [`login-flow.md`](login-flow.md) | 있음 |
-| 화면 시안 | [`iris-console-v0.3.3.html`](../iris-console/iris-console-v0.3.3.html) | 있음 (빈 상태 전환 포함) |
+| 화면 시안 | [`iris-console-v0.3.4.html`](../iris-console/iris-console-v0.3.4.html) | 있음 (빈 상태 전환 포함) |
 | 컴포넌트 · 상태 | [`component-states.md`](../iris-component-states/component-states.md) · [상태 시트 v0.1.1](../iris-component-states/iris-component-states-v0.1.1.html) | 있음 |
 | 토큰 · 컴포넌트 | [`iris-ds/`](../iris-ds/README.md) · [`token-diff.md`](token-diff.md) · [`type-scale.md`](type-scale.md) | 있음 |
 | 오류 안내 | [`validation-ui.md`](validation-ui.md) | 있음 |
