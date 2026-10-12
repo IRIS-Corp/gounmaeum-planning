@@ -223,20 +223,24 @@ ID 규칙: `S-화면` · 기능은 `F-화면-번호` · 모달은 `M-이름`.
 
 ## 4. 권한
 
-역할은 **Owner**(회사당 1명 · 계약 시 백오피스가 지정)와 **관리자** 2단입니다. 임직원은 신청 웹만 쓰고 콘솔에 들어오지 않습니다.
+역할은 **Owner** · **관리자** · **뷰어** 셋입니다. Owner는 회사당 1명이고 계약 시 백오피스가 지정합니다. 임직원은 신청 웹만 쓰고 콘솔에 들어오지 않습니다.
 
-Owner와 관리자는 **같은 권한**입니다. 아래 두 가지만 Owner 전용입니다.
+Owner와 관리자는 **같은 권한**이고, 법인카드 두 가지만 Owner 전용입니다. 뷰어는 **보기만** 합니다 (`decisions.md` D22).
 
-| 기능 | Owner | 관리자 |
-|---|---|---|
-| 홈 · 경조사 · 단건 발송 · 신청 승인 · 반려 | ○ | ○ |
-| 리포트 · 결제 내역 · 활동 로그 | ○ | ○ |
-| 임직원 · 거래처 관리 | ○ | ○ |
-| 설정 › 복지 정책 · 권한 · 회사 운영 · 회사 정보 | ○ | ○ |
-| 설정 › 법인카드 **등록** | ○ | — |
-| 설정 › 법인카드 **한도** | ○ | — |
+| 기능 | Owner | 관리자 | 뷰어 |
+|---|---|---|---|
+| 홈 · 경조사 · 단건 발송 보기 | ○ | ○ | ○ (전용 홈) |
+| 경조사 등록 · 발송 실행 | ○ | ○ | — |
+| 신청 승인 · 반려 | ○ | ○ | — |
+| 리포트 · 결제 내역 · 활동 로그 | ○ | ○ | ○ |
+| 임직원 · 거래처 관리 | ○ | ○ | — |
+| 설정 › 복지 정책 · 권한 · 회사 운영 · 회사 정보 | ○ | ○ | 보기만 |
+| 설정 › 법인카드 **등록** | ○ | 신청만 | — |
+| 설정 › 법인카드 **한도** | ○ | — | — |
 
-v0.3.0에서 **본부 담당 · 조회** 역할은 없어졌습니다. 본부 단위로 보이는 범위를 제한하지 않습니다.
+뷰어는 전용 홈 화면이 따로 있습니다 (프로토타입의 "홈 · 뷰어").
+
+v0.3.0에서 **본부 담당** 역할은 없어졌습니다. 본부 단위로 보이는 범위를 제한하지 않습니다. 다만 설정 › 법인카드의 권한 안내 모달 문구에는 아직 "본부 담당"이 남아 있습니다 — 옛 문구로 보이며 확인이 필요합니다 (9장 Q11).
 
 권한 없는 메뉴는 **숨김**(사이드바에서 제외), 권한 없는 버튼은 **비활성 + 툴팁 "권한이 없습니다"**.
 
@@ -247,7 +251,7 @@ v0.3.0에서 **본부 담당 · 조회** 역할은 없어졌습니다. 본부 �
 | 객체 | 주요 필드 |
 |---|---|
 | Company | id · name · bizNo · address · phone · senderNames[] · noticeRules{expireDays=30, mournerEdit, showAccount} |
-| User (콘솔 계정) | id · phone(ID, 유일) · passwordHash · name · role(owner/admin) · deputyId · status(invited/active/locked/disabled) · lastLoginAt |
+| User (콘솔 계정) | id · phone(ID, 유일) · passwordHash · name · role(owner/admin/viewer) · deputyId · status(invited/active/locked/disabled) · lastLoginAt |
 | Employee | id · name · phone · email? · dept · team · rank · joinedAt · leftAt? · bankAccount? · status |
 | Partner | id · name · ownerDept · contactName · contactPhone · address · autoNotice |
 | Policy (버전) | id · version · effectiveFrom · kinds{death,wed,birth}.enabled · relations[{key, enabled, amount, leaveDays, flowerProductId}] · approvalRules[] |
@@ -347,6 +351,7 @@ v0.3.0에서 **본부 담당 · 조회** 역할은 없어졌습니다. 본부 �
 | Q8 | 인사 시스템 연동 방식 | ✅ 1차 제외: 동기화 없이 CSV · 개별 등록 + "마지막 업데이트 날짜" 표시 | — |
 | Q9 | 임직원 신청 웹의 휴대폰 화면 대응 | 미정 (콘솔은 데스크톱만) | 사업 |
 | Q10 | 경조사 "서류 확인"을 별도 단계로 둘지 | 진행 단계 안에 둠 (4단계로 줄이면서 정산 단계가 없어짐) | 기획 |
+| Q11 | 법인카드 권한 안내 모달의 "본부 담당" | 옛 역할 이름이 문구에만 남아 있음 · 역할은 Owner · 관리자 · 뷰어 셋 | 기획 |
 
 ---
 
