@@ -2,7 +2,7 @@
 
 | 항목 | 내용 |
 |---|---|
-| 기준 시안 | 이 문서를 쓴 기준은 [`v0.3.3`](../archive/iris-console-v0.3.3.html) (archive) · 최신 화면은 [`v0.3.5`](../iris-console/iris-console-v0.3.5.html) |
+| 기준 시안 | 이 문서를 쓴 기준은 [`v0.3.3`](../archive/iris-console-v0.3.3.html) (archive) · 최신 화면은 [`v0.3.6`](../iris-console/iris-console-v0.3.6.html) |
 | 대상 | 클라이언트(고객사) 콘솔 · 웹 데스크톱 (최소 1280px) |
 | 함께 볼 문서 | PRD [`prd.md`](prd.md) · 로그인 [`login-flow.md`](login-flow.md) · 오류 안내 [`validation-ui.md`](validation-ui.md) · 컴포넌트 [`component-states.md`](../iris-component-states/component-states.md) · 결정 기록 [`decisions.md`](decisions.md) |
 | 범위 표기 | **P1** 1차 출시 · **P2** 후순위 후보 (1차에서 빼도 흐름이 끊기지 않음) |
@@ -169,7 +169,7 @@ ID 규칙: `S-화면` · 기능은 `F-화면-번호` · 모달은 `M-이름`.
 
 ### S-SET 설정
 
-탭은 7개입니다. 순서 · 이름은 프로토타입 v0.3.5의 `settingsDefs` 기준입니다.
+탭은 7개입니다. 순서 · 이름은 프로토타입 v0.3.6의 `settingsDefs` 기준입니다.
 
 | # | 탭 | 기능 | 범위 |
 |---|---|---|---|
@@ -232,7 +232,7 @@ ID 규칙: `S-화면` · 기능은 `F-화면-번호` · 모달은 `M-이름`.
 
 Owner와 관리자는 **같은 권한**입니다(10-12 · 법인카드 등록 · 한도도 관리자 가능). 뷰어는 **보이는 메뉴가 홈과 단건 발송으로 줄고**, 설정은 3개 탭만 읽기 전용으로 보입니다. 실행은 단건 발송과 경조사 등록까지만 됩니다.
 
-아래 뷰어 열은 프로토타입 v0.3.5의 `navShown` · `settingsTabItems` 필터를 그대로 적은 것입니다.
+아래 뷰어 열은 프로토타입 v0.3.6의 `navShown` · `settingsTabItems` 필터를 그대로 적은 것입니다.
 
 **메뉴** (사이드바)
 
@@ -446,7 +446,7 @@ v0.3.0에서 **본부 담당** 역할은 없어졌습니다. 본부 단위로 �
 | 기획 | [`prd.md`](prd.md) · [`decisions.md`](decisions.md) · [`design-principles.md`](design-principles.md) | 있음 |
 | 기능 명세 | `functional-spec.md` (이 문서) | 있음 |
 | 로그인 · 계정 | [`login-flow.md`](login-flow.md) | 있음 |
-| 화면 시안 | [`iris-console-v0.3.5.html`](../iris-console/iris-console-v0.3.5.html) | 있음 (빈 상태 전환 포함) |
+| 화면 시안 | [`iris-console-v0.3.6.html`](../iris-console/iris-console-v0.3.6.html) | 있음 (빈 상태 전환 포함) |
 | 컴포넌트 · 상태 | [`component-states.md`](../iris-component-states/component-states.md) · [상태 시트 v0.1.1](../iris-component-states/iris-component-states-v0.1.1.html) | 있음 |
 | 토큰 · 컴포넌트 | [`iris-ds/`](../iris-ds/README.md) · [`token-diff.md`](token-diff.md) · [`type-scale.md`](type-scale.md) | 있음 |
 | 오류 안내 | [`validation-ui.md`](validation-ui.md) | 있음 |

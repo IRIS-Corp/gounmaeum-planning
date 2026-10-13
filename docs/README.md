@@ -1,11 +1,11 @@
 # 개발자용 읽는 순서
 
-IRIS 콘솔을 처음 받는 개발자가 이 순서로 읽으면 됩니다. 기준 화면은 **[iris-console/iris-console-v0.3.5.html](../iris-console/iris-console-v0.3.5.html)** 입니다.
+IRIS 콘솔을 처음 받는 개발자가 이 순서로 읽으면 됩니다. 기준 화면은 **[iris-console/iris-console-v0.3.6.html](../iris-console/iris-console-v0.3.6.html)** 입니다.
 
 | 순서 | 문서 | 무엇 | 상태 |
 |---|---|---|---|
 | 1 | [`functional-spec.md`](functional-spec.md) | 기능 명세 — 화면 목록 · 기능 ID · 상태 전이 · 권한 · 필요 API · 미정 목록 | ⚠️ v0.3.3 기준 · D9~D24 미반영 (아래) |
-| 2 | [`../iris-console/iris-console-v0.3.5.html`](../iris-console/iris-console-v0.3.5.html) | 화면 시안. 내려받아서 브라우저로 여세요 | 최신 |
+| 2 | [`../iris-console/iris-console-v0.3.6.html`](../iris-console/iris-console-v0.3.6.html) | 화면 시안. 내려받아서 브라우저로 여세요 | 최신 |
 | 3 | [`login-flow.md`](login-flow.md) | 로그인 · 계정 발급 정책 | 최신 |
 | 4 | [`validation-ui.md`](validation-ui.md) | 오류 · 확인 창 · 토스트 쓰는 규칙 | 최신 |
 | 5 | [`../iris-component-states/component-states.md`](../iris-component-states/component-states.md) | 쓰는 컴포넌트와 상태값 ([그림](../iris-component-states/iris-component-states-v0.1.1.html)) | 최신 |
@@ -25,7 +25,7 @@ IRIS 콘솔을 처음 받는 개발자가 이 순서로 읽으면 됩니다. 기
 
 ## `functional-spec.md`에서 주의할 것
 
-**명세서는 v0.3.3 기준입니다. v0.3.5(2026-10-12)에서 정해진 D9~D24가 아직 안 들어가 있습니다.** 아래 항목은 명세서보다 [`decisions.md`](decisions.md)가 맞습니다.
+**명세서는 v0.3.3 기준입니다. v0.3.6(2026-10-12)에서 정해진 D9~D24가 아직 안 들어가 있습니다.** 아래 항목은 명세서보다 [`decisions.md`](decisions.md)가 맞습니다.
 
 | 주제 | 명세서에 있는 것 | 실제 결정 |
 |---|---|---|
@@ -41,7 +41,7 @@ IRIS 콘솔을 처음 받는 개발자가 이 순서로 읽으면 됩니다. 기
 
 역할은 **Owner · 관리자 · 뷰어** 셋입니다 (명세서 4장 · `decisions.md` D26). 뷰어는 **단건 발송과 경조사 등록은 실행할 수 있고**, 승인 · 결제는 못 합니다. **리포트 · 결제 내역 · 활동 로그는 뷰어에게 메뉴가 없습니다.** 법인카드는 등록 · 수정 · 한도 모두 관리자도 할 수 있습니다 (D25).
 
-뷰어에게 보이는 메뉴는 **홈과 단건 발송뿐**입니다. 경조사 · 신청·승인 · 리포트·내역 · 마일리지 · 임직원 · 거래처는 사이드바에 없습니다. 설정은 조직·관계 / 복지 정책 / 회사 정보 **3개 탭만 읽기 전용**이고, 권한 · 리본 문구 · 문자·안내 · 법인카드 탭은 없습니다. (프로토타입 v0.3.5 기준)
+뷰어에게 보이는 메뉴는 **홈과 단건 발송뿐**입니다. 경조사 · 신청·승인 · 리포트·내역 · 마일리지 · 임직원 · 거래처는 사이드바에 없습니다. 설정은 조직·관계 / 복지 정책 / 회사 정보 **3개 탭만 읽기 전용**이고, 권한 · 리본 문구 · 문자·안내 · 법인카드 탭은 없습니다. (프로토타입 v0.3.6 기준)
 
 `본부 담당`은 없어졌지만 설정 › 법인카드의 권한 안내 모달 문구에는 아직 남아 있습니다 (Q11).
 
