@@ -29,6 +29,7 @@ const CSS = `
 @keyframes iris-fade-in{from{opacity:0}to{opacity:1}}
 @keyframes iris-slide-up{from{transform:translateY(100%)}to{transform:translateY(0)}}
 @keyframes iris-grow{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.iris-field:not(:focus-within):not([data-invalid]){box-shadow:inset 0 0 0 1px var(--semantic-line-normal-normal)!important}
 .iris-field:focus-within{box-shadow:inset 0 0 0 2px rgba(var(--semantic-primary-normal-rgb),.43)!important}
 .iris-field[data-invalid]:focus-within{box-shadow:inset 0 0 0 2px rgba(var(--semantic-status-negative-rgb),.43)!important}
 .iris-field input::placeholder,.iris-field textarea::placeholder{color:var(--semantic-label-assistive)}
@@ -431,7 +432,7 @@ function colors(variant, color, disabled) {
     backgroundColor: 'var(--semantic-fill-normal)',
     backdropFilter: 'blur(32px)'
   };
-  const ring = 'inset 0 0 0 1px var(--semantic-line-solid-normal)';
+  const ring = 'inset 0 0 0 1px var(--semantic-line-normal-normal)';
   if (color === 'primary') return {
     color: disabled ? 'var(--semantic-label-disable)' : 'var(--semantic-primary-normal)',
     backgroundColor: 'var(--semantic-background-normal-normal)',
@@ -488,7 +489,7 @@ function Button({
   };
   const label = React.createElement('span', {
     style: {
-      ...__ds_scope.typo(s.t, color === 'assistive' ? 'medium' : 'bold'),
+      ...__ds_scope.typo(s.t, 'bold'),
       visibility: loading ? 'hidden' : undefined,
       display: 'inline-block'
     }
