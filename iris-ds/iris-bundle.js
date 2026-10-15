@@ -656,7 +656,8 @@ function Chip({
   }, leadingContent), React.createElement('span', {
     style: {
       ...__ds_scope.typo(s.t, 'medium'),
-      padding: s.tp
+      padding: s.tp,
+      whiteSpace: 'nowrap'
     }
   }, children), trailingContent && React.createElement('span', {
     style: {
@@ -2019,7 +2020,7 @@ function Radio({
       borderRadius: 'inherit',
       transition: 'background-color .2s ease,box-shadow .2s ease',
       backgroundColor: isOn ? 'var(--semantic-primary-normal)' : 'var(--semantic-background-normal-normal)',
-      boxShadow: isOn ? 'none' : 'inset 0 0 0 1.5px var(--semantic-line-normal-normal)'
+      boxShadow: isOn ? 'none' : 'inset 0 0 0 1px var(--semantic-line-normal-normal)'
     }
   }, React.createElement('span', {
     style: {
@@ -3150,7 +3151,8 @@ function SectionHeader({
       margin: 0,
       font: 'inherit',
       color: 'inherit',
-      letterSpacing: 'inherit'
+      letterSpacing: 'inherit',
+      whiteSpace: 'nowrap'
     }
   }, children), headingContent && React.createElement('div', {
     style: {
@@ -3980,7 +3982,7 @@ function Checkbox({
       borderRadius: 'inherit',
       transition: 'background-color .2s ease,box-shadow .2s ease',
       backgroundColor: on ? 'var(--semantic-primary-normal)' : 'var(--semantic-background-normal-normal)',
-      boxShadow: `inset 0 0 0 1.5px ${on ? 'var(--semantic-primary-normal)' : 'var(--semantic-line-normal-normal)'}`
+      boxShadow: `inset 0 0 0 1.5px ${on ? 'var(--semantic-primary-normal)' : 'var(--semantic-line-normal-strong)'}`
     }
   }, React.createElement(__ds_scope.Icon, {
     name: indeterminate ? 'minus' : 'check-thick',
@@ -4123,7 +4125,7 @@ function roundCheckboxImpl({
       borderRadius: 9999,
       transition: 'background-color .2s ease,box-shadow .2s ease',
       backgroundColor: val ? 'var(--semantic-primary-normal)' : 'var(--semantic-background-normal-normal)',
-      boxShadow: val ? 'none' : 'inset 0 0 0 1.5px var(--semantic-line-normal-normal)'
+      boxShadow: val ? 'none' : 'inset 0 0 0 1px var(--semantic-line-normal-normal)'
     }
   }, React.createElement(__ds_scope.Icon, {
     name: 'check-thick',
