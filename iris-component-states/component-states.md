@@ -78,7 +78,7 @@
 |---|---|
 | 사이드바 메뉴 · 프로필 메뉴 항목 · 선택 목록 줄 · 선택 카드 (17곳) | 줄 전체를 누르는 영역. 모두 같은 회색 hover(`fill-normal`) |
 | 막대그래프 2곳 (예산 진척 · 카드 한도) | IRIS ProgressIndicator는 2px. 요청에 따라 10px 유지, 색은 토큰 |
-| 섹션 · 카드 제목 | 글자 스타일 18 / 26 / 700으로 통일 (`docs/type-scale.md`) |
+| 섹션 · 카드 제목 | 글자 스타일 18 / 26 / 700으로 통일 (`iris-ds/type-scale.md`) |
 
 ## 6. 공통 스타일 (모든 컴포넌트 공통)
 
@@ -102,12 +102,12 @@
 - Chip · FilterButton active: 컴포넌트 기본값 그대로(덮어쓰기 금지).
 
 ### 글자
-- 단계는 `docs/type-scale.md` 7단계. 가장 진한 글자는 `label-normal` #171719.
+- 단계는 `iris-ds/type-scale.md` 7단계. 가장 진한 글자는 `label-normal` #171719.
 - 자간: 11~13px −0.004em · 14px −0.008em · 15~16px −0.012em · 18px 이상 −0.012em~−0.0194em.
 - 보조 글자 `label-alternative` rgba(55,56,60,0.74) · 대비 4.5:1 이상.
 
 ### 색
-- 모든 값은 `iris-ds/tokens/semantic.css`. 원본과 다른 값은 `docs/token-diff.md`.
+- 모든 값은 `iris-ds/tokens/semantic.css`. 원본과 다른 값은 `iris-ds/token-diff.md`.
 - 토큰이 아닌 색은 부고장 테마 미리보기 · 토스트 체크 아이콘뿐.
 
 ## 페이지네이션 규칙

@@ -21,7 +21,7 @@
 - 추가 수신인 창에 **임직원 · 외부 연락처 탭**. 외부 연락처가 묻혀 안 보이던 문제를 해결했습니다.
 - 추가 수신인 목록을 팀별로 접고 펴는 구조로(팀 체크 = 팀 전체 선택 · 이름 체크 = 개인). 검색은 이름 · 본부 · 팀.
 - **장례케어 상품 4종**을 명세서에 문서화했습니다 (보급형 199 · 일반형 299 · 고급형 399 · 무빈소형 299만원 · 구성표 · 별도 비용). **MVP 제외 · 참고용**이고 화면에는 v0.3.7부터 있었습니다. 명세서 "장례케어 (고운마음 · 후불 상조)" 절 · `decisions.md` D28.
-- [`docs/ux-writing.md`](../docs/ux-writing.md): 문구 원칙 · **용어 사전** · 바꾼 문구 기록 (새 문서).
+- [`docs/reference/ux-writing.md`](../docs/reference/ux-writing.md): 문구 원칙 · **용어 사전** · 바꾼 문구 기록 (새 문서).
 
 ### 변경
 - **용어 통일 (D29)** — 시안 전체와 문서에 적용했습니다.
@@ -137,7 +137,7 @@
 - 임직원: 퇴사일 달력 + 빠른 선택(오늘 · 이번 달 말 · 다음 달 말) · 퇴사 예정 / 취소 · 여러 회사 소속 번호 변경 안내 · 다른 본부 담당자 지정. (D14 · D16 · D18)
 - 복지 정책: 변경 이력 버튼 복구 · 버전별 읽기 전용 보기 · 저장 시 적용일 선택(다음 날 0시 · 지금 · 날짜 지정) · 저장 시 Owner에게 알림. (D19 · D20 · D22 · D23)
 - 화환 보내기: 리본 문구 직접 입력.
-- [`docs/policy-review-1012.md`](../docs/policy-review-1012.md): 10/12 정책 질의 10건 답변 (새 문서).
+- [`docs/reference/policy-review-1012.md`](../docs/reference/policy-review-1012.md): 10/12 정책 질의 10건 답변 (새 문서).
 
 ### 변경
 - DatePicker 달력을 화면 위(body)로 띄우고, 아래 공간이 부족하면 위로 열립니다. 모달 · 표 안에서 잘리던 문제가 없어집니다.
@@ -189,15 +189,15 @@
 ### 추가
 - 디자인 토큰 · 컴포넌트를 레포에 포함: [`iris-ds/tokens/semantic.css`](../iris-ds/tokens/semantic.css) · [`iris-ds/iris-bundle.js`](../iris-ds/iris-bundle.js). 콘솔의 덮어쓰기 블록을 없애고 값은 토큰 파일에서만 옵니다.
 - 내보내기 아이콘 `upload` · `download` (WDS 원본): [`iris-ds/assets/icons/`](../iris-ds/assets/icons/).
-- [`docs/type-scale.md`](../docs/type-scale.md): 글자 7단계 표 (새 문서).
-- [`docs/token-diff.md`](../docs/token-diff.md): WDS 원본과 다른 토큰 값 (새 문서).
+- [`iris-ds/type-scale.md`](../iris-ds/type-scale.md): 글자 7단계 표 (새 문서).
+- [`iris-ds/token-diff.md`](../iris-ds/token-diff.md): WDS 원본과 다른 토큰 값 (새 문서).
 
 ### 변경
 - 글자 위계 재설정: 섹션 제목 18/26/700, 항목 제목 16/24/600. 17px 섹션 제목 55곳 · 15px 항목 제목 65곳을 바꿨습니다.
 - 순수 검정(#000) 제거. 가장 진한 글자는 `label-normal`(#171719). 탭 선택 글자 · 밑줄도 같이 바꿨습니다.
 - 테두리 통일: 입력칸 · 검색창 · 드롭다운 · 필터 · 테두리 버튼 = #E1E2E4.
 - 호버를 진하게 (8% · 12%).
-- 대비 보정(WCAG AA 본문 4.5:1): `label-alternative` · `label-assistive` · 파랑 · 빨강 · 초록 · 주황 계열. 전체 목록은 `docs/token-diff.md`.
+- 대비 보정(WCAG AA 본문 4.5:1): `label-alternative` · `label-assistive` · 파랑 · 빨강 · 초록 · 주황 계열. 전체 목록은 `iris-ds/token-diff.md`.
 - 직접 넣은 색 189곳을 토큰으로 교체.
 - 부의금 수수료 합계를 별도 줄로 분리.
 - 서류 첨부 버튼 동작 수정.

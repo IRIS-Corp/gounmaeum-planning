@@ -1,55 +1,47 @@
 # 개발자용 읽는 순서
 
-IRIS 콘솔을 처음 받는 개발자가 이 순서로 읽으면 됩니다. 기준 화면은 **[iris-console/iris-console-v0.3.8.html](../iris-console/iris-console-v0.3.8.html)** 입니다.
+IRIS 콘솔을 처음 받는 개발자가 이 순서로 읽으면 됩니다. 기준 화면은 **[iris-console-v0.3.8.html](../iris-console/iris-console-v0.3.8.html)** 입니다.
 
-| 순서 | 문서 | 무엇 | 상태 |
-|---|---|---|---|
-| 1 | [`functional-spec.md`](functional-spec.md) | 기능 명세 — 화면 목록 · 기능 ID · 상태 전이 · 권한 · 필요 API · 미정 목록 | ⚠️ v0.3.3 기준 · D9~D24 미반영 (아래) |
-| 2 | [`../iris-console/iris-console-v0.3.8.html`](../iris-console/iris-console-v0.3.8.html) | 화면 시안. 내려받아서 브라우저로 여세요 | 최신 |
-| 3 | [`login-flow.md`](login-flow.md) | 로그인 · 계정 발급 정책 | 최신 |
-| 4 | [`validation-ui.md`](validation-ui.md) | 오류 · 확인 창 · 토스트 쓰는 규칙 | 최신 |
-| 5 | [`../iris-component-states/component-states.md`](../iris-component-states/component-states.md) | 쓰는 컴포넌트와 상태값 ([그림](../iris-component-states/iris-component-states-v0.1.1.html)) | 최신 |
-| 6 | [`../iris-ds/README.md`](../iris-ds/README.md) | 토큰 · 컴포넌트 불러오는 법 | 최신 |
-| 7 | [`type-scale.md`](type-scale.md) · [`token-diff.md`](token-diff.md) | 글자 7단계 · WDS 원본과 다른 토큰 값 | 최신 |
+| 순서 | 문서 | 무엇 |
+|---|---|---|
+| 1 | [`functional-spec.md`](functional-spec.md) | 기능 명세 — 화면 목록 · 기능 ID · 상태 전이 · 권한 · 필요 API · 미정 목록 |
+| 2 | [`iris-console-v0.3.8.html`](../iris-console/iris-console-v0.3.8.html) | 화면 시안. 내려받아서 브라우저로 여세요 (26MB) |
+| 3 | [`login-flow.md`](login-flow.md) | 로그인 · 계정 발급 정책 |
+| 4 | [`validation-ui.md`](validation-ui.md) | 오류 · 확인 창 · 토스트 쓰는 규칙 |
+| 5 | [`component-states.md`](../iris-component-states/component-states.md) | 쓰는 컴포넌트와 상태값 ([그림](../iris-component-states/iris-component-states-v0.1.1.html)) |
+| 6 | [`iris-ds/README.md`](../iris-ds/README.md) | 토큰 · 컴포넌트 불러오는 법 ([글자 단계](../iris-ds/type-scale.md) · [토큰 차이](../iris-ds/token-diff.md)) |
+
+[`decisions.md`](decisions.md)는 **정책의 기준**입니다 (D1~D29). 명세서와 다르게 보이면 이 문서가 맞습니다.
 
 ## 맥락이 필요할 때
 
 | 문서 | 무엇 |
 |---|---|
-| [`prd.md`](prd.md) | 서비스 정의 · 사용자 · 어기면 안 되는 것 |
-| [`design-principles.md`](design-principles.md) | 화면 설계 원칙 |
-| [`decisions.md`](decisions.md) | 결정 기록 D1~D24 (왜 이렇게 됐는지) · **정책은 이 문서가 기준** |
-| [`policy-review-1012.md`](policy-review-1012.md) | 10/12 정책 질의 10건 답변 (D9~D18의 근거) |
-| [`ux-writing.md`](ux-writing.md) | 문구 원칙 · **용어 사전**(D29) · 바꾼 문구 기록 |
-| [`meeting-2026-10-02.md`](meeting-2026-10-02.md) | 회의록 · v3.1 반영 항목 |
-| [`../iris-console/CHANGELOG.md`](../iris-console/CHANGELOG.md) | 버전별 변경 |
+| [`reference/prd.md`](reference/prd.md) | 서비스 정의 · 사용자 · 어기면 안 되는 것 |
+| [`reference/design-principles.md`](reference/design-principles.md) | 화면 설계 원칙 |
+| [`reference/ux-writing.md`](reference/ux-writing.md) | 문구 원칙 · **용어 사전** · 바꾼 문구 기록 |
+| [`reference/policy-review-1012.md`](reference/policy-review-1012.md) | 10/12 정책 질의 10건 답변 (D9~D18의 근거) |
+| [`reference/meeting-2026-10-02.md`](reference/meeting-2026-10-02.md) | 10-02 회의록 |
+| [`CHANGELOG.md`](../iris-console/CHANGELOG.md) | 버전별 변경 |
+| [`obit/`](../obit/) | 부고장 피그마 원본 프레임 · 토큰 |
 
-## `functional-spec.md`에서 주의할 것
+## 구현 전에 알아야 할 것
 
-**명세서는 v0.3.3 기준입니다. v0.3.8(2026-10-12)에서 정해진 D9~D24가 아직 안 들어가 있습니다.** 아래 항목은 명세서보다 [`decisions.md`](decisions.md)가 맞습니다.
+**역할은 대표 · 관리자 · 일반 셋입니다.** 2026-10-15에 이름을 통일했습니다 — 전에 쓰던 `Owner` · `오너` · `루트`는 **대표**, `어드민`은 **관리자**, `뷰어`는 **일반**입니다. 데이터 값은 `role = owner / admin / viewer` 그대로입니다. 용어 사전은 [`reference/ux-writing.md`](reference/ux-writing.md).
 
-| 주제 | 명세서에 있는 것 | 실제 결정 |
-|---|---|---|
-| 복지 정책 변경 이력 | "1차 제외" | **복구.** 버전별 읽기 전용 보기 + 전 → 후 비교. 불러오기(되돌리기)만 1차 제외 (D20) |
-| 정책 적용 시점 | "이후 등록 건부터" | 저장할 때 **적용일을 고름** (기본 다음 날 0시 · 즉시 · 날짜 지정). 기준은 경조사 발생일 (D23) |
-| 정책 수정 권한 | 언급 없음 | 대표와 관리자 **모두 직접 수정 · 저장**. 승인 단계 없이 저장 시 대표에게 알림 (D22) |
-| 회사 정보 | "회사명 · 사업자번호 수정 요청" | 결과 박스 · 검토 중 배지 · 요청 이력 · 등록증 첨부. 사업자 정보는 대표만, 주소 · 연락처는 관리자도 (D9~D12) |
-| 퇴사 | "퇴사 처리" 1단 | **"퇴사 처리 중 → 퇴사 완료" 2단** + 퇴사 예정일(미래 날짜 · 당일 자동 · 그 전 취소) (D7 · D14) |
-| 임직원 삭제 | 언급 없음 | 이력이 있으면 **삭제 불가**, 퇴사 처리로 안내. 퇴사자 정보는 퇴사 취소 후에만 수정 (D15 · D17) |
-| 번호 변경 (F-EMP-7) | 전용 창 · 중복 확인 | 여러 회사에 소속된 번호는 **콘솔에서 막고 고객센터 안내** (D16) |
-| 조직 | 언급 없음 | 본부 순서를 ↑ ↓ 로 변경 · CSV 순서 유지 · 숫자 자연 정렬 (D13) |
-| 경조금 산정 | 관계별 정책 금액 | 1차는 **금액 직접 입력 + 직급별 차등**. 기본급 % 방식은 HRIS 연동 후 2차 (D24) |
+**화면에 있지만 만들지 않는 것이 있습니다.**
 
-역할은 **대표 · 관리자 · 일반** 셋입니다 (명세서 4장 · `decisions.md` D26 · D29). 2026-10-15에 이름을 통일했습니다 — 전에 쓰던 `대표` · `오너` · `루트`는 **대표**, `어드민`은 **관리자**, `일반`는 **일반**입니다. 용어 사전은 [`ux-writing.md`](ux-writing.md). 데이터 값은 `role = owner / admin / viewer` 그대로입니다. 일반은 **단건 발송과 경조사 등록은 실행할 수 있고**, 승인 · 결제는 못 합니다. **리포트 · 결제 내역 · 활동 로그는 일반에게 메뉴가 없습니다.** 법인카드는 등록 · 수정 · 한도 모두 관리자도 할 수 있습니다 (D25).
+| 항목 | 상태 |
+|---|---|
+| 부재 시 대행 (대행자 지정 · 24시간 미처리 이관) | **MVP 제외** (D27). 프로토타입 v0.3.8에는 아직 화면이 남아 있습니다 |
+| 장례케어 (고운마음 후불 상조) | **MVP 제외 · 참고용** (D28). 상품 4종은 명세서 끝 절에 |
+| 인사 시스템 동기화 | 제외 (D8). 대신 "마지막 업데이트 날짜" 표시 |
+| 부고장 서식 편집 | 1차 제외. 아이리스 기존 부고장에 테마만 고름 |
 
-일반에게 보이는 메뉴는 **홈과 단건 발송뿐**입니다. 경조사 · 신청·승인 · 리포트·내역 · 마일리지 · 임직원 · 거래처는 사이드바에 없습니다. 설정은 조직·관계 / 복지 정책 / 회사 정보 **3개 탭만 읽기 전용**이고, 권한 · 리본 문구 · 문자·안내 · 법인카드 탭은 없습니다. (프로토타입 v0.3.8 기준)
+**금액 · 한도 · 정책 값은 전부 가안입니다.** 회사마다 설정으로 정합니다. 아직 안 정해진 7건은 명세서 9장에 있고, 그중 **Q10**(경조사 "서류 확인"을 별도 단계로 둘지)은 구현 순서에 영향을 줍니다.
 
-`본부 담당 · 조회` 역할은 v0.3.0에서 없어졌습니다. 프로토타입 v0.3.8의 설정 › 법인카드 권한 안내 모달 문구에만 "본부 담당"이 남아 있습니다 — 문서가 아니라 프로토타입 쪽 수정 대상입니다.
-
-부고장 공개 규칙은 회사 정보에서 **삭제**됐습니다 (10-02 회의 13번). 다만 D3의 부의금 계좌 노출 토글과 `Company.noticeRules`의 `showAccount` · `mournerEdit`는 입력 위치가 없어졌습니다 (Q15).
-
-그 밖에 금액 · 한도 · 정책 값은 **전부 가안**입니다 (명세서 9장). 9장의 Q3 · Q4 · Q5 · Q6 · Q9 · Q10도 아직 미정이고, 특히 Q10(경조사 "서류 확인"을 별도 단계로 둘지)은 구현 순서에 영향을 줍니다.
+**프로토타입 쪽에 남은 낡은 문구 2곳** — 설정 › 법인카드 권한 안내 모달의 "본부 담당"(없어진 역할), 같은 탭 설명의 "초과 시 Owner 승인"(삭제된 흐름). 문서가 맞고 화면 문구가 낡았습니다.
 
 ## 여기 없는 것
 
-`design_handoff_iris_console/`(이전 핸드오프 패키지)와 `iris-tokens.css`는 올리지 않았습니다. 토큰은 [`../iris-ds/`](../iris-ds/)로 대체됐고, 핸드오프 패키지는 보관 대상입니다. 옛 토큰 파일을 기준으로 구현하면 값이 어긋납니다.
+`design_handoff_iris_console/`(이전 핸드오프 패키지)와 `iris-tokens.css`는 올리지 않았습니다. 토큰은 [`../iris-ds/`](../iris-ds/)가 기준입니다. 옛 토큰 파일로 구현하면 값이 어긋납니다.

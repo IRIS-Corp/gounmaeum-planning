@@ -4,11 +4,11 @@
 |---|---|
 | 기준 시안 | 이 문서를 쓴 기준은 [`v0.3.3`](../archive/iris-console-v0.3.3.html) (archive) · 최신 화면은 [`v0.3.8`](../iris-console/iris-console-v0.3.8.html) |
 | 대상 | 클라이언트(고객사) 콘솔 · 웹 데스크톱 (최소 1280px) |
-| 함께 볼 문서 | PRD [`prd.md`](prd.md) · 로그인 [`login-flow.md`](login-flow.md) · 오류 안내 [`validation-ui.md`](validation-ui.md) · 컴포넌트 [`component-states.md`](../iris-component-states/component-states.md) · 결정 기록 [`decisions.md`](decisions.md) |
+| 함께 볼 문서 | PRD [`prd.md`](reference/prd.md) · 로그인 [`login-flow.md`](login-flow.md) · 오류 안내 [`validation-ui.md`](validation-ui.md) · 컴포넌트 [`component-states.md`](../iris-component-states/component-states.md) · 결정 기록 [`decisions.md`](decisions.md) |
 | 범위 표기 | **P1** 1차 출시 · **P2** 후순위 후보 (1차에서 빼도 흐름이 끊기지 않음) |
 | 상태 | 금액 · 한도 · 정책 값은 모두 **가안**입니다. 회사마다 설정으로 정합니다 (9장 미정 목록). |
 | 개정 | 2026-10-12. v0.1.0 기준으로 쓰인 뒤 v0.3.0에서 뒤집힌 결정(법인카드 한도 초과 승인 · 거래처 분류 · 수신 거부 · 부고장 서식 편집 · 권한 4단 · HR 동기화)을 반영했습니다. 버전별 변경은 [`CHANGELOG.md`](../iris-console/CHANGELOG.md). |
-| ⚠️ 갱신 필요 | 4장 권한은 D22 · D25 · D26까지 반영했습니다. 그러나 **회사 정보 수정 요청 · 조직 순서 · 퇴사 예정 · 복지 정책 버전 · 적용일 선택(D9~D21 · D23 · D24)은 2장 본문에 아직 안 들어갔습니다.** 그 부분은 이 문서보다 [`decisions.md`](decisions.md)와 [`policy-review-1012.md`](policy-review-1012.md)가 맞습니다. 차이는 [`README.md`](README.md). |
+| 반영 범위 | `decisions.md`의 **D1~D29를 본문에 반영**했습니다. 결정 원문과 근거는 [`decisions.md`](decisions.md) · [`reference/policy-review-1012.md`](reference/policy-review-1012.md). 아직 안 정해진 것은 9장. |
 
 ---
 
@@ -125,7 +125,7 @@ ID 규칙: `S-화면` · 기능은 `F-화면-번호` · 모달은 `M-이름`.
 | F-SEND-2 | 화환 상품 | 상황 칩(근조 · 축하 · 개업 · 승진) · 페이지네이션 · 반입 제한 상품 비활성 |
 | F-SEND-3 | 리본 문구 | 왼쪽(문구) · 오른쪽(보내는 사람 이름 = 설정의 발신 명의) |
 | F-SEND-4 | 마일리지 사용 (P2) | 1P = 1원 · 상품 금액까지 · 결제액 4% 적립 (가안) |
-| F-SEND-5 | 경조금 금액 | 관계별 정책 금액 자동 · +10만/+30만/+50만 · 정책과 다르면 승인 필요 |
+| F-SEND-5 | 경조금 금액 | 관계별 정책 금액 자동 · +10만/+30만/+50만 · 정책과 다르면 승인 필요. 1차 산정 방식은 **금액 직접 입력 + 직급별 차등**이고, 기본급 % 방식은 HRIS 연동 후 2차입니다 (D24) |
 | F-SEND-6 | 부고장 수신 대상 | 사내 전체 · 거래처 · 부서 단위 · 개별 추가. 각 명단 "상세 보기"에서 체크 / 해제. 임원 우선 발송은 1차 제외 |
 | F-SEND-7 | 단계 이동 | 현재 단계 필수 미충족 시 "다음" 비활성 + 남은 항목 안내 |
 
@@ -154,9 +154,10 @@ ID 규칙: `S-화면` · 기능은 `F-화면-번호` · 모달은 `M-이름`.
 | F-EMP-2 | 개별 등록 | 이름 · 휴대폰(=ID) · 본부 · 팀 · 직급 · 입사일. 등록 즉시 계정 발급 + 초대 문자 (`login-flow.md` 3장) |
 | F-EMP-3 | CSV 일괄 등록 | 이름 + 입사일이 같으면 갱신 · 없으면 추가 · 퇴사일만 채우면 대상 제외 |
 | F-EMP-4 | 선택 일괄 변경 | 체크 → 본부 변경 · 직급 변경 |
-| F-EMP-5 | 상세 · 퇴사 처리 | 퇴사 시 진행 중 경조사는 유지, 이후 신청 대상 제외 · 계정 비활성 |
+| F-EMP-5 | 상세 · 퇴사 처리 | **"퇴사 처리 중 → 퇴사 완료" 2단**입니다 (D7). 퇴사일은 **미래 날짜**로 잡을 수 있고(퇴사 예정), 당일에 자동으로 퇴사되며 그 전에는 취소할 수 있습니다. 예정일 3일 전에 알림이 갑니다 (D14 · 받는 사람 재지정 필요 — 4-1). 퇴사하면 진행 중 경조사는 유지되고, 이후 신청 대상에서 빠지며 계정이 비활성됩니다 |
+| F-EMP-5b | 삭제 | 경조사 · 발송 **이력이 있으면 삭제할 수 없습니다.** 퇴사 처리로 안내합니다 (D15). 퇴사자 정보는 **퇴사를 취소한 뒤에만** 수정합니다 (D17) |
 | ~~F-EMP-6~~ | ~~인사 시스템 동기화~~ | **제외** — 대신 목록 상단에 "마지막 업데이트 날짜"를 표시합니다 (F-EMP-1) |
-| F-EMP-7 | 휴대폰 번호 변경 | 기본 정보 편집 창에서는 번호를 **읽기만** 합니다. 바꿀 때는 "번호 변경" 버튼으로 전용 창을 엽니다. 전용 창은 중복 확인 → 확인 단계를 거칩니다. 번호는 로그인 ID라 바꾸면 **재인증**하고, 활동 로그에 따로 남깁니다 (`decisions.md` D8) |
+| F-EMP-7 | 휴대폰 번호 변경 | 기본 정보 편집 창에서는 번호를 **읽기만** 합니다. 바꿀 때는 "번호 변경" 버튼으로 전용 창을 엽니다. 전용 창은 중복 확인 → 확인 단계를 거칩니다. 번호는 로그인 ID라 바꾸면 **재인증**하고, 활동 로그에 따로 남깁니다 (D8). 여러 회사에 소속된 번호는 **콘솔에서 막고 고객센터로 안내**합니다 (D16) |
 
 ### S-PARTNER 거래처 — P1
 거래처 = 선진건설(고객사)이 경조사를 챙기는 **협력사 · 고객사**. 거래처는 로그인하지 않습니다.
@@ -182,7 +183,7 @@ ID 규칙: `S-화면` · 기능은 `F-화면-번호` · 모달은 `M-이름`.
 | 6 | 법인카드 | 카드 목록 · 등록 · 수정 · 삭제 · 월 한도. **대표와 관리자 모두** 할 수 있습니다 (D25). "사용 본부" 칸은 없습니다. 월 한도 도달 시 카드 사용 중지 + 문의 안내 | P1 |
 | 7 | 회사 정보 | 사업자 정보 · 주소 · 연락처 · 보내는 사람 이름(발신 명의). 수정 요청은 항목별로 동시에 넣을 수 있고, 같은 항목이 검토 중이면 막습니다. 맨 위 결과 박스(반려 사유 · 다시 요청) · "검토 중" 배지 · 요청 이력 · 사업자등록증 첨부. 사업자 정보는 대표만, 주소 · 연락처는 관리자도 (D9~D12) | P1 |
 
-없어진 탭: **회사 운영**. 본부 · 팀은 `조직 · 관계`로, 보내는 사람 이름은 `회사 정보`로 옮겨졌습니다. 부고장 공개 규칙 섹션은 회사 정보에서 **제거**됐습니다 ([`meeting-2026-10-02.md`](meeting-2026-10-02.md) 13번).
+없어진 탭: **회사 운영**. 본부 · 팀은 `조직 · 관계`로, 보내는 사람 이름은 `회사 정보`로 옮겨졌습니다. 부고장 공개 규칙 섹션은 회사 정보에서 **제거**됐습니다 ([`meeting-2026-10-02.md`](reference/meeting-2026-10-02.md) 13번).
 
 규칙: 정책 변경은 **이후 등록 건부터** 적용. 진행 중 건은 등록 당시 정책 버전 유지.
 
@@ -443,12 +444,12 @@ v0.3.0에서 **본부 담당 · 조회** 역할은 없어졌습니다. 본부 �
 
 | 구분 | 파일 | 상태 |
 |---|---|---|
-| 기획 | [`prd.md`](prd.md) · [`decisions.md`](decisions.md) · [`design-principles.md`](design-principles.md) | 있음 |
+| 기획 | [`prd.md`](reference/prd.md) · [`decisions.md`](decisions.md) · [`design-principles.md`](reference/design-principles.md) | 있음 |
 | 기능 명세 | `functional-spec.md` (이 문서) | 있음 |
 | 로그인 · 계정 | [`login-flow.md`](login-flow.md) | 있음 |
 | 화면 시안 | [`iris-console-v0.3.8.html`](../iris-console/iris-console-v0.3.8.html) | 있음 (빈 상태 전환 포함) |
 | 컴포넌트 · 상태 | [`component-states.md`](../iris-component-states/component-states.md) · [상태 시트 v0.1.1](../iris-component-states/iris-component-states-v0.1.1.html) | 있음 |
-| 토큰 · 컴포넌트 | [`iris-ds/`](../iris-ds/README.md) · [`token-diff.md`](token-diff.md) · [`type-scale.md`](type-scale.md) | 있음 |
+| 토큰 · 컴포넌트 | [`iris-ds/`](../iris-ds/README.md) · [`token-diff.md`](../iris-ds/token-diff.md) · [`type-scale.md`](../iris-ds/type-scale.md) | 있음 |
 | 오류 안내 | [`validation-ui.md`](validation-ui.md) | 있음 |
 | 버전별 변경 | [`CHANGELOG.md`](../iris-console/CHANGELOG.md) | 있음 |
 | 미정 목록 | 이 문서 9장 | 결정 필요 |

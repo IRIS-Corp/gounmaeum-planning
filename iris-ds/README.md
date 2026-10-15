@@ -30,8 +30,8 @@ IRIS 콘솔이 쓰는 디자인 토큰 · 컴포넌트 · 아이콘입니다. �
 
 - 색은 항상 `semantic` 토큰으로 씁니다. `atomic` 값을 화면에서 직접 쓰지 않습니다.
 - 순수 검정(`#000`)은 쓰지 않습니다. 가장 진한 글자는 `--semantic-label-normal`.
-- WDS 원본과 값이 다른 토큰은 [`../docs/token-diff.md`](../docs/token-diff.md)에 정리돼 있습니다. 피그마 변수는 이 파일 기준으로 만듭니다.
-- 글자 단계는 [`../docs/type-scale.md`](../docs/type-scale.md).
+- WDS 원본과 값이 다른 토큰은 [`token-diff.md`](token-diff.md)에 정리돼 있습니다. 피그마 변수는 이 파일 기준으로 만듭니다.
+- 글자 단계는 [`type-scale.md`](type-scale.md).
 - 컴포넌트의 상태별 모양은 [`../iris-component-states/component-states.md`](../iris-component-states/component-states.md).
 
 ## 폴더
