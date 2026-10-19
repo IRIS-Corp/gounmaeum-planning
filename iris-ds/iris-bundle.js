@@ -12,6 +12,8 @@ const __ds_scope = {};
 // components/actions/WithInteraction.jsx
 try { (() => {
 const CSS = `
+:root body .iris-field.iris-field.iris-field.iris-field:focus-within,:root body .iris-field.iris-field.iris-field.iris-field:has([aria-expanded="true"]){box-shadow:inset 0 0 0 1px var(--semantic-line-primary-strong)!important}
+:root body .iris-field.iris-field.iris-field.iris-field[data-invalid]:focus-within{box-shadow:inset 0 0 0 1px var(--semantic-line-status-negative-normal)!important}
 .iris-iw{position:relative}
 .iris-iw>*:not(.iris-il){position:relative;z-index:1}
 .iris-il{position:absolute;left:50%;top:50%;width:100%;height:100%;transform:translate(-50%,-50%);border-radius:inherit;opacity:0;background-color:var(--iris-il-color,var(--semantic-label-normal));transition:opacity .15s ease,transform .15s ease;pointer-events:none;z-index:0;overflow:hidden}
@@ -30,8 +32,8 @@ const CSS = `
 @keyframes iris-slide-up{from{transform:translateY(100%)}to{transform:translateY(0)}}
 @keyframes iris-grow{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .iris-field:not(:focus-within):not([data-invalid]){box-shadow:inset 0 0 0 1px var(--semantic-line-normal-normal)!important}
-.iris-field:focus-within{box-shadow:inset 0 0 0 2px rgba(var(--semantic-primary-normal-rgb),.43)!important}
-.iris-field[data-invalid]:focus-within{box-shadow:inset 0 0 0 2px rgba(var(--semantic-status-negative-rgb),.43)!important}
+.iris-field:focus-within{box-shadow:inset 0 0 0 1px var(--semantic-line-primary-strong)!important}
+.iris-field[data-invalid]:focus-within{box-shadow:inset 0 0 0 1px var(--semantic-line-status-negative-normal)!important}
 .iris-field input::placeholder,.iris-field textarea::placeholder{color:var(--semantic-label-assistive)}
 .iris-field input:disabled::placeholder,.iris-field textarea:disabled::placeholder{color:var(--semantic-label-disable)}
 .iris-thumb:hover img{transform:scale(1.025)}
@@ -804,7 +806,7 @@ function TextButton({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 4,
-    borderRadius: 6,
+    borderRadius: 8,
     padding: '4px 0',
     border: 'none',
     background: 'transparent',
@@ -855,7 +857,8 @@ function TextButton({
   return React.createElement(__ds_scope.WithInteraction, {
     variant: 'normal',
     disabled: disabled || disableInteraction,
-    width: size === 'medium' ? 'calc(100% + 14px)' : 'calc(100% + 12px)'
+    width: size === 'medium' ? 'calc(100% + 24px)' : 'calc(100% + 20px)',
+    height: size === 'medium' ? 'calc(100% + 8px)' : 'calc(100% + 6px)'
   }, el);
 }
 Object.assign(__ds_scope, { TextButton });
@@ -1753,7 +1756,7 @@ function Alert({
     style: {
       display: 'flex',
       flexDirection: 'column',
-      gap: 6,
+      gap: 2,
       padding: 20
     }
   }, heading && React.createElement('h2', {
@@ -1769,13 +1772,13 @@ function Alert({
       color: 'var(--semantic-label-alternative)',
       wordBreak: 'keep-all'
     }
-  }, description), children), actions.length > 0 && React.createElement('div', {
+  }, description), children && React.createElement('div', { style: { marginTop: 18 } }, children)), actions.length > 0 && React.createElement('div', {
     style: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end',
-      gap: 24,
-      padding: '0 20px 12px 20px'
+      gap: 28,
+      padding: '4px 24px 20px 24px'
     }
   }, actions.map((a, i) => React.createElement(__ds_scope.TextButton, {
     key: i,
@@ -5460,7 +5463,7 @@ function Pagination({
     if (page === undefined) setInner(n);
     onPageChange && onPageChange(n);
   };
-  const nav = (icon, dis, fn, label) => React.createElement(__ds_scope.IconButton, {
+  const nav = (icon, dis, fn, label, dbl) => React.createElement(__ds_scope.IconButton, {
     size: 20,
     disabled: dis,
     onClick: fn,
@@ -5468,7 +5471,9 @@ function Pagination({
     style: {
       color: 'var(--semantic-label-alternative)'
     }
-  }, React.createElement(__ds_scope.Icon, {
+  }, dbl ? React.createElement('span', { style: { display: 'inline-flex', alignItems: 'center' } },
+    React.createElement('span', { style: { display: 'inline-flex', marginRight: '-0.55em' } }, React.createElement(__ds_scope.Icon, { name: icon })),
+    React.createElement(__ds_scope.Icon, { name: icon })) : React.createElement(__ds_scope.Icon, {
     name: icon
   }));
   return React.createElement('nav', {

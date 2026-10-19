@@ -1,11 +1,11 @@
 # 개발자용 읽는 순서
 
-IRIS 콘솔을 처음 받는 개발자가 이 순서로 읽으면 됩니다. 기준 화면은 **[iris-console-v0.3.8.html](../iris-console/iris-console-v0.3.8.html)** 입니다.
+IRIS 콘솔을 처음 받는 개발자가 이 순서로 읽으면 됩니다. 기준 화면은 **[iris-console-v0.3.9.html](../iris-console/iris-console-v0.3.9.html)** 입니다.
 
 | 순서 | 문서 | 무엇 |
 |---|---|---|
 | 1 | [`functional-spec.md`](functional-spec.md) | 기능 명세 — 화면 목록 · 기능 ID · 상태 전이 · 권한 · 필요 API · 미정 목록 |
-| 2 | [`iris-console-v0.3.8.html`](../iris-console/iris-console-v0.3.8.html) | 화면 시안. 내려받아서 브라우저로 여세요 (26MB) |
+| 2 | [`iris-console-v0.3.9.html`](../iris-console/iris-console-v0.3.9.html) | 화면 시안. 내려받아서 브라우저로 여세요 (26MB) |
 | 3 | [`login-flow.md`](login-flow.md) | 로그인 · 계정 발급 정책 |
 | 4 | [`validation-ui.md`](validation-ui.md) | 오류 · 확인 창 · 토스트 쓰는 규칙 |
 | 5 | [`component-states.md`](../iris-component-states/component-states.md) | 쓰는 컴포넌트와 상태값 ([그림](../iris-component-states/iris-component-states-v0.1.1.html)) |
@@ -21,6 +21,7 @@ IRIS 콘솔을 처음 받는 개발자가 이 순서로 읽으면 됩니다. 기
 | [`reference/design-principles.md`](reference/design-principles.md) | 화면 설계 원칙 |
 | [`reference/ux-writing.md`](reference/ux-writing.md) | 문구 원칙 · **용어 사전** · 바꾼 문구 기록 |
 | [`reference/policy-review-1012.md`](reference/policy-review-1012.md) | 10/12 정책 질의 10건 답변 (D9~D18의 근거) |
+| [`reference/notion-qna-2026-10-16.md`](reference/notion-qna-2026-10-16.md) | 10/16 서류 첨부 · 부고장 발송 기준 Q&A |
 | [`reference/meeting-2026-10-02.md`](reference/meeting-2026-10-02.md) | 10-02 회의록 |
 | [`CHANGELOG.md`](../iris-console/CHANGELOG.md) | 버전별 변경 |
 | [`obit/`](../obit/) | 부고장 피그마 원본 프레임 · 토큰 |
@@ -33,7 +34,7 @@ IRIS 콘솔을 처음 받는 개발자가 이 순서로 읽으면 됩니다. 기
 
 | 항목 | 상태 |
 |---|---|
-| 부재 시 대행 (대행자 지정 · 24시간 미처리 이관) | **MVP 제외** (D27). 프로토타입 v0.3.8에는 아직 화면이 남아 있습니다 |
+| 부재 시 대행 (대행자 지정 · 24시간 미처리 이관) | **MVP 제외** (D27). 프로토타입 v0.3.9에는 아직 화면이 남아 있습니다 |
 | 장례케어 (고운마음 후불 상조) | **MVP 제외 · 참고용** (D28). 상품 4종은 명세서 끝 절에 |
 | 인사 시스템 동기화 | 제외 (D8). 대신 "마지막 업데이트 날짜" 표시 |
 | 부고장 서식 편집 | 1차 제외. 아이리스 기존 부고장에 테마만 고름 |
