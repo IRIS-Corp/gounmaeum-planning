@@ -86,10 +86,10 @@
 | 대상 | 기본 | 입력 · 열림 · 포커스 | 비활성 |
 |---|---|---|---|
 | TextField · SearchField · TextArea · Select 트리거 | `line-solid-normal` #E1E2E4 · 흰 바탕 | `line-primary-strong` 1px (파랑 43%) · 오류는 `line-status-negative-normal` 1px | `line-normal-neutral` (16%) |
-| 선택 카드 · 라디오 카드 · 단계 표시 현재 단계 · 선택 바 | `line-normal-neutral` (16%) | 선택 시 `line-primary-strong` 1px (파랑 43%) | — |
+| 선택 카드 · 라디오 카드 · 단계 표시 현재 단계 · 선택 바 | `line-normal-neutral` (22%) | 선택 시 `line-primary-strong` 1px (파랑 43%) | — |
 | Button outlined · FilterButton · Chip outlined | `line-solid-normal` #E1E2E4 | — | `line-normal-neutral` |
-| 카드 · 표 · 모달 안 박스 | `line-normal-neutral` (16%) | — | — |
-| SNB · 상단 바 구분선 | `line-normal-normal` (22%) | — | — |
+| 카드 · 표 · 모달 안 박스 | `line-normal-neutral` (22%) | — | — |
+| SNB · 상단 바 구분선 | `line-normal-normal` (28%) | — | — |
 
 ### 호버 · 누름 (WithInteraction)
 | variant | hover | pressed |

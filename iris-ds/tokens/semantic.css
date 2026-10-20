@@ -22,8 +22,8 @@
 --semantic-background-status-positive:rgba(0, 191, 64, 0.08);
 --semantic-interaction-inactive:#989BA2;
 --semantic-interaction-disable:#F4F4F5;
---semantic-line-normal-normal:rgba(112, 115, 124, 0.22);
---semantic-line-normal-neutral:rgba(112, 115, 124, 0.16);--semantic-line-normal-strong:rgba(112, 115, 124, 0.52);
+--semantic-line-normal-normal:rgba(112, 115, 124, 0.28);
+--semantic-line-normal-neutral:rgba(112, 115, 124, 0.22);--semantic-line-normal-strong:rgba(112, 115, 124, 0.52);
 --semantic-line-normal-alternative:rgba(112, 115, 124, 0.08);
 --semantic-line-solid-normal:#E1E2E4;
 --semantic-line-solid-neutral:#EAEBEC;
