@@ -1,11 +1,11 @@
 # 개발자용 읽는 순서
 
-IRIS 콘솔을 처음 받는 개발자가 이 순서로 읽으면 됩니다. 기준 화면은 **[iris-console-v0.3.12.html](../iris-console/iris-console-v0.3.12.html)** 입니다.
+IRIS 콘솔을 처음 받는 개발자가 이 순서로 읽으면 됩니다. 기준 화면은 **[iris-console-v0.3.11.html](../iris-console/iris-console-v0.3.11.html)** 입니다.
 
 | 순서 | 문서 | 무엇 |
 |---|---|---|
 | 1 | [`functional-spec.md`](functional-spec.md) | 기능 명세 — 화면 목록 · 기능 ID · 상태 전이 · 권한 · 필요 API · 미정 목록 |
-| 2 | [`prototype-dev/iris-console-v0.3.12.html`](../prototype-dev/iris-console-v0.3.12.html) | 화면 시안 — **개발자용 827KB**. `prototype-dev/` 폴더째 받아서 여세요 (CDN 참조라 인터넷 필요). 오프라인 단일 파일은 [`iris-console/`](../iris-console/iris-console-v0.3.10.html) (21MB) |
+| 2 | [`prototype-dev/iris-console-v0.3.11.html`](../prototype-dev/iris-console-v0.3.11.html) | 화면 시안 — **개발자용 827KB**. `prototype-dev/` 폴더째 받아서 여세요 (CDN 참조라 인터넷 필요). 오프라인 단일 파일은 [`iris-console/`](../iris-console/iris-console-v0.3.10.html) (21MB) |
 | 3 | [`login-flow.md`](login-flow.md) | 로그인 · 계정 발급 정책 |
 | 4 | [`validation-ui.md`](validation-ui.md) | 오류 · 확인 창 · 토스트 쓰는 규칙 |
 | 5 | [`component-states.md`](../iris-component-states/component-states.md) | 쓰는 컴포넌트와 상태값 ([그림](../iris-component-states/iris-component-states-v0.1.1.html)) |

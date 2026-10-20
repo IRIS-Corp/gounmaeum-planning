@@ -4,19 +4,19 @@
 
 | 파일 | 원래 위치 | 대체 |
 |---|---|---|
-| `iris-console-v0.1.0.html` | `iris-console/` | [v0.3.12](../iris-console/iris-console-v0.3.12.html) |
-| `iris-console-v0.2.0.html` | `iris-console/` | [v0.3.12](../iris-console/iris-console-v0.3.12.html) |
-| `iris-console-v0.3.0.html` | `iris-console/` | [v0.3.12](../iris-console/iris-console-v0.3.12.html) |
-| `iris-console-v0.3.1.html` | `iris-console/` | [v0.3.12](../iris-console/iris-console-v0.3.12.html) |
-| `iris-console-v0.3.2.html` | `iris-console/` | [v0.3.12](../iris-console/iris-console-v0.3.12.html) |
-| `iris-console-v0.3.3.html` | `iris-console/` | [v0.3.12](../iris-console/iris-console-v0.3.12.html) |
-| `iris-console-v0.3.4.html` | `iris-console/` | [v0.3.12](../iris-console/iris-console-v0.3.12.html) |
-| `iris-console-v0.3.5.html` | `iris-console/` | [v0.3.12](../iris-console/iris-console-v0.3.12.html) |
-| `iris-console-v0.3.6.html` | `iris-console/` | [v0.3.12](../iris-console/iris-console-v0.3.12.html) |
-| `iris-console-v0.3.7.html` | `iris-console/` | [v0.3.12](../iris-console/iris-console-v0.3.12.html) |
-| `iris-console-v0.3.8.html` | `iris-console/` | [v0.3.12](../iris-console/iris-console-v0.3.12.html) |
-| `iris-console-v0.3.9.html` | `iris-console/` | [v0.3.12](../iris-console/iris-console-v0.3.12.html) |
-| `iris-console-v0.3.10.html` | `iris-console/` | [v0.3.12](../iris-console/iris-console-v0.3.12.html) |
+| `iris-console-v0.1.0.html` | `iris-console/` | [v0.3.11](../iris-console/iris-console-v0.3.11.html) |
+| `iris-console-v0.2.0.html` | `iris-console/` | [v0.3.11](../iris-console/iris-console-v0.3.11.html) |
+| `iris-console-v0.3.0.html` | `iris-console/` | [v0.3.11](../iris-console/iris-console-v0.3.11.html) |
+| `iris-console-v0.3.1.html` | `iris-console/` | [v0.3.11](../iris-console/iris-console-v0.3.11.html) |
+| `iris-console-v0.3.2.html` | `iris-console/` | [v0.3.11](../iris-console/iris-console-v0.3.11.html) |
+| `iris-console-v0.3.3.html` | `iris-console/` | [v0.3.11](../iris-console/iris-console-v0.3.11.html) |
+| `iris-console-v0.3.4.html` | `iris-console/` | [v0.3.11](../iris-console/iris-console-v0.3.11.html) |
+| `iris-console-v0.3.5.html` | `iris-console/` | [v0.3.11](../iris-console/iris-console-v0.3.11.html) |
+| `iris-console-v0.3.6.html` | `iris-console/` | [v0.3.11](../iris-console/iris-console-v0.3.11.html) |
+| `iris-console-v0.3.7.html` | `iris-console/` | [v0.3.11](../iris-console/iris-console-v0.3.11.html) |
+| `iris-console-v0.3.8.html` | `iris-console/` | [v0.3.11](../iris-console/iris-console-v0.3.11.html) |
+| `iris-console-v0.3.9.html` | `iris-console/` | [v0.3.11](../iris-console/iris-console-v0.3.11.html) |
+| `iris-console-v0.3.10.html` | `iris-console/` | [v0.3.11](../iris-console/iris-console-v0.3.11.html) |
 | `iris-component-states-v0.1.0.html` | `iris-component-states/` | [v0.1.1](../iris-component-states/iris-component-states-v0.1.1.html) |
 
 버전별로 무엇이 바뀌었는지는 [`../iris-console/CHANGELOG.md`](../iris-console/CHANGELOG.md)를 보세요.
