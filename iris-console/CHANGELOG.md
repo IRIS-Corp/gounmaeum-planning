@@ -33,8 +33,29 @@
 
   `iris-component-states/component-states.md`의 % 표기도 같이 고쳤습니다.
 
+### 고침
+- **"빈 상태" 데모 모드에서 콘솔 전체가 멈추던 오류.** `?empty=1`에서
+  `renderVals(): Cannot read properties of undefined (reading '2')`가 나며 화면이
+  그려지지 않았습니다. 거래처 목록이 빈 배열인데 0번째를 읽어서 생긴 문제입니다
+  (`sendVals()`의 `CANDS[recip][n]` 16곳). 같은 위험이 있던 `authVals`의 `TT[step]`,
+  `pagesVals`의 `SL[st]`도 함께 막았습니다. 빈 상태로 13개 화면이 모두 열립니다.
+- 쓰이지 않던 죽은 코드 한 줄 삭제.
+
+### 배포 형태가 둘로 나뉩니다
+- **개발자용** [`prototype-dev/`](../prototype-dev/) — 라이브러리를 HTML에 넣지 않고
+  **import로 불러옵니다.** HTML이 26MB → **831KB**가 됐습니다.
+  폴더 구성: `iris-console-v0.3.10.html` + `support.js` + `iris-ds/` + `obit/`.
+  React · 폰트 · 우편번호 API는 CDN에서 받으므로 인터넷이 필요합니다.
+- **공유용** [`iris-console/`](iris-console-v0.3.10.html) — 오프라인 단일 파일.
+  **26.4MB → 21.4MB** (Noto Sans KR를 안 써서 뺐습니다).
+
+  26MB의 92%는 woff2 폰트 526개를 base64로 넣은 것이었습니다. 브라우저가 첫 화면을
+  그리기 전에 그걸 모두 디코드해야 해서 느렸습니다.
+- 부고장 월계수 장식을 파일로 분리 — `obit/laurel-stem.svg`.
+
 ### 알려진 제한
 - 부재 시 대행은 MVP 제외 확정(D27)인데 이 버전 화면에는 아직 남아 있습니다.
+- 나눔명조 글자 서브셋 추출은 하지 않았습니다. 개발자용은 CDN이라 영향이 작습니다.
 
 ---
 
