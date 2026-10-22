@@ -24,6 +24,7 @@ IRIS 콘솔을 처음 받는 개발자가 이 순서로 읽으면 됩니다. 기
 | [`reference/ux-writing.md`](reference/ux-writing.md) | 문구 원칙 · **용어 사전** · 바꾼 문구 기록 |
 | [`reference/policy-review-1012.md`](reference/policy-review-1012.md) | 10/12 정책 질의 10건 답변 (D9~D18의 근거) |
 | [`reference/notion-qna-2026-10-16.md`](reference/notion-qna-2026-10-16.md) | 10/16 서류 첨부 · 부고장 발송 기준 Q&A |
+| [`reference/dev-qna-2026-10-22.md`](reference/dev-qna-2026-10-22.md) | 10/22 개발 검토 의견에 대한 답 — 예금주 · 증빙 · 수수료 · 부고장 만료 · 일반 승인 흐름 |
 | [`reference/meeting-2026-10-02.md`](reference/meeting-2026-10-02.md) | 10-02 회의록 |
 | [`CHANGELOG.md`](../iris-console/CHANGELOG.md) | 버전별 변경 |
 | [`obit/`](../obit/) | 부고장 피그마 원본 프레임 · 토큰 |
