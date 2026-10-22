@@ -6,7 +6,7 @@
 
 | 항목 | 내용 |
 |---|---|
-| 기준 시안 | `prototype/iris-console-v0.3.0.html` (Claude Design 기준 · 2026-10-20 · 레포 v0.3.10과 같은 내용) |
+| 기준 시안 | `prototype/iris-console-v0.3.12-offline.html` (Claude Design 기준 · 2026-10-22 · 레포 `iris-console/iris-console-v0.3.12.html`과 같은 파일) |
 | 대상 | 클라이언트(고객사) 콘솔 · 웹 데스크톱 (최소 1280px) |
 | 함께 볼 문서 | PRD `docs/prd.md` · 로그인 `docs/login-flow.md` · 오류 안내 `docs/validation-ui.md` · 컴포넌트 `docs/component-states.md` · 결정 기록 `docs/decisions.md` |
 | 범위 표기 | **P1** 1차 출시 · **P2** 후순위 후보 (1차에서 빼도 흐름이 끊기지 않음) |
@@ -398,7 +398,7 @@ v0.3.0에서 **본부 담당** 역할은 없어졌습니다. 본부 단위로 �
 | 기획 | `docs/prd.md` · `docs/decisions.md` · `docs/design-principles.md` | 있음 |
 | 기능 명세 | `docs/functional-spec.md` (이 문서) | 있음 |
 | 로그인 · 계정 | `docs/login-flow.md` | 있음 |
-| 화면 시안 | GitHub 레포 `iris-console/iris-console-v0.3.3.html` | 있음 (빈 상태 전환 포함) |
+| 화면 시안 | GitHub 레포 `iris-console/iris-console-v0.3.12.html` (오프라인 21MB) · `prototype-dev/iris-console-v0.3.12.html` (개발자용 829KB) | 있음 (빈 상태 전환 포함) |
 | 컴포넌트 · 상태 | `docs/component-states.md` · `IRIS 컴포넌트 상태 시트.dc.html` | 있음 |
 | 토큰 · 컴포넌트 | `iris-ds/` · `docs/token-diff.md` · `docs/type-scale.md` | 있음 |
 | 오류 안내 | `docs/validation-ui.md` | 있음 |
