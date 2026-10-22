@@ -5463,19 +5463,35 @@ function Pagination({
     if (page === undefined) setInner(n);
     onPageChange && onPageChange(n);
   };
-  const nav = (icon, dis, fn, label, dbl) => React.createElement(__ds_scope.IconButton, {
-    size: 20,
+  const nav = (icon, dis, fn, label, dbl) => React.createElement(__ds_scope.WithInteraction, {
+    variant: 'light',
+    disabled: dis,
+    width: 'calc(100% + 4px)'
+  }, React.createElement('button', {
+    type: 'button',
     disabled: dis,
     onClick: fn,
     'aria-label': label,
     style: {
-      color: 'var(--semantic-label-alternative)'
+      position: 'relative',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      minWidth: 24,
+      height: 28,
+      padding: 0,
+      border: 'none',
+      borderRadius: 6,
+      background: 'transparent',
+      cursor: dis ? 'default' : 'pointer',
+      fontSize: 20,
+      color: dis ? 'var(--semantic-label-disable)' : 'var(--semantic-label-alternative)'
     }
   }, dbl ? React.createElement('span', { style: { display: 'inline-flex', alignItems: 'center' } },
     React.createElement('span', { style: { display: 'inline-flex', marginRight: '-0.55em' } }, React.createElement(__ds_scope.Icon, { name: icon })),
     React.createElement(__ds_scope.Icon, { name: icon })) : React.createElement(__ds_scope.Icon, {
     name: icon
-  }));
+  })));
   return React.createElement('nav', {
     'aria-label': 'pagination',
     style: {
@@ -5498,7 +5514,7 @@ function Pagination({
     style: {
       display: 'flex',
       alignItems: 'center',
-      gap: 4,
+      gap: 8,
       margin: '0 auto'
     }
   }, variant === 'extended' && nav('chevron-left', cur <= 1, () => go(1), '첫 페이지'), nav('chevron-left', cur <= 1, () => go(cur - 1), '이전'), range(cur, totalPages, siblings).map((p, i) => typeof p === 'string' ? React.createElement('span', {

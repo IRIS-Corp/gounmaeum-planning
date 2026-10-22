@@ -316,7 +316,7 @@
       </sc-for>
     </nav>
 
-    <sc-if value="{{ notPartner }}" hint-placeholder-val="{{ true }}">
+    <sc-if value="{{ showSettingsNav }}" hint-placeholder-val="{{ true }}">
     <div style="padding: 12px; box-shadow: inset 0 1px 0 var(--semantic-line-normal-normal);">
       <button type="button" data-tour="settings" onClick="{{ goSettings }}" style="{{ settingsNavStyle }}" style-hover="background-image: linear-gradient(var(--semantic-fill-normal), var(--semantic-fill-normal));">
         <x-import component-from-global-scope="IrisDesignSystem.Icon" name="setting" size="{{ 20 }}" hint-size="20px,20px"></x-import>
@@ -977,7 +977,7 @@
             <sc-if value="{{ ikHasFee }}" hint-placeholder-val="{{ false }}"><div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; line-height: 20px; margin-top: -6px;"><span style="color: var(--semantic-label-neutral);">부의금 송금 수수료</span><span style="color: var(--semantic-label-normal); font-variant-numeric: tabular-nums;">{{ ikFeeText }}</span></div></sc-if>
             <div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 12px; border-top: 1px solid var(--semantic-line-normal-neutral);"><span style="font-size: 16px; line-height: 24px; font-weight: 600;">합계</span><span style="font-size: 22px; line-height: 30px; font-weight: 600; letter-spacing: -0.0194em; font-variant-numeric: tabular-nums;">{{ ikTotal }}</span></div>
             <sc-if value="{{ ikHasTodo }}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-radius: 10px; background: var(--atomic-orange-95); box-shadow: inset 0 0 0 1px var(--semantic-line-status-cautionary-normal);"><span style="font-size: 14px; line-height: 20px; font-weight: 600; color: var(--semantic-accent-foreground-orange);">등록 전에 남은 항목</span><sc-for list="{{ ikTodoList }}" as="t" hint-placeholder-count="2"><span style="font-size: 14px; line-height: 20px; color: var(--semantic-accent-foreground-orange);">· {{ t.text }}</span></sc-for></div></sc-if>
-            <x-import component-from-global-scope="IrisDesignSystem.Button" size="large" full-width="{{ true }}" disabled="{{ ikBlocked }}" onClick="{{ submitIntake }}" hint-size="100%,48px">이대로 등록하고 발송</x-import>
+            <x-import component-from-global-scope="IrisDesignSystem.Button" size="large" full-width="{{ true }}" disabled="{{ ikBlocked }}" onClick="{{ submitIntake }}" hint-size="100%,48px">{{ ikSubmitLabel }}</x-import>
             <p style="margin: 0; font-size: 13px; line-height: 18px; color: var(--semantic-label-neutral);">등록하면 경조사가 만들어지고 선택한 발송이 진행됩니다. 이후 취소는 경조사 화면에서 건별로 요청합니다.</p>
           </div>
         </aside>
@@ -3275,7 +3275,7 @@ class Component extends DCLogic {
     const isSend = ['flower', 'money', 'notice'].indexOf(scr) >= 0;
 
     const DONE_N = (s.doneTodos || []).length; const TODO_N = empty ? 0 : Math.max(0, 4 - DONE_N);
-    const counts = { today: TODO_N, approve: empty ? 0 : Math.max(0, 5 - ((s.doneTodos || []).indexOf('정재훈 사원 결혼') >= 0 ? 1 : 0) - (s.apDone || []).length), cases: empty ? 0 : 3 };
+    const counts = { today: TODO_N, approve: (s.viewerReqs || []).length + (empty ? 0 : 0) + (empty ? 0 : Math.max(0, 5 - ((s.doneTodos || []).indexOf('정재훈 사원 결혼') >= 0 ? 1 : 0) - (s.apDone || []).length)), cases: empty ? 0 : 3 };
     const navDef = [
       { key: 'today', label: '홈', icon: 'home', count: counts.today },
       { key: 'approve', label: '신청 · 승인', icon: 'check', count: counts.approve, accent: true },
@@ -3297,7 +3297,7 @@ class Component extends DCLogic {
     });
 
     const titles = {
-      today: this.isViewer ? ['한서연님, 안녕하세요', '보기 전용 계정 · 경조사 등록과 거래처 발송을 할 수 있습니다'] : [empty ? '한서연님, 오늘은 확인할 건이 없습니다' : (TODO_N === 0 ? '한서연님, 오늘 처리할 일을 모두 마쳤습니다' : '한서연님, 오늘 처리할 일이 ' + TODO_N + '건 있습니다'), empty ? '2025년 6월 3일 화요일' : '2025년 5월 19일 월요일'],
+      today: this.isViewer ? ['한서연님, 안녕하세요', '일반 계정 · 경조사 등록과 거래처 발송은 관리자 승인 후 진행됩니다'] : [empty ? '한서연님, 오늘은 확인할 건이 없습니다' : (TODO_N === 0 ? '한서연님, 오늘 처리할 일을 모두 마쳤습니다' : '한서연님, 오늘 처리할 일이 ' + TODO_N + '건 있습니다'), empty ? '2025년 6월 3일 화요일' : '2025년 5월 19일 월요일'],
       approve: ['신청 · 승인', empty ? '승인 대기 없음' : '승인 대기 ' + counts.approve + '건 · 이번 달 승인 11건'],
       cases: ['경조사', empty ? '올해 0건' : '진행 중 3건 · 올해 20건'],
       case: (s.lastCase && s.lastCase.who) ? [s.lastCase.who + ' ' + (s.lastCase.rel ? s.lastCase.rel + '상' : '경조사'), '2026.10.16 등록 · ' + (s.lastCase.place || '장례식장 입력 전')] : ['박철수 차장 부친상', '인사총무본부 · 서울추모공원 2호 · 입관 5/20 (화) 14:00 · 발인 5/21 (수) 06:00 · 장지 경기 파주 하늘공원'],
@@ -3636,7 +3636,7 @@ class Component extends DCLogic {
       dotStyle: { width: '6px', height: '6px', marginTop: '8px', flexShrink: 0, borderRadius: '9999px', background: unread ? 'var(--semantic-primary-normal)' : 'transparent' } }); });
     const ntfUnread = notifications.filter(n => n.unread).length;
 
-    const doneDefs = { sentflower: ['화환을 주문했습니다', '제작이 시작되면 배송 상태를 목록에서 확인할 수 있습니다'], sentmoney: ['송금했습니다', '받는 분에게 안내 문자가 발송됩니다'], sentnotice: ['부고장을 발송했습니다', '열람 수는 발송 내역에서 확인합니다'], proofReq: ['서류 제출을 요청했습니다', '신청자에게 제출 링크가 문자로 발송됩니다'], approve: ['승인하고 결제했습니다', '신청자에게 지급 안내 문자가 발송됩니다'], intake: ['접수되었습니다', '화환 주문 · 부의금 송금 · 부고장 초안이 준비되었습니다'], saved: ['저장했습니다', '변경 사항은 이후 등록부터 적용됩니다'], proof: ['서류를 승인했습니다', '해당 건은 완료로 이동합니다'], bulk: ['선택한 신청을 승인했습니다', '결제와 지급 안내가 순서대로 진행됩니다'] };
+    const doneDefs = { viewerReq: ['승인을 요청했습니다', '관리자가 승인하면 발송이 진행됩니다 · 진행 상황은 홈의 내가 등록한 경조사에서 확인합니다'], sentflower: ['화환을 주문했습니다', '제작이 시작되면 배송 상태를 목록에서 확인할 수 있습니다'], sentmoney: ['송금했습니다', '받는 분에게 안내 문자가 발송됩니다'], sentnotice: ['부고장을 발송했습니다', '열람 수는 발송 내역에서 확인합니다'], proofReq: ['서류 제출을 요청했습니다', '신청자에게 제출 링크가 문자로 발송됩니다'], approve: ['승인하고 결제했습니다', '신청자에게 지급 안내 문자가 발송됩니다'], intake: ['접수되었습니다', '화환 주문 · 부의금 송금 · 부고장 초안이 준비되었습니다'], saved: ['저장했습니다', '변경 사항은 이후 등록부터 적용됩니다'], proof: ['서류를 승인했습니다', '해당 건은 완료로 이동합니다'], bulk: ['선택한 신청을 승인했습니다', '결제와 지급 안내가 순서대로 진행됩니다'] };
     const dd = doneDefs[s.doneKind || 'approve'];
     const F = this.FORMS[s.formKey] || this.FORMS.empAdd;
 
@@ -3657,13 +3657,13 @@ class Component extends DCLogic {
     });
 
     // 신청 · 승인 (master–detail)
-    const APS = [
+    const APS = (s.viewerReqs || []).concat([
       { id: 'a0', name: '이수민 대리', dept: '경영지원실', item: '장례케어 · 고급형', missing: false, done: false, value: 0, date: '오늘', when: '조모상 · 장례케어 신청', dday: '', place: '대금은 본인이 기업 제휴가격으로 결제 · 회사 결제 없음', care: true },
       { id: 'a1', name: '정재훈 사원', dept: '건축사업본부', item: '결혼 축의금', missing: false, done: false, value: 300000, date: '5/17', when: '5/24 (토) 11:00 예식', dday: 'D-5', place: '신라호텔 영빈관', urgent: false },
       { id: 'a2', name: '김하늘 대리', dept: '토목사업본부', item: '배우자 출산', missing: false, done: false, value: 200000, date: '5/16', when: '5/14 출생', dday: '', place: '기한 없음 · 계좌 송금만', urgent: false },
       { id: 'a3', name: '오세훈 과장', dept: '플랜트본부', item: '본인 회갑', missing: true, done: false, value: 150000, date: '5/15', when: '6/02 (월) 회갑', dday: 'D-14', place: '자택', urgent: false },
       { id: 'a4', name: '이수민 대리', dept: '경영지원실', item: '조모상', missing: true, done: false, value: 300000, date: '5/14', when: '5/21 (수) 06:00 발인', dday: 'D-2', place: '입관 5/20 14:00', urgent: true }
-    ].map(r => Object.assign(r, {
+    ]).map(r => Object.assign(r, {
       proofName: r.care ? '없음' : /결혼/.test(r.item) ? '청첩장' : /출산/.test(r.item) ? '출생증명서' : /상$/.test(r.item) ? '사망진단서 · 부고' : '주민등록초본',
       rule: r.care ? '상조사가 임직원에게 직접 연락해 장례지도사가 출동합니다' : /결혼/.test(r.item) ? '축의금은 예식 3일 전 송금 · 화환은 당일 오전 도착' : /출산/.test(r.item) ? '출생 확인 후 즉시 송금 · 화환 없음' : /상$/.test(r.item) ? '부의금은 발인 전 송금 · 근조화환은 빈소로 즉시 발송' : '회갑 당일 송금 · 화환은 자택으로 발송'
     }));
@@ -3778,7 +3778,7 @@ class Component extends DCLogic {
           this.el('Button', { variant: 'outlined', color: 'assistive', size: 'large', fullWidth: true, onClick: () => this.setState({ modal: 'form', formKey: 'csvUpload' }) }, '다시 올리기'),
           this.el('Button', { size: 'large', fullWidth: true, onClick: () => { this.setState({ modal: null, toast: '임직원 2명을 등록했습니다' + (s.csvSms === true ? ' · 안내 문자 발송' : '') }); clearTimeout(this._tt); this._tt = setTimeout(() => this.setState({ toast: null }), 2400); } }, '등록하기')),
         React.createElement('div', { style: { display: 'flex', justifyContent: 'center' } }, this.el('TextButton', { color: 'assistive', size: 'medium', onClick: () => this.setState({ modal: null }) }, '취소'))),
-      notPartner: true, navItems, settingsNavStyle: this.navStyle(is('settings')),
+      notPartner: true, showSettingsNav: !this.isViewer, ikSubmitLabel: this.isViewer ? '승인 요청' : '이대로 등록하고 발송', navItems, settingsNavStyle: this.navStyle(is('settings')),
       goToday: this.go('today'), goIntake: (this.empty && (!(s.cfgDone || {}).emp || !s.polPublished)) ? (() => this.setState({ modal: 'prereq', prereqFor: 'intake' })) : this.go('intake', { ikWho: null, ikWhoQuery: '' }), goSettings: this.go('settings', { settingsTab: null }), goCase: this.go('case'), goNotice: this.go('notice'), goCaseRow: () => this.setState({ screen: 'case' }),
       doLogin: () => { let seen = false; try { seen = localStorage.getItem('iris-guide-seen') === '1'; } catch (e) {} this.setState(Object.assign({ screen: 'today', modal: null }, seen ? {} : { modal: null, tour: 0 })); if (!seen) { try { localStorage.setItem('iris-guide-seen', '1'); } catch (e) {} } },
       ...(() => { const ph = (s.loginPhone == null ? '' : String(s.loginPhone)).replace(/[^0-9]/g, ''); const phOk = /^01[016789][0-9]{7,8}$/.test(ph); const code = (s.loginCode || '').replace(/[^0-9]/g, ''); const sent = !!s.loginCodeSent;
@@ -3927,7 +3927,7 @@ class Component extends DCLogic {
       intakeKindItems: [{ value: 'death', label: '부고' }, { value: 'happy', label: '경사' }, { value: 'partner', label: '거래처' }], intakeKind: s.intakeKind, setIntakeKind: (v) => this.setState({ intakeKind: v }),
       intakeToggles,
       intakeSummary: [{ k: '대상', v: '박철수 차장 · 부친' }, { k: '규정', v: '부의금 ₩500,000 · 화환' }, { k: '화환', v: s.intakeToggles.flower ? '근조 바구니 ₩140,000' : '보내지 않음' }, { k: '경조금', v: s.intakeToggles.money ? '₩500,000 자동 승인' : '보내지 않음' }, { k: '부고장', v: s.intakeToggles.notice ? '사내 · 거래처 42곳' : '보내지 않음' }],
-      submitIntake: () => this.setState(st => ({ modal: 'done', doneKind: 'intake', lastCase: { who: st.ikWho != null ? ['박철수 차장', '정재훈 사원', '이수민 대리', '김하늘 대리', '오세훈 과장', '최민석 부장'][st.ikWho] || null : null, rel: st.ikRel || null, place: st.ikPlaceName || null } })),
+      submitIntake: () => this.isViewer ? this.setState(st => ({ modal: 'done', doneKind: 'viewerReq', viewerReqs: [{ id: 'vr' + (st.viewerReqs || []).length, name: st.ikWho != null ? ['박철수 차장', '정재훈 사원', '이수민 대리', '김하늘 대리', '오세훈 과장', '최민석 부장'][st.ikWho] : '임직원', dept: '일반 계정 신청', item: (st.intakeKind === 'happy' ? '경사' : '부고') + ' · 경조사 등록', missing: false, done: false, value: 500000, date: '방금', when: '일반 계정 승인 요청', dday: '', place: '', urgent: false }].concat(st.viewerReqs || []) })) : this.setState(st => ({ modal: 'done', doneKind: 'intake', lastCase: { who: st.ikWho != null ? ['박철수 차장', '정재훈 사원', '이수민 대리', '김하늘 대리', '오세훈 과장', '최민석 부장'][st.ikWho] || null : null, rel: st.ikRel || null, place: st.ikPlaceName || null } })),
       // send
       sendSearchPh: sd.ph, sendCta: sd.cta, sendCols: sd.cols, sendRows: empty ? [] : sd.rows,
       // records
@@ -4349,8 +4349,8 @@ class Component extends DCLogic {
         : kind === 'money' ? [['받는 사람', recSel != null && R ? R[0] : '선택 전'], ['경조금 종류', s.mnKind ? ((mnKindV === 'condol' ? '부의금' : '축의금') + (s.mnRel && s.mnRel[mnKindV] ? ' · ' + mnRelV : ' · 관계 선택 전')) : '선택 전'], ['입금 계좌', (s.acctNo && String(s.acctNo).replace(/[^0-9]/g, '').length >= 4) ? ({ shinhan: '신한', kb: '국민', woori: '우리', hana: '하나', nh: '농협' }[s.acctBank] || '은행') + ' ' + String(s.acctNo).replace(/[^0-9]/g, '').slice(0, 3) + '-***-' + String(s.acctNo).replace(/[^0-9]/g, '').slice(-4) : '입력 전'], ['송금금액', (s.mnKind && ((s.mnRel && s.mnRel[mnKindV]) || s.mnAmt != null) && mnAmtV) ? '₩' + mnAmtV.toLocaleString('en-US') : '선택 전'], ['송금 수수료', '미정'], ['송금 시각', '승인 즉시']]
         : [['부고', s.nfCase ? ({ c1: '박철수 차장 부친상', c2: '김도현 부장 모친상', c3: '이수민 대리 조모상' })[s.nfCase] : '선택 전'], ['발인', s.nfCase ? ({ c1: '5/21 (수) 06:00', c2: '5/9 (금) 07:00', c3: '5/12 (월) 08:00' })[s.nfCase] : '—'], ['대상', '사내 152명 · 거래처 42곳'], ['비용', '없음']]).map(([k, v]) => ({ k, v })),
       sfTotalLabel: kind === 'notice' ? '발송 대상' : '결제금액', sfTotal: kind === 'notice' ? '194명' : (kind === 'money' && !(s.mnKind && ((s.mnRel && s.mnRel[mnKindV]) || s.mnAmt != null) && mnAmtV)) ? '선택 전' : won(pay),
-      sfSubmitLabel: kind === 'flower' ? '결제하고 주문' : kind === 'money' ? '송금하기' : '부고장 발송',
-      sfSubmit: () => { if (kind === 'notice') return this.setState({ modal: 'noticeConfirm' }); const who = recSel != null && R ? R[0] : '받는 사람'; const what = kind === 'flower' ? (PRODS[prod] ? PRODS[prod][0] : '화환') : '경조금'; const amt = kind === 'flower' ? won(pay) : '₩' + (mnAmtV + 500).toLocaleString('en-US'); this.setState(st => ({ modal: 'done', doneKind: 'sent' + kind, sendView: 'list', sentLog: [{ kind, who, what, amt, when: '방금' }].concat(st.sentLog || []) })); }
+      sfSubmitLabel: this.isViewer ? '승인 요청' : kind === 'flower' ? '결제하고 주문' : kind === 'money' ? '송금하기' : '부고장 발송',
+      sfSubmit: () => { if (this.isViewer) return this.setState(st => ({ modal: 'done', doneKind: 'viewerReq', viewerReqs: [{ id: 'vr' + (st.viewerReqs || []).length, name: '거래처 발송', dept: '일반 계정 신청', item: (st.screen === 'money' ? '경조금' : '화환') + ' · 거래처 발송', missing: false, done: false, value: st.screen === 'money' ? 300000 : 140000, date: '방금', when: '일반 계정 승인 요청', dday: '', place: '', urgent: false }].concat(st.viewerReqs || []) })); if (kind === 'notice') return this.setState({ modal: 'noticeConfirm' }); const who = recSel != null && R ? R[0] : '받는 사람'; const what = kind === 'flower' ? (PRODS[prod] ? PRODS[prod][0] : '화환') : '경조금'; const amt = kind === 'flower' ? won(pay) : '₩' + (mnAmtV + 500).toLocaleString('en-US'); this.setState(st => ({ modal: 'done', doneKind: 'sent' + kind, sendView: 'list', sentLog: [{ kind, who, what, amt, when: '방금' }].concat(st.sentLog || []) })); }
     });
     // link editor
     const mark = s.leMark || 'logo', tone = s.leTone || 'mono';
@@ -4536,7 +4536,7 @@ class Component extends DCLogic {
       openCardDel: this.openDel('이 카드를 삭제할까요?', '지난 결제 내역은 남고, 앞으로 이 카드로는 결제할 수 없습니다. 되돌릴 수 없습니다.'),
       openCoHist: this.openForm('coReqHist'), coResultOn: !s.coResultHidden, coResultClose: () => this.setState({ coResultHidden: true }),
     };
-    if (scr === 'settings' && s.settingsTab) { const T = { obit: ['부고장', '새 경조사 부고장의 기본 모양과 넣을 항목'], policy: ['복지 정책', '경조 유형별 지원 금액 · 화환 · 휴가'], perms: ['권한', '대표 · 관리자 · 본부별 담당'], org: ['조직 · 관계', '본부 · 팀 · 담당자 · 임직원 등록 전에 먼저 설정'], company: ['회사 정보', '사업자 정보 · 주소 · 연락처'], ribbon: ['리본 문구', '화환 리본에 들어가는 문구'], sender: ['보내는 사람 이름', '문자 · 부고장 · 리본에 쓰는 명의'], templates: ['문자 · 안내', '발신 번호 · 안내 문구'], card: ['법인카드', '등록 카드와 한도 · 초과 시 승인'] }[s.settingsTab] || ['설정', '']; Object.assign(out, { pageTitle: T[0], pageSub: T[1], hasBack: true, backLabel: '설정', backGo: () => this.setState({ settingsTab: null }) }); }
+    if (scr === 'settings' && s.settingsTab) { const T = { obit: ['부고장', '새 경조사 부고장의 기본 모양과 넣을 항목'], policy: ['복지 정책', '경조 유형별 지원 금액 · 화환 · 휴가'], perms: ['권한', '대표 · 관리자 · 본부별 담당'], org: ['조직 · 관계', '본부 · 팀 · 담당자 · 임직원 등록 전에 먼저 설정'], company: ['회사 정보', '사업자 정보 · 주소 · 연락처'], ribbon: ['리본 문구', '화환 리본에 들어가는 문구'], sender: ['보내는 사람 이름', '문자 · 부고장 · 리본에 쓰는 명의'], templates: ['문자 · 안내', '발신 번호 · 안내 문구'], card: ['법인카드', '등록 카드와 한도 · 초과 시 승인'] }[s.settingsTab] || ['설정', '']; Object.assign(out, { pageTitle: T[0], pageSub: T[1], hasBack: true, backLabel: '설정', backGo: () => { const st = this.state; if (!!st.polDirty || !!st.coEdit || !!st.bsDraft) { this.setState({ modal: 'leaveConfirm', leaveNext: { settingsTab: null } }); return; } this.setState({ settingsTab: null }); } }); }
     const WHO = { '박철수': ['차장', '인사총무본부', '인사팀', '010-2841-7788', 'park.cs@sunjin.co.kr'], '한서연': ['팀장', '인사총무본부', '총무팀', '010-4410-8827', 'han.sy@sunjin.co.kr'], '김도현': ['과장', '인사총무본부', '인사팀', '010-3391-2204', 'kim.dh@sunjin.co.kr'], '오세훈': ['과장', '플랜트본부', '플랜트공사팀', '010-5567-2210', 'oh.sh@sunjin.co.kr'], '이수민': ['대리', '경영지원실', '재무팀', '010-3312-5540', 'lee.sumin@sunjin.co.kr'] };
     const RW = s.empWhoRow; const wn = RW ? RW.name : (WHO[s.empWho] ? s.empWho : '박철수'); const w0 = WHO[wn]; const W = RW ? Object.assign({}, RW) : { name: wn, rank: w0[0], dept: w0[1], team: w0[2], phone: w0[3], mail: w0[4] };
     const EX = { '박철수': ['2014.03.12 · 근속 11년', '1981.06.22', '국민 1234-56-789012 · 박철수'] }[wn] || ['—', '—', '—'];

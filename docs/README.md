@@ -1,17 +1,19 @@
 # 개발자용 읽는 순서
 
-IRIS 콘솔을 처음 받는 개발자가 이 순서로 읽으면 됩니다. 기준 화면은 **[iris-console-v0.3.11.html](../iris-console/iris-console-v0.3.11.html)** 입니다.
+IRIS 콘솔을 처음 받는 개발자가 이 순서로 읽으면 됩니다. 기준 화면은 **[iris-console-v0.3.12.html](../iris-console/iris-console-v0.3.12.html)** 입니다.
 
 | 순서 | 문서 | 무엇 |
 |---|---|---|
 | 1 | [`functional-spec.md`](functional-spec.md) | 기능 명세 — 화면 목록 · 기능 ID · 상태 전이 · 권한 · 필요 API · 미정 목록 |
-| 2 | [`prototype-dev/iris-console-v0.3.11.html`](../prototype-dev/iris-console-v0.3.11.html) | 화면 시안 — **개발자용 827KB**. `prototype-dev/` 폴더째 받아서 여세요 (CDN 참조라 인터넷 필요). 오프라인 단일 파일은 [`iris-console/`](../iris-console/iris-console-v0.3.10.html) (21MB) |
+| 2 | [`prototype-dev/iris-console-v0.3.12.html`](../prototype-dev/iris-console-v0.3.12.html) | 화면 시안 — **개발자용 829KB**. `prototype-dev/` 폴더째 받아서 여세요 (CDN 참조라 인터넷 필요). 오프라인 단일 파일은 [`iris-console-v0.3.12.html`](../iris-console/iris-console-v0.3.12.html) (21MB) |
 | 3 | [`login-flow.md`](login-flow.md) | 로그인 · 계정 발급 정책 |
 | 4 | [`validation-ui.md`](validation-ui.md) | 오류 · 확인 창 · 토스트 쓰는 규칙 |
 | 5 | [`component-states.md`](../iris-component-states/component-states.md) | 쓰는 컴포넌트와 상태값 ([그림](../iris-component-states/iris-component-states-v0.1.1.html)) |
 | 6 | [`iris-ds/README.md`](../iris-ds/README.md) | 토큰 · 컴포넌트 불러오는 법 ([글자 단계](../iris-ds/type-scale.md) · [토큰 차이](../iris-ds/token-diff.md)) |
 
-[`decisions.md`](decisions.md)는 **정책의 기준**입니다 (D1~D29). 명세서와 다르게 보이면 이 문서가 맞습니다.
+[`plan.md`](plan.md)가 **상위 기준 문서**입니다. 사용자 · 권한 · 핵심 흐름 · 확정 정책 · MVP 범위가 한 장에 있고, 명세서와 다르면 `plan.md`를 따릅니다.
+
+[`decisions.md`](decisions.md)는 **정책 결정 기록**입니다 (D1~D43). 어떤 결정이 왜 그렇게 됐는지는 이 문서에 있습니다.
 
 ## 맥락이 필요할 때
 
@@ -28,13 +30,14 @@ IRIS 콘솔을 처음 받는 개발자가 이 순서로 읽으면 됩니다. 기
 
 ## 구현 전에 알아야 할 것
 
-**역할은 대표 · 관리자 · 일반 셋입니다.** 2026-10-15에 이름을 통일했습니다 — 전에 쓰던 `Owner` · `오너` · `루트`는 **대표**, `어드민`은 **관리자**, `뷰어`는 **일반**입니다. 데이터 값은 `role = owner / admin / viewer` 그대로입니다. 용어 사전은 [`reference/ux-writing.md`](reference/ux-writing.md).
+**역할은 대표 · 관리자 · 일반 셋이고, 일반(임직원)도 같은 콘솔에 휴대폰 번호로 로그인합니다.** 별도 신청 웹은 없습니다. 일반이 등록한 경조사 · 거래처 발송은 관리자의 신청 · 승인 목록으로 들어가 **승인 후 진행**됩니다. 2026-10-15에 이름을 통일했습니다 — 전에 쓰던 `Owner` · `오너` · `루트`는 **대표**, `어드민`은 **관리자**, `뷰어`는 **일반**입니다. 데이터 값은 `role = owner / admin / viewer` 그대로입니다. 용어 사전은 [`reference/ux-writing.md`](reference/ux-writing.md).
 
 **화면에 있지만 만들지 않는 것이 있습니다.**
 
 | 항목 | 상태 |
 |---|---|
-| 부재 시 대행 (대행자 지정 · 24시간 미처리 이관) | **MVP 제외** (D27). 프로토타입 v0.3.10에는 아직 화면이 남아 있습니다 |
+| 부재 시 대행 (대행자 지정 · 24시간 미처리 이관) | **MVP 제외** (D27). 프로토타입 v0.3.12에는 아직 화면이 남아 있습니다 |
+| 마일리지 | **1차 제외** (D37). v0.3.12에서 메뉴 · 화면 · 적립 안내를 모두 뺐습니다 |
 | 장례케어 (고운마음 후불 상조) | **MVP 제외 · 참고용** (D28). 상품 4종은 명세서 끝 절에 |
 | 인사 시스템 동기화 | 제외 (D8). 대신 "마지막 업데이트 날짜" 표시 |
 | 부고장 서식 편집 | 1차 제외. 아이리스 기존 부고장에 테마만 고름 |

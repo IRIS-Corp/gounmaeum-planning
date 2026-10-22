@@ -19,6 +19,8 @@
 | --semantic-status-positive | #00BF40 | #00A336 |
 | --semantic-status-cautionary | #FF9200 | #B35F00 |
 
+
+
 ## 새로 추가한 토큰
 | 토큰 | 값 | 용도 |
 |---|---|---|

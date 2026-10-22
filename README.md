@@ -8,12 +8,12 @@
 
 | 폴더 | 내용 | 최신 버전 |
 |---|---|---|
-| [`iris-console/`](iris-console/) | 콘솔 프로토타입 — **공유용 단일 파일**(오프라인) | [v0.3.11](iris-console/iris-console-v0.3.11.html) (21MB) · [변경 기록](iris-console/CHANGELOG.md) |
+| [`iris-console/`](iris-console/) | 콘솔 프로토타입 — **공유용 단일 파일**(오프라인) | [v0.3.12](iris-console/iris-console-v0.3.12.html) (21MB) · [변경 기록](iris-console/CHANGELOG.md) |
 | [`iris-component-states/`](iris-component-states/) | 콘솔에서 쓰는 컴포넌트의 상태별 모양 · 토큰 시트 | [v0.1.1](iris-component-states/iris-component-states-v0.1.1.html) · [상태값 표](iris-component-states/component-states.md) |
 | [`iris-ds/`](iris-ds/) | 콘솔이 쓰는 디자인 토큰 · 컴포넌트 · 아이콘 | [읽는 법](iris-ds/README.md) · [토큰](iris-ds/tokens/semantic.css) |
 | [`docs/`](docs/) | 기능 명세 · 로그인 · 결정 기록 | [읽는 순서](docs/README.md) · [기능 명세](docs/functional-spec.md) |
 | [`docs/reference/`](docs/reference/) | 맥락 · 근거 (PRD · 원칙 · 용어 사전 · 회의록) | [용어 사전](docs/reference/ux-writing.md) |
-| [`prototype-dev/`](prototype-dev/) | **개발자용 프로토타입** — 라이브러리를 import로 불러오는 가벼운 버전 | [v0.3.11](prototype-dev/iris-console-v0.3.11.html) (827KB) |
+| [`prototype-dev/`](prototype-dev/) | **개발자용 프로토타입** — 라이브러리를 import로 불러오는 가벼운 버전 | [v0.3.12](prototype-dev/iris-console-v0.3.12.html) (829KB) |
 | [`obit/`](obit/) | 아이리스 부고장 — 피그마 원본 프레임 · 토큰 | [실제 화면](obit/ObitLive.js) · [토큰](obit/fig-tokens.css) |
 | [`archive/`](archive/) | 지난 버전 (기록용) | [목록](archive/README.md) |
 
@@ -27,7 +27,7 @@
 **개발자용** (`prototype-dev/`) — 폴더째 받아야 합니다.
 
 1. 레포를 clone하거나 `prototype-dev/` 폴더를 통째로 내려받습니다.
-2. `iris-console-v0.3.11.html`을 엽니다. 같은 폴더의 `support.js` · `iris-ds/` · `obit/`를 참조합니다.
+2. `iris-console-v0.3.12.html`을 엽니다. 같은 폴더의 `support.js` · `iris-ds/` · `obit/`를 참조합니다.
 3. React · 폰트 · 우편번호 API는 CDN에서 불러오므로 **인터넷이 필요**합니다.
 
 GitHub 웹에서는 HTML이 화면이 아니라 코드로 보입니다. 꼭 내려받아서 여세요.
