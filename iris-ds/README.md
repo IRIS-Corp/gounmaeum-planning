@@ -20,7 +20,7 @@ IRIS 콘솔이 쓰는 디자인 토큰 · 컴포넌트 · 아이콘입니다. �
 | 1 | `fonts/pretendard.css` | 폰트 선언 (온라인 로드) |
 | 2 | `tokens/atomic.css` | 원색 팔레트. 화면에서 직접 쓰지 않습니다 |
 | 3 | `tokens/semantic.css` | 용도별 색. **화면에서 쓰는 것은 이 파일** |
-| 4 | `tokens/opacity.css` · `spacing.css` · `radius.css` | 투명도 · 간격 · 모서리 |
+| 4 | `tokens/opacity.css` · `spacing.css` · `radius.css` | 투명도 · 간격 · 모서리. `spacing.css` 아래쪽의 **용도별 간격**(`--space-tight` · `stack` · `item` · `item-lg` · `inset` · `section`)을 숫자 대신 쓰세요 (v0.3.13) |
 | 5 | `tokens/typography.css` | 글자 크기 · 줄높이 · 자간 |
 | 6 | `tokens/base.css` | 기본 초기화 · body 기본값 |
 

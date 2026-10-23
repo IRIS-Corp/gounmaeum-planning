@@ -19,6 +19,13 @@
 --spacing-64:64px;
 --spacing-72:72px;
 --spacing-80:80px;
+/* 용도별 간격 (10-23) — 숫자 대신 이 이름을 쓰세요 */
+--space-tight:var(--spacing-4);    /* 붙음 · 제목과 설명, 단계 이름과 날짜 (2px도 허용) */
+--space-stack:var(--spacing-8);    /* 묶음 · 라벨과 입력칸, 아이콘과 글자, 칩 사이 */
+--space-item:var(--spacing-12);    /* 항목 · 카드 안 줄과 줄, 버튼과 버튼 (텍스트 버튼 옆 포함) */
+--space-item-lg:var(--spacing-16); /* 항목(넓게) · 입력칸 묶음, 폼 행 */
+--space-inset:var(--spacing-24);   /* 카드 안 · 카드 · 모달 안쪽 (좁은 카드 20px) */
+--space-section:var(--spacing-24); /* 섹션 · 카드와 카드 사이 (화면 큰 덩어리 32px) */
 --breakpoint-xs:0px;
 --breakpoint-sm:768px;
 --breakpoint-md:992px;

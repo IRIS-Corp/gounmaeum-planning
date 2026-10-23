@@ -20,7 +20,7 @@
 |---|---|---|---|---|
 | TextField | 52 (템플릿 51 · 로직 1) | type: text · tel · password | default · **invalid** · **positive** · **disabled** · **readOnly** | 아래 표 참고 |
 | SearchField | 16 | size: medium · small | default · 입력 중(지우기 x) | 받는 사람·부고·대상자·추가 수신인·모달 검색 |
-| Select | 24 | — | default · open · 선택됨 | 은행, 관계, 본부, 발신 명의 등 |
+| Select | 24 | — | default · open · 선택됨 | 은행, 관계, 본부, 보내는 사람 이름 등 |
 | TextArea | 8 | — | default · 값 있음 | 사유, 안내 문구, 서식 본문 |
 | Checkbox | 15 (템플릿 12 · 로직 3) | size: small | unchecked · **checked** · **indeterminate** · **disabled** | 수신인 "전체 선택"은 일부만 고르면 indeterminate |
 | Radio | 7 (템플릿 5 · 로직 2) | size: medium | unchecked · **checked** | 경조금 종류 |
