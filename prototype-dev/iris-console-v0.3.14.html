@@ -343,11 +343,18 @@
       </div>
       <div style="margin-left: auto; display: flex; align-items: center; gap: 12px;">
         <x-import component-from-global-scope="IrisDesignSystem.Menu" align="right" width="{{ 220 }}" items="{{ sendMenuItems }}" onSelect="{{ sendMenuPick }}" trigger="{{ sendMenuTrigger }}" hint-size="auto,40px"></x-import>
-        <x-import component-from-global-scope="IrisDesignSystem.PushBadge" variant="number" count="{{ 3 }}" size="small" hint-size="40px,40px">
-          <x-import component-from-global-scope="IrisDesignSystem.IconButton" variant="normal" size="medium" onClick="{{ openNotify }}" aria-label="알림 3건" style="{{ bellStyle }}" hint-size="40px,40px">
+        <sc-if value="{{ ntfHasUnread }}" hint-placeholder-val="{{ true }}">
+        <x-import component-from-global-scope="IrisDesignSystem.PushBadge" variant="number" count="{{ ntfUnread }}" size="small" hint-size="40px,40px">
+          <x-import component-from-global-scope="IrisDesignSystem.IconButton" variant="normal" size="medium" onClick="{{ openNotify }}" aria-label="{{ ntfAria }}" style="{{ bellStyle }}" hint-size="40px,40px">
             <x-import component-from-global-scope="IrisDesignSystem.Icon" name="bell" size="{{ 22 }}" hint-size="22px,22px"></x-import>
           </x-import>
         </x-import>
+        </sc-if>
+        <sc-if value="{{ ntfNoUnread }}" hint-placeholder-val="{{ false }}">
+          <x-import component-from-global-scope="IrisDesignSystem.IconButton" variant="normal" size="medium" onClick="{{ openNotify }}" aria-label="{{ ntfAria }}" style="{{ bellStyle }}" hint-size="40px,40px">
+            <x-import component-from-global-scope="IrisDesignSystem.Icon" name="bell" size="{{ 22 }}" hint-size="22px,22px"></x-import>
+          </x-import>
+        </sc-if>
         <span style="width: 1px; height: 20px; background: var(--semantic-line-normal-neutral);"></span>
         <div style="position: relative;">
           <div onClick="{{ toggleProfile }}">{{ profileTrigger }}</div>
@@ -882,9 +889,8 @@
           <sc-if value="{{ ikIsHappy }}" hint-placeholder-val="{{ false }}">
           <section style="background: var(--semantic-static-white); border-radius: 12px; box-shadow: inset 0 0 0 1px var(--semantic-line-normal-neutral); padding: 24px; display: flex; flex-direction: column; gap: 16px;">
             <p style="margin: 0; font-size: 18px; line-height: 26px; font-weight: 600; letter-spacing: -0.012em; color: var(--semantic-label-normal);">경사 정보</p>
-            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;">
-              <div style="display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 14px; line-height: 20px; font-weight: 600; color: var(--semantic-label-normal);">장소 <span style="color: var(--semantic-accent-foreground-red);">*</span></span><x-import component-from-global-scope="IrisDesignSystem.TextField" placeholder="예식장 · 장소" width="100%" hint-size="100%,48px"></x-import></div>
-              <div style="display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 14px; line-height: 20px; font-weight: 600; color: var(--semantic-label-normal);">일시 <span style="color: var(--semantic-accent-foreground-red);">*</span></span><div style="position: relative;">
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <sc-if value="{{ ikHappyWed }}" hint-placeholder-val="{{ true }}"><div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 8px; position: relative;"><span style="font-size: 14px; line-height: 20px; font-weight: 600; color: var(--semantic-label-normal);">예식장 <span style="color: var(--semantic-accent-foreground-red);">*</span></span><div data-srow style="display: grid; grid-template-columns: minmax(120px, 1fr) auto; gap: 8px; align-items: center;"><x-import component-from-global-scope="IrisDesignSystem.SearchField" size="medium" width="100%" value="{{ ikVenueQ }}" onChange="{{ ikVenueQChange }}" onKeyDown="{{ srchEnter_venue }}" placeholder="예식장 이름 · 지역" hint-size="100%,48px"></x-import><x-import component-from-global-scope="IrisDesignSystem.Button" size="large" variant="{{ srchBtn_venue.variant }}" color="{{ srchBtn_venue.color }}" onClick="{{ srchOpen_venue }}" hint-size="auto,48px">검색</x-import></div><sc-if value="{{ ac_venue.show }}" hint-placeholder-val="{{ false }}"><div style="position: absolute; top: 84px; left: 0; right: 0; z-index: 30; border-radius: 12px; background: var(--semantic-static-white); box-shadow: inset 0 0 0 1px var(--semantic-line-normal-neutral), var(--semantic-elevation-shadow-normal-small); padding: 6px; display: flex; flex-direction: column; gap: 2px; max-height: 320px; overflow-y: auto;"><p style="margin: 0; padding: 6px 12px 4px; font-size: 13px; line-height: 18px; color: var(--semantic-label-alternative);">{{ ac_venue.label }}</p><sc-for list="{{ ac_venue.rows }}" as="r" hint-placeholder-count="3"><button type="button" onClick="{{ r.pick }}" style="display: flex; align-items: center; gap: 12px; padding: 12px; border: none; border-radius: 8px; background: transparent; cursor: pointer; font-family: inherit; text-align: left; width: 100%;" style-hover="background: var(--semantic-fill-normal);"><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 16px; line-height: 24px; font-weight: 600; color: var(--semantic-label-normal);">{{ r.title }}</span><span style="font-size: 13px; line-height: 18px; color: var(--semantic-label-alternative);">{{ r.sub }}</span></span></button></sc-for><sc-if value="{{ ac_venue.none }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; padding: 16px 12px; font-size: 14px; line-height: 20px; color: var(--semantic-label-alternative);">검색 결과가 없습니다 · 아래에 직접 입력해도 됩니다</p></sc-if></div></sc-if><div style="display: grid; grid-template-columns: minmax(0, 1fr) 140px; gap: 8px;"><x-import component-from-global-scope="IrisDesignSystem.TextField" value="{{ ikVenueName }}" onChange="{{ ikVenueNameChange }}" placeholder="예식장 이름" width="100%" hint-size="100%,48px"></x-import><x-import component-from-global-scope="IrisDesignSystem.TextField" placeholder="홀" width="100%" hint-size="100%,48px"></x-import></div><span style="font-size: 13px; line-height: 18px; color: var(--semantic-label-alternative);">축하 화환 배송지로 함께 쓰입니다 · 찾는 곳이 없으면 직접 입력합니다</span></div></sc-if> <div style="display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 14px; line-height: 20px; font-weight: 600; color: var(--semantic-label-normal);">{{ ikHappyDateLabel }} <span style="color: var(--semantic-accent-foreground-red);">*</span></span><div style="position: relative;">
                 <div onClick="{{ ikCal_happy.toggle }}" style="cursor: pointer;"><x-import component-from-global-scope="IrisDesignSystem.TextField" value="{{ ikCal_happy.text }}" placeholder="날짜 · 시간 선택" read-only="{{ true }}" trailing-content="{{ icCalendar }}" width="100%" hint-size="100%,48px"></x-import></div>
                 <sc-if value="{{ ikCal_happy.open }}" hint-placeholder-val="{{ false }}">
                   <div style="position: absolute; top: calc(100% + 6px); left: 0; z-index: 40; border-radius: 16px; background: var(--semantic-static-white); box-shadow: inset 0 0 0 1px var(--semantic-line-normal-neutral), var(--semantic-elevation-shadow-normal-medium); padding: 12px; display: flex; flex-direction: column; gap: 12px;">
@@ -1657,6 +1663,9 @@
           <sc-if value="{{ notLogTab }}" hint-placeholder-val="{{ true }}"><div style="margin-left: auto;">
             <x-import component-from-global-scope="IrisDesignSystem.Button" variant="outlined" color="assistive" size="medium" onClick="{{ openExport }}" trailing-content="{{ icExport }}" hint-size="auto,40px">내보내기</x-import>
           </div></sc-if>
+          <sc-if value="{{ isLog }}" hint-placeholder-val="{{ false }}"><div style="margin-left: auto;">
+            <x-import component-from-global-scope="IrisDesignSystem.SearchField" placeholder="사용자 · 대상 검색" size="small" width="{{ 240 }}" hint-size="240px,40px"></x-import>
+          </div></sc-if>
         </div>
 
         <sc-if value="{{ recordsEmpty }}" hint-placeholder-val="{{ false }}"><div data-fbwrap style="background: var(--semantic-static-white); border-radius: 12px; box-shadow: inset 0 0 0 1px var(--semantic-line-normal-neutral); padding: 32px 24px; display: flex; align-items: center; justify-content: center; min-height: 320px; box-sizing: border-box;"><x-import component-from-global-scope="IrisDesignSystem.FallbackView" data-fallback="1" padding="compact" dc-props="{{ fbProps }}" title="아직 기록이 없습니다" description="경조사를 등록하고 발송하면 리포트 · 결제 내역 · 활동 로그가 여기에 쌓입니다" hint-size="100%,200px"></x-import></div></sc-if>
@@ -1697,12 +1706,11 @@
           <sc-if value="{{ payHas }}" hint-placeholder-val="{{ true }}"><div data-flat-table style="background: var(--semantic-static-white); border-radius: 12px; border: 1px solid var(--semantic-line-normal-neutral); overflow: hidden;"><x-import component-from-global-scope="IrisDesignSystem.Table" head-style="{{ tableHead }}" columns="{{ payCols }}" rows="{{ payRows }}" interactive="{{ true }}" onRowClick="{{ openPayDetail }}" footer="{{ payFooter }}" hint-size="100%,400px"></x-import></div></sc-if><sc-if value="{{ payNone }}" hint-placeholder-val="{{ false }}"><div data-fbwrap style="background: var(--semantic-static-white); border-radius: 12px; box-shadow: inset 0 0 0 1px var(--semantic-line-normal-neutral); padding: 32px 24px; display: flex; align-items: center; justify-content: center; min-height: 320px; box-sizing: border-box;"><x-import component-from-global-scope="IrisDesignSystem.FallbackView" data-fallback="1" padding="compact" dc-props="{{ fbProps }}" title="결제 내역이 없습니다" description="발송이 완료되면 결제 기록이 남습니다" hint-size="100%,200px"></x-import></div></sc-if>
         </sc-if>
         <sc-if value="{{ isLog }}" hint-placeholder-val="{{ false }}">
-          <sc-if value="{{ has_logRows }}" hint-placeholder-val="{{ true }}"><div style="background: var(--semantic-static-white); border-radius: 12px; border: 1px solid var(--semantic-line-normal-neutral); overflow: hidden;">
-            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 16px 20px; box-shadow: inset 0 -1px 0 var(--semantic-line-normal-neutral);">
-              <div style="display: flex; gap: 8px; flex-wrap: wrap;"><sc-for list="{{ logChips }}" as="c" hint-placeholder-count="3"><x-import component-from-global-scope="IrisDesignSystem.Chip" size="small" variant="{{ c.variant }}" active="{{ c.on }}" onClick="{{ c.pick }}" hint-size="auto,32px">{{ c.label }}</x-import></sc-for></div>
-              <div style="margin-left: auto;"><x-import component-from-global-scope="IrisDesignSystem.SearchField" placeholder="사용자 · 대상 검색" size="small" width="{{ 240 }}" hint-size="240px,40px"></x-import></div>
-            </div>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+          <x-import component-from-global-scope="IrisDesignSystem.Tab" items="{{ logSegItems }}" value="{{ logSeg }}" onValueChange="{{ setLogSeg }}" size="medium" hint-size="100%,44px"></x-import>
+          <sc-if value="{{ has_logRows }}" hint-placeholder-val="{{ true }}"><div data-flat-table style="background: var(--semantic-static-white); border-radius: 12px; border: 1px solid var(--semantic-line-normal-neutral); overflow: hidden;">
             <x-import component-from-global-scope="IrisDesignSystem.Table" head-style="{{ tableHead }}" columns="{{ logCols }}" rows="{{ logRows }}" interactive="{{ true }}" onRowClick="{{ openLogDetail }}" footer="{{ logFooter }}" hint-size="100%,400px"></x-import></div></sc-if><sc-if value="{{ no_logRows }}" hint-placeholder-val="{{ false }}"><div data-fbwrap style="background: var(--semantic-static-white); border-radius: 12px; box-shadow: inset 0 0 0 1px var(--semantic-line-normal-neutral); padding: 32px 24px; display: flex; align-items: center; justify-content: center; min-height: 320px; box-sizing: border-box;"><x-import component-from-global-scope="IrisDesignSystem.FallbackView" data-fallback="1" padding="compact" dc-props="{{ fbProps }}" title="기록된 활동이 없습니다" description="등록 · 승인 · 발송이 일어나면 여기에 시간순으로 남습니다" hint-size="100%,180px"></x-import></div></sc-if>
+          </div>
         </sc-if>
       </div>
       </sc-if>
@@ -2765,12 +2773,21 @@
     <span style="flex: 1; font-size: 13px; line-height: 18px; color: var(--semantic-label-alternative);">{{ ntfHead }}</span>
     <x-import component-from-global-scope="IrisDesignSystem.TextButton" color="assistive" size="small" disabled="{{ ntfAllRead }}" onClick="{{ ntfReadAll }}" hint-size="auto,24px">모두 읽음</x-import>
   </div>
-  <div style="display: flex; flex-direction: column; gap: 2px; padding: 0 8px 8px;">
-    <sc-for list="{{ notifications }}" as="n" hint-placeholder-count="3">
+  <div data-ntf-list style="max-height: 480px; overflow-y: auto; display: flex; flex-direction: column; gap: 2px; padding: 0 8px 8px;">
+    <sc-if value="{{ ntfHasAny }}" hint-placeholder-val="{{ true }}">
+    <sc-for list="{{ ntfShown }}" as="n" hint-placeholder-count="3">
       <div style="{{ n.wrapStyle }}">
         <x-import component-from-global-scope="IrisDesignSystem.ListCell" vertical-padding="small" fill-width="{{ true }}" text-props="{{ n.textProps }}" caption="{{ n.meta }}" leading-content="{{ n.dot }}" onClick="{{ n.go }}" hint-size="100%,56px">{{ n.text }}</x-import>
       </div>
     </sc-for>
+    <sc-if value="{{ ntfHasMore }}" hint-placeholder-val="{{ false }}">
+      <div style="flex-shrink: 0; display: flex; justify-content: center; padding: 8px 0 4px;"><x-import component-from-global-scope="IrisDesignSystem.TextButton" color="assistive" size="small" onClick="{{ ntfMore }}" hint-size="auto,24px">이전 알림 더 보기</x-import></div>
+    </sc-if>
+    <p style="flex-shrink: 0; margin: 0; padding: 8px 12px 4px; text-align: center; font-size: 12px; line-height: 16px; color: var(--semantic-label-alternative);">최근 30일 알림만 보관합니다 · 지난 기록은 리포트 › 활동 로그</p>
+    </sc-if>
+    <sc-if value="{{ ntfNone }}" hint-placeholder-val="{{ false }}">
+      <x-import component-from-global-scope="IrisDesignSystem.FallbackView" padding="compact" title="새 알림이 없습니다" description="승인 요청 · 발송 결과 · 한도 같은 알림이 여기에 모입니다" hint-size="100%,160px"></x-import>
+    </sc-if>
   </div>
 </div>
 </sc-if>
@@ -3049,7 +3066,7 @@ class Component extends DCLogic {
           fields: [t('제목', c.title || '', '예: 대성이엔지 창립기념'), t('일시', c.when || '', '2025-06-10 10:00'), sel('종류', this.opts([['거래처', '거래처'], ['사내 행사', '사내 행사'], ['메모', '메모']]), c.kind), t('장소', c.place || '', '선택'), tog('전날 알림', '담당자에게 하루 전 문자를 보냅니다', true)] }; })(),
       permAdd: { title: '관리자 지정', cta: '지정', note: ['info', '임직원 중에서 골라 관리자로 지정합니다'], fields: [t('임직원', '', '이름 · 본부로 찾기'), sel('역할', ROLES, 'admin'), checks([{ title: '인사총무본부', sub: '3팀 · 42명' }, { title: '경영지원실', sub: '2팀 · 24명' }, { title: '건축사업본부', sub: '4팀 · 128명' }, { title: '토목사업본부', sub: '2팀 · 64명' }, { title: '플랜트본부', sub: '2팀 · 48명' }, { title: '안전관리실', sub: '1팀 · 12명' }], 'permDepts'), tog('안내 문자 보내기', '[선진건설] 고운마음 콘솔 관리자로 지정되었습니다 · 휴대폰 번호로 로그인하세요', true)] },
       permDetail: { title: '담당 본부 수정', cta: '저장', del: ['지정 해제', '이 관리자 지정을 해제할까요?', '콘솔에 접속할 수 없게 됩니다. 임직원 정보는 유지됩니다.'], fields: [rows([['이름', '오세훈 과장'], ['소속', '플랜트본부'], ['최근 접속', '5/15']]), sel('역할', ROLES, 'admin'), checks([{ title: '플랜트본부', sub: '2팀 · 48명' }, { title: '토목사업본부', sub: '2팀 · 64명' }, { title: '안전관리실', sub: '1팀 · 12명' }], 'permDetailDepts')] },
-      policyEdit: { title: '규정 금액 수정', cta: '저장', note: ['cautionary', '변경한 금액은 이후 접수되는 경조사부터 적용됩니다. 진행 중인 건은 바뀌지 않습니다.'], fields: [sel('관계', this.opts([['parent', '부친 · 모친'], ['spouse', '배우자'], ['inlaw', '배우자 부모'], ['grand', '조부모 · 형제자매'], ['wed', '본인 · 자녀 결혼'], ['birth', '본인 · 배우자 출산'], ['age', '회갑 · 칠순']]), 'parent'), t('경조금', '₩500,000', '₩0'), sel('화환', this.opts([['f3', '근조 3단 화환'], ['f1', '근조 화환'], ['basket', '근조 바구니'], ['none', '보내지 않음']]), 'f3'), t('휴가', '5일', '예: 5일'), area('변경 사유', '', '개정 이력에 남습니다')] },
+      policyEdit: { title: '규정 금액 수정', cta: '저장', note: ['cautionary', '변경한 금액은 이후 접수되는 경조사부터 적용됩니다. 진행 중인 건은 바뀌지 않습니다.'], fields: [sel('관계', this.opts([['parent', '부친 · 모친'], ['spouse', '배우자'], ['inlaw', '배우자 부모'], ['grand', '조부모 · 형제자매'], ['wed', '본인 · 자녀 결혼'], ['age', '회갑 · 칠순']]), 'parent'), t('경조금', '₩500,000', '₩0'), sel('화환', this.opts([['f3', '근조 3단 화환'], ['f1', '근조 화환'], ['basket', '근조 바구니'], ['none', '보내지 않음']]), 'f3'), t('휴가', '5일', '예: 5일'), area('변경 사유', '', '개정 이력에 남습니다')] },
       policyHistory: { title: '변경 이력', size: 'medium', cta: '닫기', noCancel: true, note: ['info', '접수된 경조사는 접수 당시 기준으로 처리됩니다 · 항목을 누르면 그때 기준을 볼 수 있습니다'], fields: [{ isPickList: true, items: [['v3', '2025.04.02 · 한서연 팀장', '현재', '부모 · 배우자 부의금 ₩300,000 → ₩500,000'], ['v2', '2023.03.01 · 김도현 부장', '', '출산 축의금 신설 ₩200,000'], ['v1', '2021.01.01 · 인사총무본부', '', '최초 등록']].map(([v, sub, cur, chg]) => ({ title: chg, sub: sub + (cur ? '' : ''), sub, badge: cur ? this.badge(cur, 'green') : null, pick: () => this.setState({ modal: 'form', formKey: 'polVer_' + v }) })) }] },
       polVer_v3: { title: '2025.04.02 변경 · 현재 기준', size: 'medium', cta: '목록으로', noCancel: true, onCta: () => this.setState({ formKey: 'policyHistory' }), note: ['info', '2025.04.03부터 발생한 경조사에 적용 · 2025.04.02 변경 · 한서연 팀장'], fields: [rows([['바뀐 항목', '부모 · 배우자 부의금 ₩300,000 → ₩500,000'], ['', '근조 화환 기본 상품 3단 근조 → 고급 3단 근조'], ['부의금 · 부모', '₩500,000'], ['부의금 · 조부모', '₩200,000'], ['결혼 축의금 · 본인', '₩300,000'], ['경조 휴가 · 부모', '5일'], ['근조 화환', '고급 3단 근조 ₩180,000']])] },
       polVer_v2: { title: '2023.03.01 변경', size: 'medium', cta: '목록으로', noCancel: true, onCta: () => this.setState({ formKey: 'policyHistory' }), note: ['info', '2023.03.02 ~ 2025.04.02 발생분에 적용 · 2023.03.01 변경 · 김도현 부장 · 읽기 전용'], fields: [rows([['바뀐 항목', '출산 축의금 신설 ₩200,000'], ['부의금 · 부모', '₩300,000'], ['부의금 · 조부모', '₩200,000'], ['결혼 축의금 · 본인', '₩300,000'], ['경조 휴가 · 부모', '5일'], ['근조 화환', '3단 근조 ₩120,000']])] },
@@ -3070,7 +3087,7 @@ class Component extends DCLogic {
       cardAdd: { title: '법인카드 등록 신청', size: 'small', cta: '신청', note: ['info', '재무팀 승인 후 결제에 쓸 수 있습니다. 보통 1영업일이 걸립니다.'], fields: [sel('카드사', this.opts([['shinhan', '신한카드'], ['kb', 'KB국민카드'], ['samsung', '삼성카드'], ['hana', '하나카드']]), undefined, '카드사 선택'), t('카드 번호 끝 4자리', '', '0000'), sel('용도', this.opts([['main', '사용 중 카드'], ['spare', '예비 카드']]), 'spare')] },
       exportData: { title: '내보내기', size: 'small', cta: '내보내기', fields: [sel('범위', this.opts([['month', '이번 달'], ['year', '올해'], ['all', '전체 기간']]), 'year'), sel('형식', this.opts([['xlsx', '엑셀 (xlsx)'], ['csv', 'CSV'], ['pdf', 'PDF 정산 요약']]), 'xlsx'), tog('서류 파일 포함', '영수증 · 진단서 사본을 zip으로 함께 내려받습니다', false)] },
       sendFlower: { title: '화환 보내기', cta: '주문', fields: [t('받는 분', '', '임직원 · 거래처 · 직접 입력'), sel('상품', this.opts([['b', '근조 바구니 ₩140,000'], ['f1', '근조 화환 ₩120,000'], ['f3', '근조 3단 화환 ₩150,000'], ['c3', '축하 3단 화환 ₩120,000']]), 'f3'), t('받는 곳', '', '장례식장 · 예식장 · 회사 주소'), t('도착 희망', '', '2025-05-20 15:00'), t('리본 문구', '', '예: 삼가 고인의 명복을 빕니다 · 선진건설 임직원 일동')] },
-      sendMoney: { title: '경조금 보내기', cta: '송금', note: ['info', '규정 금액과 같으면 승인 없이 바로 송금됩니다.'], fields: [t('받는 분', '', '임직원 이름 · 사번'), sel('사유', this.opts([['death', '부의금'], ['wed', '결혼 축의금'], ['birth', '출산 축의금'], ['age', '회갑 축의금']]), 'death'), t('금액', '', '예: ₩500,000'), t('계좌', '', '은행 · 계좌번호'), t('예금주', '', '예금주 이름')] },
+      sendMoney: { title: '경조금 보내기', cta: '송금', note: ['info', '규정 금액과 같으면 승인 없이 바로 송금됩니다.'], fields: [t('받는 분', '', '임직원 이름 · 사번'), sel('사유', this.opts([['death', '부의금'], ['wed', '결혼 축의금'], ['age', '회갑 축의금']]), 'death'), t('금액', '', '예: ₩500,000'), t('계좌', '', '은행 · 계좌번호'), t('예금주', '', '예금주 이름')] },
       sendNotice: { title: '부고장 보내기', size: 'large', cta: '발송', fields: [rows([['경조사', '박철수 차장 부친상 · 5/21 발인']]), sel('서식', this.opts([['emp', '부고 안내 (임직원)'], ['partner', '부고 안내 (거래처)']]), 'emp'), tog('사내 전체', '임직원 152명 · 문자', true), tog('거래처', '담당 본부 거래처 42곳 · 문자', true), tog('사내 부고장 페이지 링크', '조문 안내 · 계좌 · 지도 포함', true), area('미리보기', '', '경조사를 선택하면 안내 문구가 채워집니다')] },
       sendDetail: { title: '발송 상세', cta: '확인', noCancel: true, fields: [rows([['상품', '근조 바구니 ₩140,000'], ['받는 분', '박철수 차장 부친상'], ['받는 곳', '서울추모공원 2호실'], ['배송', '5/19 15:00 도착 예정 · 배송 중'], ['리본', '삼가 고인의 명복을 빕니다 · 선진건설 임직원 일동'], ['결제', '신한 1234 · 5/19 13:48']])] },
       payDetail: { title: '결제 상세', cta: '영수증 내려받기', fields: [rows([['일시', '5/19 14:02'], ['내용', '부의금 · 박철수 차장 부친상'], ['금액', '₩500,000'], ['수단', '법인계좌 송금 · 신한 110-***-4421'], ['승인', '규정 자동 승인'], ['서류', '미제출 · 14일 후 자동 요청']]), tog('서류 요청 문자 지금 보내기', '신청자에게 사망진단서 사본 제출을 요청합니다', false)] },
@@ -3221,7 +3238,7 @@ class Component extends DCLogic {
     const s = this.state; const K = s.srch;
     const C = {
       who: ['대상자 검색', 'ikWhoQuery', v.ikWhoQueryChange, '임직원 이름 · 본부', () => (v.ikWhoMatches || []).map(c => ({ title: c.name, sub: c.meta, lead: c.avatar, trail: c.badge || null, pick: c.pick }))],
-      place: ['장례식장 검색', 'ikPlaceQ', v.ikPlaceQChange, '장례식장 이름 · 지역', () => (v.ikPlaceHits || []).map(h => ({ title: h.name, sub: h.addr, lead: null, trail: null, pick: h.pick }))],
+      place: ['장례식장 검색', 'ikPlaceQ', v.ikPlaceQChange, '장례식장 이름 · 지역', () => (v.ikPlaceHits || []).map(h => ({ title: h.name, sub: h.addr, lead: null, trail: null, pick: h.pick }))], venue: ['예식장 검색', 'ikVenueQ', v.ikVenueQChange, '예식장 이름 · 지역', () => (v.ikVenueHits || []).map(h => ({ title: h.name, sub: h.addr, lead: null, trail: null, pick: h.pick }))],
       case: ['경조사 검색', 'nfQuery', v.nfQueryChange, '임직원 이름 · 부서 · 빈소', () => (v.nfMatches2 || []).map(c => ({ title: c.name, sub: c.meta, lead: c.avatar, trail: c.badge || null, pick: c.pick }))],
       recip: ['받는 사람 검색', 'sfQuery', v.sfQueryChange, v.sfSearchPh2 || '이름 · 소속', () => (v.sfMatches || []).map(c => ({ title: c.name, sub: c.meta, lead: c.avatar, trail: c.tag || null, pick: c.pick }))]
     };
@@ -3232,14 +3249,14 @@ class Component extends DCLogic {
         () => src.filter(x => !fq || (x[0] + x[1]).indexOf(fq) >= 0).map(x => ({ title: x[0], sub: x[1], lead: this.el('Avatar', { variant: 'person', size: 'small', fallback: x[2] }), trail: null, pick: () => this.setState(st => ({ formPicked: Object.assign({}, st.formPicked, { [fl]: x[0] }), formVals: Object.assign({}, st.formVals, { [fl]: '' }) })) }))];
       C.field.qVal = (s.formVals || {})[fl] || ''; }
     const out = { m_srch: !!K && !!C[K], srchClose: () => this.setState({ srch: null, srchDept: 'all' }), srchHasDept: false, srchDeptChips: [], srchEmptyAll: false, srchHasAny: true, srchEmptyTitle: '', srchEmptyDesc: '', srchEmptyCta: '', srchEmptyGo: () => {}, srchTitle: '', srchQ: '', srchChange: () => {}, srchPh: '', srchCount: '', srchNone: false, srchRows: [] };
-    ['who', 'place', 'recip', 'case'].forEach(k => { const qk = C[k] && C[k][1]; const has = qk ? !!String(s[qk] || '').trim() : false; out['srchBtn_' + k] = has ? { variant: 'solid', color: 'primary' } : { variant: 'outlined', color: 'assistive' }; });
+    ['who', 'place', 'venue', 'recip', 'case'].forEach(k => { const qk = C[k] && C[k][1]; const has = qk ? !!String(s[qk] || '').trim() : false; out['srchBtn_' + k] = has ? { variant: 'solid', color: 'primary' } : { variant: 'outlined', color: 'assistive' }; });
     Object.keys(C).forEach(k => { if (k === 'field') return; const qk = C[k][1]; const q = qk ? String(s[qk] || '').trim() : ''; const rows = q ? C[k][4]() : [];
       out['ac_' + k] = { show: !!q && !K, none: !!q && rows.length === 0, label: '"' + q + '" 검색 결과 ' + rows.length + '건' + (rows.length > 5 ? ' · 5건만 표시 · 검색 버튼으로 전체 보기' : ''), rows: rows.slice(0, 5) }; });
     Object.keys(C).forEach(k => { const open = () => this.setState({ srch: k }); out['srchOpen_' + k] = open; out['srchEnter_' + k] = (e) => { if (e && e.key === 'Enter') { e.preventDefault(); open(); } }; });
     if (K && C[K]) { const [title, qk, chg, ph, rows] = C[K]; const all = rows(); const qv = qk ? (s[qk] || '') : (C[K].qVal || ''); const q = qv.trim();
-      const DEPTS = ['인사총무본부', '경영지원실', '건축사업본부', '토목사업본부', '플랜트본부', '안전관리실']; const hasDept = K !== 'place' && !(K === 'recip' && (s.sfSrc || 'partner') === 'partner');
+      const DEPTS = ['인사총무본부', '경영지원실', '건축사업본부', '토목사업본부', '플랜트본부', '안전관리실']; const hasDept = K !== 'place' && K !== 'venue' && !(K === 'recip' && (s.sfSrc || 'partner') === 'partner');
       const dsel = hasDept ? (s.srchDept || 'all') : 'all'; const list = dsel === 'all' ? all : all.filter(r => String(r.sub || '').indexOf(dsel) >= 0);
-      const isPartner = K === 'recip' && (s.sfSrc || 'partner') === 'partner'; const emptyAll = !!this.empty && K !== 'place' && K !== 'case';
+      const isPartner = K === 'recip' && (s.sfSrc || 'partner') === 'partner'; const emptyAll = !!this.empty && K !== 'place' && K !== 'venue' && K !== 'case';
       out.srchHasDept = hasDept && !emptyAll; out.srchEmptyAll = emptyAll; out.srchHasAny = !emptyAll;
       out.srchEmptyTitle = isPartner ? '등록된 거래처가 없습니다' : '등록된 임직원이 없습니다';
       out.srchEmptyDesc = isPartner ? '거래처를 먼저 등록하면 여기서 고를 수 있습니다' : 'CSV로 임직원 명단을 올리면 여기서 고를 수 있습니다';
@@ -3385,7 +3402,7 @@ class Component extends DCLogic {
 
     // Options
     const deptOptions = this.opts([['all', '본부 전체'], ['hr', '인사총무본부'], ['mgmt', '경영지원실'], ['build', '건축사업본부'], ['civil', '토목사업본부'], ['plant', '플랜트본부'], ['safety', '안전관리실']]);
-    const kindOptions = this.opts([['all', '종류 전체'], ['death', '부고'], ['wed', '결혼'], ['birth', '출산'], ['etc', '회갑 · 근속']]);
+    const kindOptions = this.opts([['all', '종류 전체'], ['death', '부고'], ['wed', '결혼'], ['etc', '회갑 · 근속']]);
     const statusOptions = this.opts([['all', '상태 전체'], ['active', '진행 중'], ['wait', '승인 대기'], ['done', '처리 완료'], ['cancel', '취소']]);
     const proofOptions = this.opts([['all', '서류 전체'], ['none', '미제출'], ['more', '추가 필요'], ['ok', '완료']]);
     const periodOptions = this.opts([['month', '이번 달'], ['last', '지난 달'], ['year', '올해'], ['all', '전체 기간']]);
@@ -3607,12 +3624,19 @@ class Component extends DCLogic {
     ];
     const gs = guideSteps[s.guideStep];
 
-    const notifications = [
-      { meta: '권한 · 오늘', text: '한지훈 과장 10/31 퇴사 예정 · 건축사업본부 담당 관리자를 다시 지정하세요', go: () => this.setState({ screen: 'settings', settingsTab: 'perms', modal: null }) },
-      { meta: '부고장 · 10분 전', text: '박철수 차장 부친상 발인 D-2 · 부고장이 아직 발송되지 않았습니다', go: this.go('case') },
-      { meta: '승인 · 어제', text: '정재훈 사원 결혼 축의금 ₩300,000 승인을 기다립니다', go: this.go('approve') },
-      { meta: '화환 · 5/8', text: '김도현 부장 모친상 · 근조 3단 화환 배송이 완료되었습니다', go: this.go('case') }
-    ].map((n, i) => { const unread = !s.ntfRead && i < 3; return Object.assign(n, { unread, textProps: { weight: unread ? 'bold' : 'regular' }, wrapStyle: { borderRadius: '10px', overflow: 'hidden', background: unread ? 'var(--semantic-fill-normal)' : 'transparent' }, dot: React.createElement('span', { style: { width: '8px', height: '8px', borderRadius: '9999px', background: unread ? 'var(--semantic-primary-normal)' : 'transparent', display: 'inline-block' } }),
+    const notifications = (this.isViewer ? [
+      { meta: '내 요청 · 10분 전', text: '부친상 등록이 승인되었습니다 · 화환 · 부의금 발송이 시작됩니다', go: this.go('today') },
+      { meta: '내 요청 · 어제', text: '거래처 화환 요청이 반려되었습니다 · 사유: 부고장 첨부 누락', go: this.go('today') },
+      { meta: '내 요청 · 5/2', text: '자녀 결혼 축의금 요청이 승인되었습니다', go: this.go('today') }
+    ] : [
+      { meta: '승인 · 방금', text: '한서연 팀장이 부친상을 등록했습니다 · 승인을 기다립니다', go: this.go('approve') },
+      { meta: '부고장 · 10분 전', text: '박철수 차장 부친상 발인 D-1 · 부고장이 아직 발송되지 않았습니다', go: this.go('case') },
+      { meta: '경조금 · 30분 전', text: '이수민 대리 결혼 축의금 송금 실패 · 예금주가 일치하지 않습니다', go: this.go('case') },
+      { meta: '서류 · 오늘', text: '정재훈 사원 결혼 · 청첩장이 제출되었습니다', go: this.go('approve') },
+      { meta: '법인카드 · 오늘', text: '신한 5678 월 한도 80% 사용 · 한도에 닿으면 이 카드로는 결제되지 않습니다', go: () => this.setState({ screen: 'settings', settingsTab: 'card', modal: null, ntfOpen: false }) },
+      { meta: '권한 · 어제', text: '한지훈 과장 10/31 퇴사 예정 · 건축사업본부 담당 관리자를 다시 지정하세요', go: () => this.setState({ screen: 'settings', settingsTab: 'perms', modal: null, ntfOpen: false }) },
+      { meta: '화환 · 5/19', text: '박철수 차장 부친상 · 근조 바구니 배송이 완료되었습니다 · 현장 사진 도착', go: this.go('case') }
+    ]).map((n, i) => { const unread = !s.ntfRead && i < (this.isViewer ? 2 : 4); return Object.assign(n, { unread, textProps: { weight: unread ? 'bold' : 'regular' }, wrapStyle: { flexShrink: 0, borderRadius: '10px', overflow: 'hidden', background: unread ? 'var(--semantic-fill-normal)' : 'transparent' }, dot: React.createElement('span', { style: { width: '8px', height: '8px', borderRadius: '9999px', background: unread ? 'var(--semantic-primary-normal)' : 'transparent', display: 'inline-block' } }),
       textStyle: { fontSize: '15px', lineHeight: '22px', fontWeight: unread ? 600 : 400, color: unread ? 'var(--semantic-label-normal)' : 'var(--semantic-label-neutral)' },
       dotStyle: { width: '6px', height: '6px', marginTop: '8px', flexShrink: 0, borderRadius: '9999px', background: unread ? 'var(--semantic-primary-normal)' : 'transparent' } }); });
     const ntfUnread = notifications.filter(n => n.unread).length;
@@ -3790,7 +3814,7 @@ class Component extends DCLogic {
           tourCard: { position: 'absolute', left: left + 'px', top: top + 'px', width: cw + 'px', maxWidth: 'calc(100vw - 32px)', padding: '20px', borderRadius: '16px', background: 'var(--semantic-static-white)', boxShadow: 'var(--semantic-elevation-shadow-normal-large)', display: 'flex', flexDirection: 'column', gap: '10px', transition: 'all .25s cubic-bezier(.4,0,.2,1)' } }; })(),
       showDemoNoTour: s.tour == null && !s.guideTask && !this.props.boardScreen,
       m_quickApprove: s.modal === 'quickApprove', m_leave: s.modal === 'leaveConfirm',
-      leaveActions: [{ label: s.screen === 'settings' ? '계속 편집' : '계속 작성', variant: 'assistive', onClick: () => this.setState({ modal: null }) }, { label: '나가기', variant: 'negative', onClick: () => this.setState(Object.assign({ modal: null, sfRecipient: null, nfCase: null, sfWiz: 1, polDirty: false, coEdit: null, bsDraft: null }, s.leaveNext || {})) }], leaveHeading: s.screen === 'settings' ? '저장하지 않은 변경 사항이 있습니다' : '작성 중인 내용이 사라집니다', leaveHeadingV: s.screen === 'settings' ? '저장하지 않은 변경 사항이 있습니다' : '작성 중인 내용이 사라집니다', leaveDescV: s.screen === 'settings' ? '지금 나가면 바꾼 설정이 반영되지 않습니다. 저장하려면 계속 편집을 누르세요.' : '지금 나가면 고른 받는 사람과 입력한 내용이 저장되지 않습니다.',
+      leaveActions: [{ label: s.screen === 'settings' ? '계속 편집' : '계속 작성', variant: 'assistive', onClick: () => this.setState({ modal: null }) }, { label: '나가기', variant: 'negative', onClick: () => this.setState(Object.assign({ modal: null, sfRecipient: null, nfCase: null, sfWiz: 1, polDirty: false, polOff: {}, polKindOff: {}, polFlowerSel: Object.assign({}, this.state.polFlowerSaved), coEdit: null, bsDraft: null }, s.leaveNext || {})) }], leaveHeading: s.screen === 'settings' ? '저장하지 않은 변경 사항이 있습니다' : '작성 중인 내용이 사라집니다', leaveHeadingV: s.screen === 'settings' ? '저장하지 않은 변경 사항이 있습니다' : '작성 중인 내용이 사라집니다', leaveDescV: s.screen === 'settings' ? '지금 나가면 바꾼 설정이 반영되지 않습니다. 저장하려면 계속 편집을 누르세요.' : '지금 나가면 고른 받는 사람과 입력한 내용이 저장되지 않습니다.',
       quickApproveActions: [{ label: '반려', variant: 'assistive', onClick: () => this.setState({ modal: 'reject' }) }, { label: '승인', onClick: () => { this.setState(st => ({ modal: null, doneTodos: (st.doneTodos || []).concat(['정재훈 사원 결혼']), toast: '정재훈 사원 결혼 축의금을 승인했습니다' })); clearTimeout(this._tt); this._tt = setTimeout(() => this.setState({ toast: null }), 2400); } }],
       quickSends: [['flower', '화환 보내기', '근조 · 축하 화환', 'send'], ['money', '경조금 보내기', '부의금 · 축의금', 'business-bag']].map(([k, label, sub, ic]) => ({ label, sub, icon: this.icon(ic, 22), iconBox: React.createElement('span', { style: { flexShrink: 0, marginRight: '8px', width: '44px', height: '44px', borderRadius: '12px', background: 'var(--atomic-blue-95)', color: 'var(--semantic-primary-normal)', display: 'flex', alignItems: 'center', justifyContent: 'center' } }, this.icon(ic, 22)), chev: this.icon('chevron-right', 20, 'var(--semantic-label-assistive)'), go: () => this.setState({ screen: k, sendView: 'form', sfWiz: 1, sfProd: null, sfRecipient: null, nfCase: null, nfQuery: '', sfQuery: '' }) })),
       sendMenuTrigger: this.el('Button', { size: 'medium', variant: 'outlined', color: 'assistive' }, '거래처 발송'),
@@ -3800,6 +3824,9 @@ class Component extends DCLogic {
       todoTitleProps: { variant: 'headline1', weight: 'bold' }, quickChevron: this.icon('chevron-right', 20, 'var(--semantic-label-alternative)'), quickTitleProps: { variant: 'body1', weight: 'bold' }, closeModal: (s.formKey === 'csvTpl' ? (() => this.setState(st => ({ modal: 'form', formKey: st.prevForm || 'csvUpload' }))) : this.close()), hasToast: !!s.toast, toastUndo: s.toastUndo || null, toastText: s.toast || '',
       m_logout: s.modal === 'logout', m_cancel: s.modal === 'cancel', m_generic: s.modal === 'generic', m_proof: s.modal === 'proof', m_reject: s.modal === 'reject', m_done: s.modal === 'done', m_notify: s.modal === 'notify', ntfHead: ntfUnread ? '안 읽은 알림 ' + ntfUnread + '건' : '모든 알림을 읽었습니다', ntfAllRead: ntfUnread === 0, ntfReadAll: () => this.setState({ ntfRead: true }),
       genericTitle: s.genericTitle || '준비 중인 기능',
+      ntfUnread: ntfUnread > 99 ? '99+' : ntfUnread, ntfHasUnread: ntfUnread > 0, ntfNoUnread: ntfUnread === 0, ntfAria: ntfUnread ? '알림 · 안 읽은 알림 ' + ntfUnread + '건' : '알림',
+      ntfShown: (this.empty ? [] : notifications).slice(0, s.ntfLimit || 20), ntfHasAny: !this.empty && notifications.length > 0, ntfNone: this.empty || notifications.length === 0,
+      ntfHasMore: !this.empty && notifications.length > (s.ntfLimit || 20), ntfMore: () => this.setState(st => ({ ntfLimit: (st.ntfLimit || 20) + 20 })),
       m_holderMismatch: s.modal === 'holderMismatch',
       holderMisActions: (s.holderPend || {}).emp ? [{ label: '계좌 다시 입력', onClick: () => this.setState(st => ({ modal: st.holderPrevModal, holderOk: false })) }] : [{ label: '계좌 다시 입력', variant: 'assistive', onClick: () => this.setState(st => ({ modal: st.holderPrevModal })) }, { label: '확인하고 진행', onClick: () => { this.setState(st => { const h = st.holderPend || {}; return { modal: st.holderPrevModal, holderOk: true, holderName: h.holder, holderAcked: (st.holderAcked || []).concat([h.key]), toast: '예금주 ' + (h.holder || '') + ' · 확인 기록을 활동 로그에 남겼습니다' }; }); clearTimeout(this._tt); this._tt = setTimeout(() => this.setState({ toast: null }), 2400); } }],
       holderMisDesc: (() => { const h = s.holderPend || {}; return h.emp ? '받는 사람 ' + (h.recip || '') + ' · 예금주 ' + (h.holder || '') + ' · 임직원 경조금은 본인 명의 계좌로만 보낼 수 있습니다. 본인 계좌번호로 다시 입력하세요.' : '받는 사람 ' + (h.recip || '') + ' · 예금주 ' + (h.holder || '') + ' · 상주 가족 계좌라면 확인하고 진행하세요. 확인한 사람과 시각은 활동 로그에 남습니다.'; })(),
@@ -3830,9 +3857,9 @@ class Component extends DCLogic {
       notPolicy: (s.settingsTab || 'policy') !== 'policy', setCaptionShow: ((s.settingsTab || 'policy') !== 'policy') && !this.isViewer, polDirty: !!s.polDirty,
       polMarkDirty: (e) => { const t = e.target; if (!t || !t.closest) return; if (t.closest('button[aria-label="닫기"]')) return; const ctl = t.closest('input, textarea, select, [role="switch"], [role="checkbox"], [role="radio"], [role="option"], [role="combobox"], [aria-pressed]'); const txt = (t.closest('button') || {}).textContent || ''; if (ctl || /^(＋|−|-|\+)$/.test(txt.trim())) { if (!this.state.polDirty) this.setState({ polDirty: true }); } },
       polDiscardStyle: { color: 'var(--semantic-static-white)', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.32)', background: 'transparent' },
-      polDiscard: () => this.setState({ modal: 'delConfirm', delTitle: '변경을 되돌릴까요?', delDesc: '저장하지 않은 복지 정책 변경이 모두 사라집니다.', delAfter: () => this.setState({ polDirty: false, polOff: {}, polKindOff: {}, polFlowerSel: {}, leaveCfg: null }) }),
+      polDiscard: () => this.setState({ modal: 'delConfirm', delTitle: '변경을 되돌릴까요?', delDesc: '저장하지 않은 복지 정책 변경이 모두 사라집니다.', delAfter: () => this.setState(st => ({ polDirty: false, polOff: {}, polKindOff: {}, polFlowerSel: Object.assign({}, st.polFlowerSaved), leaveCfg: null })) }),
       polSave: () => this.setState({ modal: 'form', formKey: 'polApply' }),
-      polSaveDo: this._polSaveDo = () => { this.setState(st => st.guideTask === 'policy' ? { polDirty: false, modal: null, toast: '규정을 저장했습니다 · 2단계 완료', setupDone: Object.assign({}, st.setupDone, { policy: true }), guideTask: 'perms', settingsTab: 'perms' } : { polDirty: false, modal: null, toast: '복지 정책을 저장했습니다 · ' + (this._polWhenText || '내일(10/13) 0시부터') + ' 발생한 경조사에 적용 · 대표에게 알림을 보냈습니다' }); clearTimeout(this._tt); this._tt = setTimeout(() => this.setState({ toast: null }), 2400); }, icExport: this.icon('upload', 18), icPlusSm: this.icon('plus', 16),
+      polSaveDo: this._polSaveDo = () => { this.setState(st => st.guideTask === 'policy' ? { polDirty: false, modal: null, toast: '규정을 저장했습니다 · 2단계 완료', setupDone: Object.assign({}, st.setupDone, { policy: true }), guideTask: 'perms', settingsTab: 'perms', polFlowerSaved: Object.assign({}, st.polFlowerSaved, st.polFlowerSel) } : { polDirty: false, modal: null, polFlowerSaved: Object.assign({}, st.polFlowerSaved, st.polFlowerSel), toast: '복지 정책을 저장했습니다 · ' + (this._polWhenText || '내일(10/13) 0시부터') + ' 발생한 경조사에 적용 · 대표에게 알림을 보냈습니다' }); clearTimeout(this._tt); this._tt = setTimeout(() => this.setState({ toast: null }), 2400); }, icExport: this.icon('upload', 18), icPlusSm: this.icon('plus', 16),
       setupStepCards: setupSteps.map((st, i) => { const done = i < 1, now = i === 1; return { label: st.label, desc: st.description, mark: done ? this.icon('check', 18, 'var(--semantic-static-white)') : String(i + 1),
         box: { display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', borderRadius: '12px', minWidth: 0, background: now ? 'var(--atomic-blue-95)' : 'var(--semantic-static-white)', boxShadow: now ? 'inset 0 0 0 1px var(--semantic-line-primary-strong)' : 'inset 0 0 0 1px var(--semantic-line-normal-neutral)' },
         dot: { width: '28px', height: '28px', flexShrink: 0, borderRadius: '9999px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', fontWeight: 600, background: done ? 'var(--semantic-label-normal)' : now ? 'var(--semantic-primary-normal)' : 'var(--semantic-fill-normal)', color: done || now ? 'var(--semantic-static-white)' : 'var(--semantic-label-neutral)' },
@@ -3946,7 +3973,7 @@ class Component extends DCLogic {
         moreTrigger: this.el('IconButton', { variant: 'normal', size: 'small', 'aria-label': name + ' 메뉴' }, this.icon('more-horizontal', 20)),
         menuPick: (v) => v === 'mgr' ? this.setState({ modal: 'form', formKey: 'deptMgr' }) : v === 'edit' ? this.setState({ modal: 'form', formKey: 'deptEdit' }) : v === 'team' ? this.setState({ modal: 'form', formKey: 'teamAdd' }) : v === 'emp' ? this.setState({ screen: 'employees', filters: Object.assign({}, s.filters, { dept: k }) }) : this.setState({ modal: 'delConfirm', delTitle: name + '을(를) 삭제할까요?', delDesc: '소속 임직원이 있으면 삭제할 수 없습니다 · 먼저 다른 본부로 옮기세요.' }), toggle: () => this.setState(st => ({ orgOpen: Object.assign({}, st.orgOpen, { [k]: !open }) })), goEmp: () => this.setState({ screen: 'employees', filters: Object.assign({}, s.filters, { dept: k }) }) }; })),
       orgMenuItems: [{ value: 'edit', label: '본부 · 팀 수정' }, { value: 'team', label: '팀 추가' }, { value: 'emp', label: '임직원 보기' }, { value: 'del', label: '본부 삭제' }],
-      orgRelSummary: '본인 부모 · 배우자 부모 · 배우자 · 자녀 · 조부모 · 형제자매 · 결혼 · 출산 · 회갑 · 칠순 · 근속 — 금액과 켜기/끄기는 복지 정책에서 정합니다',
+      orgRelSummary: '본인 부모 · 배우자 부모 · 배우자 · 자녀 · 조부모 · 형제자매 · 결혼 · 회갑 · 칠순 · 근속 — 금액과 켜기/끄기는 복지 정책에서 정합니다',
             ...(() => { const D0 = { zip: '04608', a1: '서울특별시 중구 동호로 249', a2: '선진빌딩 12층', tel: '02-2280-1100' }; const C = Object.assign({}, D0, s.coSaved || {}, s.coEdit || {}); const base = Object.assign({}, D0, s.coSaved || {}); const dirty = C.a2 !== base.a2 || C.tel !== base.tel || C.zip !== base.zip;
         const ed = (k) => (e) => this.setState(st => ({ coEdit: Object.assign({}, st.coEdit, { [k]: e && e.target ? e.target.value : e }) }));
         return { coZip: this.empty ? '' : C.zip, coAddr1: this.empty ? '' : C.a1, coAddr2: this.empty ? '' : C.a2, coTel: this.empty ? '' : C.tel, coAddr2Change: ed('a2'), coTelChange: ed('tel'),
@@ -3969,7 +3996,7 @@ class Component extends DCLogic {
       setReadonly: this.isViewer ? 'true' : 'false',
       vwHas: !this.empty, vwNone: this.empty,
       vwRows: [['한서연 팀장 부친상', '5/19 등록 · 서울추모공원 2호 · 5/21 발인', '승인 대기', 'orange'], ['한서연 팀장 자녀 결혼', '5/2 등록 · 더채플앳청담 · 6/14', '진행 중', 'blue'], ['한서연 팀장 모친 회갑', '4/7 등록 · 축의금 송금 완료', '처리 완료', 'green']].map(([title, sub, b, c]) => ({ title, sub, badge: this.badge(b, c) })),
-      roleItems: [{ value: 'admin', label: '관리자' }, { value: 'viewer', label: '일반' }], roleVal: this.isViewer ? 'viewer' : 'admin', setRole: (v) => ((v === 'viewer') === this.isViewer) ? null : this.setState({ role: v, screen: s.screen === 'login' ? 'login' : 'today', settingsTab: null, modal: null }),
+      roleItems: [{ value: 'admin', label: '관리자' }, { value: 'viewer', label: '일반' }], roleVal: this.isViewer ? 'viewer' : 'admin', setRole: (v) => ((v === 'viewer') === this.isViewer) ? null : this.setState({ role: v, screen: s.screen === 'login' ? 'login' : 'today', settingsTab: null, modal: null, ntfRead: false }),
       orgStats: (() => { const D = this.empty ? [] : (this._orgDepts || []);
         const nT = D.reduce((t, d) => t + ((d.teams || []).length), 0), nE = D.reduce((t, d) => t + (parseInt(String(d.meta || '').replace(/^.*· ?(\d+)명.*$/, '$1'), 10) || 0), 0), none = D.filter(d => d.noMgr).length;
         const st = (warn) => ({ fontSize: '20px', lineHeight: '28px', fontWeight: 600, fontVariantNumeric: 'tabular-nums', color: warn ? 'var(--semantic-accent-foreground-orange)' : 'var(--semantic-label-normal)' });
@@ -4191,7 +4218,7 @@ class Component extends DCLogic {
     const price = prod != null ? PRODS[prod][1] : 0;
     const mileRaw = parseInt(String(s.sfMileAmt == null ? '0' : s.sfMileAmt).replace(/[^0-9]/g, ''), 10) || 0;
     const mileUse = 0;
-    const mnKindV = s.mnKind || 'condol'; const MN_REL = mnKindV === 'condol' ? ['부친', '모친', '배우자', '자녀', '조부모', '형제자매', '배우자 부모'] : ['본인 결혼', '자녀 결혼', '본인 출산', '배우자 출산', '회갑', '칠순', '근속'];
+    const mnKindV = s.mnKind || 'condol'; const MN_REL = mnKindV === 'condol' ? ['부친', '모친', '배우자', '자녀', '조부모', '형제자매', '배우자 부모'] : ['본인 결혼', '자녀 결혼', '회갑', '칠순', '근속'];
     const MN_POL = { '부친': 500000, '모친': 500000, '배우자': 500000, '자녀': 500000, '조부모': 300000, '형제자매': 300000, '배우자 부모': 300000, '본인 결혼': 300000, '자녀 결혼': 300000, '본인 출산': 200000, '배우자 출산': 200000, '회갑': 200000, '칠순': 200000, '근속': 300000 };
     const mnRelV = (s.mnRel || {})[mnKindV] || MN_REL[0]; const mnPol = MN_POL[mnRelV] || 300000;
     const mnAmtV = s.mnAmt == null ? mnPol : (parseInt(String(s.mnAmt).replace(/[^0-9]/g, ''), 10) || 0);
@@ -4211,7 +4238,7 @@ class Component extends DCLogic {
             lineL: line(i <= cur, i === 0), lineR: line(i < cur, i === n - 1),
             dot: { width: '32px', height: '32px', flexShrink: 0, borderRadius: '9999px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', fontWeight: 600, background: done || now ? 'var(--semantic-primary-normal)' : 'var(--semantic-static-white)', color: done || now ? 'var(--semantic-static-white)' : 'var(--semantic-label-alternative)', boxShadow: done || now ? (now ? '0 0 0 4px var(--atomic-blue-95)' : 'none') : 'inset 0 0 0 2px var(--atomic-cool-neutral-95)' },
             labelStyle: { fontSize: '16px', lineHeight: '24px', fontWeight: 600, marginTop: '4px', color: now ? 'var(--semantic-primary-normal)' : done ? 'var(--semantic-label-normal)' : 'var(--semantic-label-alternative)', whiteSpace: 'nowrap' } }; }); })(),
-      ...(() => { const mk = s.mnKind || null; const REL = !mk ? [] : mk === 'condol' ? ['부친', '모친', '배우자', '자녀', '조부모', '형제자매', '배우자 부모'] : ['본인 결혼', '자녀 결혼', '본인 출산', '배우자 출산', '회갑', '칠순', '근속'];
+      ...(() => { const mk = s.mnKind || null; const REL = !mk ? [] : mk === 'condol' ? ['부친', '모친', '배우자', '자녀', '조부모', '형제자매', '배우자 부모'] : ['본인 결혼', '자녀 결혼', '회갑', '칠순', '근속'];
         const POL = { '부친': 500000, '모친': 500000, '배우자': 500000, '자녀': 500000, '조부모': 300000, '형제자매': 300000, '배우자 부모': 300000, '본인 결혼': 300000, '자녀 결혼': 300000, '본인 출산': 200000, '배우자 출산': 200000, '회갑': 200000, '칠순': 200000, '근속': 300000 };
         const rel = mk ? ((s.mnRel || {})[mk] || null) : null; const pol = rel ? (POL[rel] || 300000) : 0;
         const amt = s.mnAmt == null ? pol : (parseInt(String(s.mnAmt).replace(/[^0-9]/g, ''), 10) || 0);
@@ -4276,7 +4303,7 @@ class Component extends DCLogic {
           o['rib' + k + 'Text'] = t; o['rib' + k + 'Type'] = (e) => this.setState(st => ({ ribText: Object.assign({}, st.ribText, { [k]: String(val(e)).slice(0, 20) }) })); o['rib' + k + 'Count'] = t.length + ' / 20자'; }); return o; })(),
       sfRibbonL: this.opts([['a', '삼가 고인의 명복을 빕니다'], ['b', '謹弔'], ['c', '깊은 애도를 표합니다'], ['d', '직접 입력']]),
       sfRibbonR: this.opts([['a', '선진건설 주식회사 임직원 일동'], ['b', '선진건설 대표이사 김선진'], ['c', '선진건설 인사총무본부'], ['d', '직접 입력']]),
-      sfReasonOptions: this.opts([['death', '부의금'], ['wed', '결혼 축의금'], ['birth', '출산 축의금'], ['age', '회갑 축의금']]),
+      sfReasonOptions: this.opts([['death', '부의금'], ['wed', '결혼 축의금'], ['age', '회갑 축의금']]),
       sfBankOptions: this.opts([['shinhan', '신한'], ['kb', 'KB국민'], ['woori', '우리'], ['hana', '하나'], ['nh', 'NH농협']]),
       sfCaseOptions: this.opts([['c1', '박철수 차장 부친상 · 5/21 06:00 발인']]),
       ...(() => { const CASES = [['c1', '박철수 차장 부친상', '인사총무본부 인사팀 · 서울추모공원 2호실 · 5/21 (수) 06:00 발인', '박', 'D-2', 'red'], ['c2', '김도현 부장 모친상', '인사총무본부 · 서울추모공원 3호 · 5/9 발인 · 발송 완료', '김', '발송 완료', 'green'], ['c3', '이수민 대리 조모상', '경영지원실 재무팀 · 서울아산병원 · 5/12 발인 · 발송 완료', '이', '발송 완료', 'green']];
@@ -4440,8 +4467,8 @@ class Component extends DCLogic {
       isEmpDetail: scr === 'empDetail', isOrg: scr === 'settings' && s.settingsTab === 'org',
       openEmpDetail: (r) => this.setState({ screen: 'empDetail', empWho: r && r.name ? r.name : null, empWhoRow: r && r.name ? { name: r.name, rank: r.rank, dept: r.dept, team: r.team, phone: r.phone, mail: r.mail } : null }), goPaymentsTab: () => this.setState({ recordTab: 'payments' }),
       logChips: [['send', '발송 기록 3'], ['approval', '승인 4'], ['change', '변경 이력 5']].map(([v, label]) => { const on = (s.logSeg || 'send') === v; return { label, on, variant: on ? 'solid' : 'outlined', pick: () => this.setState({ logSeg: v }) }; }),
-      logSegItems: [{ value: 'send', label: '발송 기록 3' }, { value: 'approval', label: '승인 4' }, { value: 'change', label: '변경 이력 5' }], logSeg: s.logSeg || 'send', setLogSeg: (v) => this.setState({ logSeg: v }),
-      policyTabItems: [{ value: 'death', label: '장례' }, { value: 'wed', label: '결혼' }, { value: 'birth', label: '출산 · 기타' }], policyTab: s.policyTab || 'death', setPolicyTab: (v) => this.setState({ policyTab: v }),
+      logSegItems: [{ value: 'send', label: '발송 3' }, { value: 'approval', label: '승인 4' }, { value: 'change', label: '설정 변경 5' }], logSeg: s.logSeg || 'send', setLogSeg: (v) => this.setState({ logSeg: v }),
+      policyTabItems: [{ value: 'death', label: '장례' }, { value: 'wed', label: '결혼' }], policyTab: (s.policyTab === 'birth' ? 'death' : s.policyTab) || 'death', setPolicyTab: (v) => this.setState({ policyTab: v }),
       policyRels: [['parent', '부모'], ['spouse', '배우자'], ['inlaw', '배우자 부모'], ['grand', '조부모'], ['sibling', '형제자매'], ['child', '자녀']].map(([k, label]) => ({ label, on: rels[k], toggle: () => this.setState({ policyRels: Object.assign({}, rels, { [k]: !rels[k] }) }) })),
       adminOptions: this.opts([['han', '한서연 팀장 · 인사총무본부'], ['kim', '김도현 부장 · 인사총무본부'], ['lee', '이정훈 차장 · 건축사업본부']]),
       funeralStageItems: [{ value: 'during', label: '장례 진행 중 · 발인 전' }, { value: 'after', label: '장례 종료 · 발인 후' }], funeralStage: fs, setFuneralStage: (v) => this.setState({ funeralStage: v }),
@@ -4462,7 +4489,7 @@ class Component extends DCLogic {
       dayUnit: React.createElement('span', { style: { fontSize: '14px', fontWeight: 600, color: 'var(--semantic-label-neutral)' } }, '일'),
       m_leaveSet: s.modal === 'leaveSet', openLeaveSet: () => this.setState({ modal: 'leaveSet' }),
       leaveSetActions: this.el('ActionArea', { variant: 'neutral', buttons: [{ label: '취소', variant: 'sub', onClick: () => this.setState({ modal: null }) }, { label: '저장', onClick: () => { this.setState({ modal: null, toast: '경조 휴가 설정을 저장했습니다' }); clearTimeout(this._tt); this._tt = setTimeout(() => this.setState({ toast: null }), 2000); } }] }),
-      polFlowerName: pt === 'death' ? '근조 화환' : pt === 'wed' ? '축하 화환' : '축하 선물', polFlowerSub: pt === 'death' ? '빈소로 발송 · 반입 제한 시 추천 상품으로 대체' : pt === 'wed' ? '예식장으로 발송' : '자택으로 발송',
+      polFlowerName: pt === 'death' ? '근조 화환' : pt === 'wed' ? '축하 화환' : '축하 선물', polFlowerSub: (pt === 'death' ? '빈소로 발송 · 반입 제한 시 추천 상품으로 대체' : pt === 'wed' ? '예식장으로 발송' : '자택으로 발송') + ' · 경조사 등록 시 이 상품이 기본으로 들어갑니다',
       polFlowerProducts: PRODS.map(([name, desc, price], i) => { const on = i === fSel; return { name, desc, price, pick: () => this.setState({ polFlowerSel: Object.assign({}, s.polFlowerSel, { [pt]: i }) }),
         style: { display: 'flex', alignItems: 'center', gap: '12px', width: '100%', padding: '14px 16px', cursor: 'pointer', background: 'var(--semantic-static-white)', boxShadow: i < PRODS.length - 1 ? 'inset 0 -1px 0 var(--semantic-line-normal-neutral)' : 'none' },
         on }; }),
@@ -4533,22 +4560,19 @@ class Component extends DCLogic {
   intakeVals() {
     const s = this.state, ik = s.intakeKind || 'death', death = ik === 'death';
     const cm = s.careMode || 'live', late = death && cm === 'done';
-    const reasons = death ? ['부친', '모친', '배우자', '자녀', '조부모', '형제자매', '기타'] : ['본인 결혼', '자녀 결혼', '출산', '회갑', '근속', '기타'];
+    const reasons = death ? ['부친', '모친', '배우자', '자녀', '조부모', '형제자매', '기타'] : ['본인 결혼', '자녀 결혼', '회갑', '근속', '기타'];
     const rp = (s.ikReason || {})[ik] || reasons[0];
     const proofs = death ? ['사망진단서', '부고 문자', '가족관계증명서'] : ['청첩장', '혼인관계증명서', '출생증명서'];
     const pp = (s.ikProof || {})[ik] || proofs[0];
     const noticeOn = s.ikNotice !== false;
     const radio = (on) => ({ width: '20px', height: '20px', flexShrink: 0, borderRadius: '9999px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: on ? 'none' : 'inset 0 0 0 2px var(--semantic-label-alternative)' });
-    const pv = death ? (late ? [
+    const POLF = { death: [['3단 근조', '120,000'], ['고급 3단 근조', '180,000'], ['최고급 3단 근조', '240,000'], ['4단', '280,000']], wed: [['2단 축하 화환', '150,000'], ['스탠드형 축하 화환', '180,000'], ['프리미엄 축하 화환', '200,000'], ['최고급 축하 화환', '250,000']], birth: [['축하 꽃바구니', '80,000'], ['축하 화분', '100,000']] }; const pf = (k) => POLF[k][((s.polFlowerSaved || {})[k]) || 0]; const pfD = pf('death'), pfW = pf('wed'); const pv = death ? (late ? [
         { title: '부의금 · 오늘 송금', sub: '발인 후 신청 · 화환 · 부고장 없이 경조금만 지급', amount: '₩500,500', editLabel: '변경', edit: this.openForm('amountChange') }
       ] : [
-        { title: '근조 바구니 · 오늘 15시 이전 도착', sub: '반입 제한으로 추천 상품 중 선택 · 리본 문구 자동', amount: '₩140,000', editLabel: '변경', edit: this.openForm('productChange') },
+        { title: pfD[0] + ' · 오늘 15시 이전 도착', sub: '복지 정책 기본 상품 · 빈소 반입 제한이면 추천 상품으로 바꿉니다 · 리본 문구 자동', amount: '₩' + pfD[1], editLabel: '변경', edit: this.openForm('productChange') },
         { title: '부의금 · 오늘 송금', fee: 500, sub: this.isViewer ? (s.holderOk ? '예금주 확인됨 · 관리자 승인 후 송금' : '위에서 입력한 계좌로 송금 · 관리자 승인 후 실행') : s.holderOk ? '예금주 확인됨 · 접수 즉시 송금' : '위에서 입력한 계좌로 송금 · 예금주 조회 후 실행', amount: '₩500,000', editLabel: '변경', edit: this.openForm('amountChange') },
         { toggle: true, on: noticeOn, flip: () => this.setState({ ikNotice: !noticeOn }), title: '부고장 · 사내 전체 152명 + 거래처 42곳', sub: noticeOn ? (this.isViewer ? '관리자 승인 후 발송합니다' : '접수와 함께 발송합니다') : '보내지 않음 · 나중에 경조사 화면에서 보낼 수 있습니다', amount: '', editLabel: '편집', edit: this.openForm('noticeEdit') }
-      ]) : [
-        { title: '축하 화환 · 예식 당일 오전 도착', sub: '신라호텔 영빈관 · 리본 문구 자동', amount: '₩150,000', editLabel: '변경', edit: this.openForm('productChange') },
-        { title: '결혼 축의금 · 예식 3일 전 송금', sub: '위에서 입력한 계좌로 송금', amount: '₩300,000', editLabel: '변경', edit: this.openForm('amountChange') }
-      ];
+      ]) : (() => { const vn = (s.ikVenueName != null ? s.ikVenueName : '신라호텔 영빈관') || '예식장 미입력'; const pfB = POLF.birth[((s.polFlowerSaved || {}).birth) || 0]; const pay = (t, sub, amt) => ({ title: t, sub, amount: amt, isPay: true, editLabel: '변경', edit: this.openForm('amountChange') }); const acct = '위에서 입력한 계좌로 송금'; if (/결혼/.test(rp)) return [ { title: pfW[0] + ' · 예식 당일 오전 도착', sub: '복지 정책 기본 상품 · ' + vn + ' · 리본 문구 자동', amount: '₩' + pfW[1], editLabel: '변경', edit: this.openForm('productChange') }, pay((rp === '자녀 결혼' ? '자녀 결혼 축의금' : '결혼 축의금') + ' · 예식 3일 전 송금', acct, '₩300,000') ]; if (rp === '출산') return [ { title: pfB[0] + ' · 축하 선물', sub: '복지 정책 기본 상품 · 받을 주소는 대상자에게 문자로 받습니다', amount: '₩' + pfB[1], editLabel: '변경', edit: this.openForm('productChange') }, pay('출산 축하금 · 접수 즉시 송금', acct, '₩200,000') ]; if (rp === '회갑') return [ pay('회갑 축하금 · 접수 즉시 송금', acct, '₩200,000') ]; if (rp === '근속') return [ pay('근속 축하금 · 기준일에 송금', acct, '₩300,000') ]; return [ pay('경조금 · 금액을 정해 주세요', '정책 표에 없는 사유 · 금액을 입력하고 승인을 받습니다', '') ]; })();
     const EMP = [['박철수 차장', '인사총무본부 인사팀 · 2014.03.12 입사', '박'], ['정재훈 사원', '건축사업본부 건축1팀 · 2023.02.11 입사', '정'], ['이수민 대리', '경영지원실 재무팀 · 2019.08.04 입사', '이'], ['김하늘 대리', '토목사업본부 공무팀 · 2020.03.16 입사', '김'], ['오세훈 과장', '플랜트본부 플랜트공사팀 · 2016.09.02 입사', '오'], ['최민석 부장', '안전관리실 안전팀 · 2009.07.11 입사', '최']];
     const wq = (s.ikWhoQuery || '').trim(); const whoIdx = s.ikWho == null ? null : s.ikWho; const who = this.isViewer ? ['한서연 팀장', '인사총무본부 총무팀 · 본인 · 가족 경조사만 등록할 수 있습니다', '한'] : (whoIdx != null ? EMP[whoIdx] : null);
     const whoName = who ? who[0] : '대상자';
@@ -4557,7 +4581,7 @@ class Component extends DCLogic {
       ikWhoLabelList: wq ? '"' + wq + '" 검색 결과 ' + EMP.filter(e => (e[0] + e[1]).indexOf(wq) >= 0).length + '명' : '최근 · 자주 찾는 임직원',
       ikWhoMatches: EMP.map((e, i) => [e, i]).filter(([e]) => !wq || (e[0] + e[1]).indexOf(wq) >= 0).map(([e, i]) => ({ name: e[0], meta: e[1], avatar: this.el('Avatar', { variant: 'person', size: 'small', fallback: e[2] }), pick: () => this.setState({ ikWho: i, ikWhoQuery: '' }) })),
       ikWhoWith: (() => { const c = whoName.charCodeAt(whoName.length - 1); const jong = c >= 0xAC00 && c <= 0xD7A3 ? (c - 0xAC00) % 28 : 0; return whoName + (jong ? '과' : '와'); })(),
-      ikBlocked: !who || !s.holderOk || (death && !s.ikPlacePicked), ikTodoList: [!who ? '대상자를 선택하세요' : null, death && !s.ikPlacePicked ? '장례식장을 검색해 선택하세요' : null, !s.holderOk ? '경조금 입금 계좌의 예금주를 조회하세요' : null].filter(Boolean).map(text => ({ text })), ikHasTodo: !who || !s.holderOk || (death && !s.ikPlacePicked),
+      ikBlocked: !who || !s.holderOk || (death && !s.ikPlacePicked) || (!death && rp === '기타'), ikTodoList: [!who ? '대상자를 선택하세요' : null, death && !s.ikPlacePicked ? '장례식장을 검색해 선택하세요' : null, !s.holderOk ? '경조금 입금 계좌의 예금주를 조회하세요' : null, !death && rp === '기타' ? '경조금 금액을 정해 주세요' : null].filter(Boolean).map(text => ({ text })), ikHasTodo: !who || !s.holderOk || (death && !s.ikPlacePicked) || (!death && rp === '기타'),
       ikWhoName: (this._ikWhoName = whoName, this._ikRel = (rp === '기타' ? (s.ikEtcText || '') : rp), whoName), ikWhoMeta: who ? who[1] : '', ikWhoAvatar: this.el('Avatar', { variant: 'person', size: 'medium', fallback: who ? who[2] : '' }), ikWhoClear: () => this.setState({ ikWho: null }), ikWhoCanChange: !this.isViewer,
       ikIsDeath: death, ikIsHappy: !death, ikWhoLabel: this.isViewer ? '등록하는 사람' : death ? '누구의 경조사인가요' : '누구의 경사인가요',
       ikCareOpts: [['live', '장례 발생', '진행 중 · 발인 전'], ['done', '장례 종료', '발인 후 · 뒤늦은 신청']].map(([v, title, sub]) => { const on = cm === v; return { title, sub, pick: () => this.setState({ careMode: v }),
@@ -4565,7 +4589,7 @@ class Component extends DCLogic {
         on }; }),
       ikCareNote: late ? '발인이 지난 건은 화환 · 부고장 발송 없이 경조금만 지급합니다 · 서류(사망진단서 · 부고 문자)가 필요합니다' : '발인 전 접수 · 화환 · 부고장 · 경조금을 함께 보낼 수 있습니다',
       ikSynced: s.ikSynced !== false, ikSyncLabel: s.ikSynced === false ? '불러오기' : '다시 불러오기', ikSync: () => this.setState({ ikSynced: true }),
-      ikDateLabel: '발인', ikDateHint: late ? '이미 지난 발인 일자를 입력합니다 · 지급 기한 산정에 사용됩니다' : '발인 시각 기준으로 화환 도착 시간과 발송 마감이 계산됩니다',
+      ikDateLabel: '발인', ikHappyWed: !death && /결혼/.test(rp), ikHappyDateLabel: /결혼/.test(rp) ? '예식 일시' : rp === '출산' ? '출생일' : rp === '회갑' ? '회갑 일자' : rp === '근속' ? '기준일' : '일시', ikDateHint: late ? '이미 지난 발인 일자를 입력합니다 · 지급 기한 산정에 사용됩니다' : '발인 시각 기준으로 화환 도착 시간과 발송 마감이 계산됩니다',
       chiefRelOptions: this.opts([['son', '아들'], ['daughter', '딸'], ['spouse', '배우자'], ['etc', '기타']]),
       ikReasonLabel: death ? '고인과의 관계' : '경사 종류',
       ikReasons: reasons.map(label => ({ label, on: label === rp, pick: () => this.setState({ ikReason: Object.assign({}, s.ikReason, { [ik]: label }) }) })),
@@ -4592,7 +4616,7 @@ class Component extends DCLogic {
         this._ikCm = cm.text || ''; this._ikCi = ci.text || '';
         return {
           openObFromIntake: () => this.setState({ modal: 'obFull', obSrc: 'intake' }),
-          ikBreakdown: pv.map((p, i) => ({ p, on: isOn(p, i) })).filter(x => x.on).map(({ p }) => ({ k: String(p.title).split(' · ')[0], v: p.amount || '비용 없음' })),
+          ikBreakdown: pv.map((p, i) => ({ p, on: isOn(p, i) })).filter(x => x.on).map(({ p }) => ({ k: String(p.title).split(' · ')[0], v: p.amount || (p.isPay ? '금액 입력 필요' : '비용 없음') })),
           ikPreview: pv.map((p, i) => { const key = (death ? 'd' : 'h') + i; const on = isOn(p, i); const isNotice = /^부고장/.test(p.title); const open = isNotice && on && s.ikNoticeOpen !== false;
             return Object.assign({}, p, { on, open,
               flip: p.toggle ? p.flip : () => this.setState(st => ({ ikOff: Object.assign({}, st.ikOff, { [key]: !(st.ikOff || {})[key] }) })),
@@ -4611,9 +4635,7 @@ class Component extends DCLogic {
           ikPlaceShow: (!!pq || !!s.ikPlaceSearched) && !s.ikPlacePicked, ikPlaceSearch: () => this.setState({ ikPlaceSearched: true, ikPlacePicked: false }), ikPlaceBtnDisabled: !pq, ikPlaceOk: !!s.ikPlacePicked, ikPlaceNone: hits.length === 0,
           ikPlaceHits: hits.map(([name, addr]) => ({ name, addr, pick: () => this.setState({ ikPlaceQ: '', ikPlaceName: name, ikPlacePicked: true, ikPlaceSearched: false, srch: null }) })),
           ikBurial: s.ikBurial || '', ikBurialChange: (e) => this.setState({ ikBurial: e.target.value }), ikChief: s.ikChief || '', ikChiefChange: (e) => this.setState({ ikChief: e.target.value }),
-          ikPlaceName: s.ikPlaceName || '', ikPlaceNameChange: (e) => this.setState({ ikPlaceName: e.target.value })
-        };
-      })(),
+          ikPlaceName: s.ikPlaceName || '', ikPlaceNameChange: (e) => this.setState({ ikPlaceName: e.target.value }), ...(() => { const VEN = [['신라호텔 영빈관', '서울 중구 동호로 249'], ['롯데호텔 서울 크리스탈볼룸', '서울 중구 을지로 30'], ['더채플앳청담', '서울 강남구 선릉로 757'], ['그랜드 인터컨티넨탈 서울 파르나스', '서울 강남구 테헤란로 521'], ['더컨벤션 잠실', '서울 송파구 올림픽로 319'], ['아펠가모 광화문', '서울 종로구 세종대로 149']]; const vq = (s.ikVenueQ || '').trim(); const vh = vq ? VEN.filter(([n, a]) => (n + a).indexOf(vq) >= 0) : VEN; return { ikVenueQ: s.ikVenueQ || '', ikVenueQChange: (e) => this.setState({ ikVenueQ: e.target.value }), ikVenueHits: vh.map(([name, addr]) => ({ name, addr, pick: () => this.setState({ ikVenueQ: '', ikVenueName: name, srch: null }) })), ikVenueName: s.ikVenueName != null ? s.ikVenueName : '신라호텔 영빈관', ikVenueNameChange: (e) => this.setState({ ikVenueName: e.target.value }) }; })() }; })(),
       intakeKindItems: [{ value: 'death', label: '부고' }, { value: 'happy', label: '경사' }]
     };
   }
